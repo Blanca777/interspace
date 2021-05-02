@@ -4,12 +4,13 @@ import store from './store'
 import Header from './common/header'
 import Footer from './common/footer'
 import Home from './page/home'
+import Detail from './page/detail'
 import Sidebar from './common/sidebar'
 function App() {
   return (
     <Provider store={store}>
       <Header />
-      <Sidebar />
+        <Home />
       <Footer />
     </Provider>
   );

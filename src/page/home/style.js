@@ -35,7 +35,9 @@ export const Pagebtn = styled.span`
   cursor: pointer;
   margin-left: 5px;
   box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.6);
-  
+  &.active {
+    background: #3eaf7c;
+  }
 `
 export const BlogItem = styled.article`
   position: relative;
@@ -57,8 +59,21 @@ export const Blogtitle = styled.div`
   font-size: 24px;
 `;
 export const Blogabstract = styled.div`
-
+  width: 100%;
+  border-left: 5px solid #67cc86;
+  box-sizing: border-box;
+  padding: 20px;
+  margin: 20px 0;
 `;
+export const AbstractTitle = styled.h1`
+  font-size: 18px;
+  color: #67cc86;
+`
+export const Abstractparagraph = styled.p`
+  font-size: 16px;
+  margin-top: 20px;
+  color: #c9c9c9;
+`
 export const Bloghr = styled.hr`
   border: 0;
   border-top: 1px solid rgba(0, 0, 0, 0.3);

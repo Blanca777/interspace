@@ -1,7 +1,10 @@
-const defaultState = {
-  list: 'asda22'
-};
+import { combineReducers } from 'redux-immutable';
+import { reducer as headerReducer } from '../common/header/store'
+import { reducer as homeReducer } from '../page/home/store'
 
-export default (state = defaultState, action) => {
-  return state
-}
+const reducer = combineReducers({
+  header: headerReducer,
+  home: homeReducer
+});
+
+export default reducer;
