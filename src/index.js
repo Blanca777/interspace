@@ -6,9 +6,8 @@ import App from './App';
 
 ReactDOM.render(
   <Fragment>
-
     <App />
-    <GlobalStyle />
+    <GlobalStyle/>
     <IconfontStyle />
   </Fragment>,
   document.getElementById('root')

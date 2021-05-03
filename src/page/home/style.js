@@ -1,17 +1,34 @@
 import styled from 'styled-components'
 import homebg from '../../statics/homebg.jpg'
 import blanca from '../../statics/blanca.jpg'
+import store from '../../store'
+let curTheme = store.getState().toJS().global.curTheme
 export const HomeWrapper = styled.main`
   width: 100vw;
-
 `;
+export const PicWrapper = styled.div`
+  width: 100vw;
+  height: 550px;
+  display: flex;
+  justify-content: center;
+`
 export const Pic = styled.img.attrs({
   src: homebg
 
 })`
-  width: 100vw;
+  height: 550px;
   filter: brightness(0.50);
 `;
+export const PicText = styled.h1`
+  position: absolute;
+  background: transparent;
+  margin-top: 200px;
+  font-size: 40px;
+  line-height: 55px;
+  text-align: center;
+  user-select: none;
+  color: ${curTheme.color1};
+`
 export const Content = styled.section`
   display: flex;
   align-items: flex-start;
@@ -54,7 +71,7 @@ export const BlogItem = styled.article`
 export const Blogtitle = styled.div`
   height: 30px;
   line-height: 30px;
-  color: #3eaf7c;
+  color: ${curTheme.titleColor2};
   font-weight: 500;
   font-size: 24px;
 `;
@@ -67,12 +84,12 @@ export const Blogabstract = styled.div`
 `;
 export const AbstractTitle = styled.h1`
   font-size: 18px;
-  color: #67cc86;
+  color: ${curTheme.titleColor1};
 `
 export const Abstractparagraph = styled.p`
   font-size: 16px;
   margin-top: 20px;
-  color: #c9c9c9;
+  color: ${curTheme.color2};
 `
 export const Bloghr = styled.hr`
   border: 0;
@@ -84,9 +101,9 @@ export const Blogmsg = styled.div`
 export const Msgitem = styled.div`
   display: inline-block;
   margin-right: 20px;
-  color: #8B8B8B;
+  color: ${curTheme.color3};
   .iconfont {
-    color: #8B8B8B;
+    color: ${curTheme.color3};
   }
 `;
 export const Userbox = styled.article`
@@ -114,14 +131,17 @@ export const Userimg = styled.img.attrs({
 export const Username = styled.h4`
   text-align: center;
   margin-bottom: 20px;
+  color: ${curTheme.color1};
 `;
 export const Usernum = styled.div`
   padding: 0 30px 10px;
   display: flex;
+  color: ${curTheme.color1};
 `;
 export const Numitem = styled.div`
   width: 120px;
   height: 50px;
+  color: ${curTheme.color1};
   &.borderr{
     border-right: 1px solid #333;
   }
@@ -140,7 +160,7 @@ export const Numitem = styled.div`
 
 export const Hastitle = styled.div`
   padding: 18px 0;
-  color: #aaa;
+  color:  ${curTheme.color2};
   .iconfont {
     color: #aaa;
   }
@@ -152,7 +172,7 @@ export const Categoryitem = styled.li`
   padding: 6px 12px;
   margin: 6px 0;
   box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.6);
-  color: #3eaf7c;
+  color:  ${curTheme.titleColor2};
   overflow: hidden;
   line-height: 25px;
   span {
@@ -164,6 +184,7 @@ export const Categoryitem = styled.li`
     background: #f40;
     text-align: center;
     line-height: 25px;
+    color: ${curTheme.color1};
   }
 `;
 export const Tagsbox = styled.div`
@@ -190,7 +211,7 @@ export const Flinkitem = styled.article`
   box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.6);
   border-radius: 4px;
   font-size: 14px;
-
+  color: ${curTheme.color2};
   &::before {
     content: '';
     display: inline-block;

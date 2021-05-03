@@ -11,15 +11,15 @@ import {
   
 } from './style'
 import blanca from '../../statics/blanca.jpg'
-const Header = () => {
+const Header = (props) => {
   return (
-    <HeaderWrapper>
+    <HeaderWrapper curTheme={props.curTheme}>
       <HeaderLeft>
         <img src={blanca} alt="blanca"/>
         <span>blanca个人中心</span>
       </HeaderLeft>
       <HeaderRight>
-        <i className="iconfont themeicon">&#xe887;</i>
+        <i className="iconfont themeicon" onClick={props.handleChangeTheme}>&#xe887;</i>
         <i className="iconfont searchicon">&#xe9fc;</i>
         <HeaderSearch />
         <NavWarpper>
@@ -37,12 +37,14 @@ const Header = () => {
 }
 const mapStateToProps = (state) => {
   return {
-    
+    curTheme: state.getIn(["global","curTheme"]).toJS()
   }
 }
 const mapDispatchToProps = (dispatch) => {
   return {
-
+    handleChangeTheme(){
+      console.log(22)
+    }
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Header)

@@ -1,4 +1,6 @@
 import styled from 'styled-components'
+import store from '../../store'
+let curTheme = store.getState().toJS().global.curTheme
 export const HeaderWrapper = styled.header`
   position: fixed;
   top: 0;
@@ -6,6 +8,7 @@ export const HeaderWrapper = styled.header`
   width: 100vw;
   padding: 10px 20px;
   overflow: hidden;
+
 `
 export const HeaderLeft = styled.div`
   width: 200px;
@@ -22,7 +25,7 @@ export const HeaderLeft = styled.div`
     white-space: nowarp;
     margin-left: 20px;
     font-size: 18px;
-    color:
+    color: ${curTheme.color2};
   }
 `
 export const HeaderRight = styled.div`
@@ -35,7 +38,7 @@ export const HeaderRight = styled.div`
   height: 50px;
   margin-right: 30px;
   .iconfont {
-    color: #3eaf7c;
+    color: ${curTheme.titleColor2};
     background: none;
     cursor: pointer;
   }
@@ -62,7 +65,7 @@ export const HeaderSearch = styled.input`
   color: #6e8eae;
   background: none;
   &:focus{
-    border: 1px solid #3eaf7c;
+    border: 1px solid ${curTheme.titleColor2};
   }
 `
 export const NavWarpper = styled.ul`
@@ -78,11 +81,12 @@ export const NavItem = styled.li`
   text-align: center;
   box-sizing: border-box;
   cursor: pointer;
+  color: ${curTheme.color2};
   &.active{
-    color: #3eaf7c;
-    border-bottom: 2px solid #3eaf7c;
+    color: ${curTheme.titleColor2};
+    border-bottom: 2px solid ${curTheme.titleColor2};
     .iconfont {
-      color: #3eaf7c;
+      color: ${curTheme.titleColor2};
     }
   }
   .iconfont {
@@ -90,10 +94,10 @@ export const NavItem = styled.li`
     color: #bfbfbf;
   }
   &:hover{
-    color: #3eaf7c;
-    border-bottom: 2px solid #3eaf7c;
+    color: ${curTheme.titleColor2};
+    border-bottom: 2px solid ${curTheme.titleColor2};
     .iconfont {
-      color: #3eaf7c;
+      color: ${curTheme.titleColor2};
     }
   }
 `

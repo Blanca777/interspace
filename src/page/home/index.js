@@ -3,7 +3,9 @@ import { connect } from 'react-redux'
 import { actionCreators } from './store'
 import {
   HomeWrapper,
+  PicWrapper,
   Pic,
+  PicText,
   Content,
   Article,
   Userbox,
@@ -59,10 +61,13 @@ class Home extends Component {
   // }
   render() {
     return (
-      <HomeWrapper>
-        <Pic></Pic>
-        <Content>
+      <HomeWrapper curTheme={this.props.curTheme}>
+        <PicWrapper>
+          <Pic></Pic>
+          <PicText>在我们失去一切之后<br />我们的冒险才真正开始</PicText>
+        </PicWrapper>
 
+        <Content>
           <Article>
             {
 
@@ -105,7 +110,7 @@ class Home extends Component {
               <Username>blanca</Username>
               <Usernum>
                 <Numitem className="borderr">
-                  <h4>{this.props.val}</h4>
+                  <h4>77</h4>
                   <h6>文章</h6>
                 </Numitem>
                 <Numitem>
@@ -146,6 +151,7 @@ const mapStateToProps = (state) => {
     curList: state.getIn(["home", "curList"]),
     page: state.getIn(["home", "page"]),
     totalPage: state.getIn(["home", "totalPage"]),
+    curTheme: state.getIn(["global","curTheme"])
   }
 }
 const mapDispatchToProps = (dispatch) => {
@@ -156,11 +162,11 @@ const mapDispatchToProps = (dispatch) => {
     handleChangePage(page) {
       dispatch(actionCreators.ChangePageAction(page))
     },
-    handlePrevPage(){
-      
+    handlePrevPage() {
+
       dispatch(actionCreators.PrevPageAction())
     },
-    handleNextPage(){
+    handleNextPage() {
       dispatch(actionCreators.NextPageAction())
     }
   }
