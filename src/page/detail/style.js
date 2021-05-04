@@ -9,7 +9,45 @@ export const DetailWrapper = styled.section`
 export const DetailBox = styled.article`
   max-width: 860px;
   flex: 1;
-  
+  .markdown {
+    letter-spacing: 2px;
+    h2 {
+      font-size: 25px;
+      font-weight: bold;
+      margin-top: 60px;
+    }
+    h3 {
+      font-size: 20px;
+      font-weight: bold;
+      margin-top: 40px;
+      color: #ddd;
+    }
+    p {
+      line-height: 22px;
+      margin: 20px 0;
+      color: #c8c8c8;
+    }
+    code {
+      line-height: 20px;
+    }
+    ul {
+      list-style-type: circle;
+    }
+    li {
+      color: #aaa;
+      margin: 10px 0;
+      padding-left: 20px;
+      box-sizing: border-box;
+      &::before{
+        content: '';
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        background: #aaa;
+        margin-right: 5px;
+      }
+    }
+  }
 `;
 export const DetailTitle = styled.div`
   width: 100%;
@@ -21,7 +59,6 @@ export const TitleText = styled.h1`
 `;
 export const TitleMsg = styled.ul`
   width: 100%;
-  height: 40px;
   padding: 15px 0;
   margin-top: 15px;
   border-top: 1px solid #323232;

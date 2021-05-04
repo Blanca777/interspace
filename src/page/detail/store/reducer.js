@@ -2,12 +2,12 @@ import * as constants from './constants';
 import { fromJS } from 'immutable';
 
 const defaultState = fromJS({
-  articleid: 0
+  content: 0
 })
 const reducer = (state = defaultState, action) => {
   switch (action.type) {
     case constants.GETARTICLECONTENT:
-      return state
+      return state.set('content',action.content)
     default:
       return state;
   }
