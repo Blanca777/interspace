@@ -1,6 +1,8 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { actionCreators } from './store'
+import { Link } from 'react-router-dom'
+
 import {
   HomeWrapper,
   PicWrapper,
@@ -32,7 +34,7 @@ import {
   AbstractTitle,
   Abstractparagraph
 } from './style'
-class Home extends Component {
+class Home extends PureComponent {
 
   componentDidMount() {
     this.props.getArticleList();
@@ -73,28 +75,33 @@ class Home extends Component {
 
               this.props.curList.map((item) => {
                 return (
-                  <BlogItem key={item.get('keyid')}>
-                    <Blogtitle>{item.get('title')}</Blogtitle>
-                    {
-                      item.getIn(["outline", "title"]) !== undefined && (
-                        <Blogabstract>
-                          <AbstractTitle>{item.getIn(["outline", "title"])}</AbstractTitle>
-                          {
-                            item.getIn(["outline", "paragraph"]).map((item, index) => {
-                              return <Abstractparagraph key={index}>{item}</Abstractparagraph>
-                            })
-                          }
-                        </Blogabstract>
-                      )
-                    }
+                  
+                    <BlogItem key={item.get('articleid')}>
+                      <Link to={`/detail/${item.get('articleid')}`} >
+                      <Blogtitle>{item.get('title')}</Blogtitle>
+                      {
+                        item.getIn(["outline", "title"]) !== undefined && (
+                          <Blogabstract>
+                            <AbstractTitle>{item.getIn(["outline", "title"])}</AbstractTitle>
+                            {
+                              item.getIn(["outline", "paragraph"]).map((item, index) => {
+                                return <Abstractparagraph key={index}>{item}</Abstractparagraph>
+                              })
+                            }
+                          </Blogabstract>
+                        )
+                      }
+                      
 
-                    <Bloghr></Bloghr>
-                    <Blogmsg>
-                      <Msgitem><i className="iconfont">&#xe60e;</i> {item.get('author')}</Msgitem>
-                      <Msgitem><i className="iconfont">&#xe619;</i> {item.get('time')}</Msgitem>
-                      <Msgitem><i className="iconfont">&#xe63d;</i> {item.get('tag')}</Msgitem>
-                    </Blogmsg>
-                  </BlogItem>
+                      <Bloghr></Bloghr>
+                      <Blogmsg>
+                        <Msgitem><i className="iconfont">&#xe60e;</i> {item.get('author')}</Msgitem>
+                        <Msgitem><i className="iconfont">&#xe619;</i> {item.get('time')}</Msgitem>
+                        <Msgitem><i className="iconfont">&#xe63d;</i> {item.get('tag')}</Msgitem>
+                      </Blogmsg>
+                      </Link>
+                    </BlogItem>
+
                 )
               })
             }
@@ -151,7 +158,7 @@ const mapStateToProps = (state) => {
     curList: state.getIn(["home", "curList"]),
     page: state.getIn(["home", "page"]),
     totalPage: state.getIn(["home", "totalPage"]),
-    curTheme: state.getIn(["global","curTheme"])
+    curTheme: state.getIn(["global", "curTheme"])
   }
 }
 const mapDispatchToProps = (dispatch) => {

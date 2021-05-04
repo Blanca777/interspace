@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { actionCreators } from './store'
+import { Link } from 'react-router-dom'
 import {
   HeaderWrapper,
   HeaderLeft,
@@ -8,16 +9,18 @@ import {
   HeaderSearch,
   NavWarpper,
   NavItem
-  
+
 } from './style'
 import blanca from '../../statics/blanca.jpg'
 const Header = (props) => {
   return (
     <HeaderWrapper curTheme={props.curTheme}>
-      <HeaderLeft>
-        <img src={blanca} alt="blanca"/>
-        <span>blanca个人中心</span>
-      </HeaderLeft>
+      <Link to='/'>
+        <HeaderLeft>
+          <img src={blanca} alt="blanca" />
+          <span>blanca个人中心</span>
+        </HeaderLeft>
+      </Link>
       <HeaderRight>
         <i className="iconfont themeicon" onClick={props.handleChangeTheme}>&#xe887;</i>
         <i className="iconfont searchicon">&#xe9fc;</i>
@@ -37,12 +40,12 @@ const Header = (props) => {
 }
 const mapStateToProps = (state) => {
   return {
-    curTheme: state.getIn(["global","curTheme"]).toJS()
+    curTheme: state.getIn(["global", "curTheme"]).toJS()
   }
 }
 const mapDispatchToProps = (dispatch) => {
   return {
-    handleChangeTheme(){
+    handleChangeTheme() {
       console.log(22)
     }
   }
