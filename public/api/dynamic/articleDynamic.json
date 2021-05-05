@@ -1,0 +1,21 @@
+{
+  "dynamicId": "articleDynamic",
+  "dynamicTitle": "文章动态",
+  "author": "blanca",
+  "time": "2021-5-2",
+  "viewNum": 22,
+  "dynamicList": [
+    {
+      "dynamicTime": "2021-5-2",
+      "dynamicText": "浏览器的事件循环机制1"
+    },
+    {
+      "dynamicTime": "2021-5-1",
+      "dynamicText": "缓存策略"
+    },
+    {
+      "dynamicTime": "2021-4-30",
+      "dynamicText": "三次握手"
+    }
+  ]
+}

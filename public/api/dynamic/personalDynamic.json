@@ -1,0 +1,29 @@
+{
+  "dynamicId": "personalDynamic",
+  "dynamicTitle": "个人动态",
+  "author": "blanca",
+  "time": "2021-5-2",
+  "viewNum": 11,
+  "dynamicList": [
+    {
+      "dynamicTime": "2021-5-2",
+      "dynamicImage": "src",
+      "dynamicText": "asdasd"
+    },
+    {
+      "dynamicTime": "2021-5-1",
+      "dynamicImage": "src",
+      "dynamicText": "asd123"
+    },
+    {
+      "dynamicTime": "2021-4-30",
+      "dynamicImage": "src",
+      "dynamicText": "asdzxc"
+    },
+    {
+      "dynamicTime": "2021-4-29",
+      "dynamicImage": "src",
+      "dynamicText": "asdfdg"
+    }
+  ]
+}

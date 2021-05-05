@@ -1,46 +1,90 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
-import ReactMarkdown from 'react-markdown'
-import gfm from 'remark-gfm'
+import { Link } from 'react-router-dom'
 import {
-  ArticleWrapper,
-  ArticleBox,
-  ArticleTitle,
+  DynamicWrapper,
+  DynamicBox,
+  DynamicTitle,
   TitleText,
   TitleMsg,
-  TitleItem
+  TitleItem,
+  DynamicContent,
+  DynamicList,
+  DynamicItem,
+  DynamicTime,
+  DynamicPoint,
+  DynamicText,
+  SidebarWrapper,
+  SidebarBox,
+  SidebarTitle,
+  SidebarItem
 
 } from './style'
-import Sidebar from '../../common/sidebar'
 import { actionCreators } from './store'
 
-class Detail extends PureComponent {
+class Dynamic extends PureComponent {
+
   componentDidMount() {
-    this.props.getArticleContent(this.props.match.params.articleid)
-    this.props.getTitleAndSidebarList(this.props.match.params.articleid)
+    let { getDynamicMsg, getSidebarContent } = this.props
+    getDynamicMsg(this.props.match.params.dynamicid)
+    getSidebarContent(this.props.match.params.dynamicid)
+    window.scrollTo(0, 0)
   }
   render() {
-    let { title, author, time, num } = this.props.articleMsg.toJS()
+    let { dynamicMsg, sidebarTitle, sidebarList, getDynamicMsg } = this.props
     return (
       <>
-        <ArticleWrapper>
-          <ArticleBox>
-            <ArticleTitle>
-              <TitleText>{title}</TitleText>
+        <DynamicWrapper>
+          <DynamicBox>
+            <DynamicTitle>
+              <TitleText>{dynamicMsg.get('dynamicTitle')}</TitleText>
               <TitleMsg>
-                <TitleItem><i className="iconfont">&#xe60e;</i>{author}</TitleItem>
-                <TitleItem><i className="iconfont">&#xe619;</i>{time}</TitleItem>
-                <TitleItem><i className="iconfont">&#xe650;</i>{num}</TitleItem>
+                <TitleItem><i className="iconfont">&#xe60e;</i>{dynamicMsg.get('author')}</TitleItem>
+                <TitleItem><i className="iconfont">&#xe619;</i>{dynamicMsg.get('time')}</TitleItem>
+                <TitleItem><i className="iconfont">&#xe650;</i>{dynamicMsg.get('viewNum')}</TitleItem>
               </TitleMsg>
-            </ArticleTitle>
-            <ReactMarkdown
-              className='markdown'
-              remarkPlugins={[gfm]} children={this.props.content}
-            />
-          </ArticleBox>
+            </DynamicTitle>
+            <DynamicContent>
+              <DynamicList>
+                <DynamicItem>
+                  <DynamicPoint />
+                  <DynamicTime>20-20-11</DynamicTime>
+                  <DynamicText>asd</DynamicText>
+                </DynamicItem>
+                <DynamicItem>
+                  <DynamicPoint />
+                  <DynamicTime>20-20-11</DynamicTime>
+                  <DynamicText>asd</DynamicText>
+                </DynamicItem>
+              </DynamicList>
 
-        </ArticleWrapper>
-        <Sidebar getArticleContent={this.props.getArticleContent}></Sidebar>
+            </DynamicContent>
+          </DynamicBox>
+
+        </DynamicWrapper>
+        <SidebarWrapper>
+          <SidebarBox>
+            <SidebarTitle>{sidebarTitle}</SidebarTitle>
+            {
+              sidebarList.map(item => {
+                return (
+                  <Link
+                    to={`/dynamic/${item.get('dynamicId')}`}
+                    onClick={() => {
+                      getDynamicMsg(item.get('dynamicId'))
+                    }}
+                    key={item.get('dynamicId')}
+                  >
+                    <SidebarItem>
+                      {item.get('dynamicTitle')}
+                    </SidebarItem>
+                  </Link>
+                )
+              })
+            }
+
+          </SidebarBox>
+        </SidebarWrapper>
       </>
     )
   }
@@ -48,20 +92,20 @@ class Detail extends PureComponent {
 
 const mapStateToProps = (state) => {
   return {
-    content: state.getIn(['article','content']),
-    articleMsg: state.getIn(['article','articleMsg'])
-
+    dynamicMsg: state.getIn(['dynamic', 'dynamicMsg']),
+    sidebarTitle: state.getIn(["dynamic", "sidebarTitle"]),
+    sidebarList: state.getIn(["dynamic", "sidebarList"])
   }
 }
 const mapDispatchToProps = (dispatch) => {
   return {
-    getArticleContent(articleid) {
-      dispatch(actionCreators.getArticleContent(articleid))
+    getDynamicMsg(dynamicId) {
+      dispatch(actionCreators.getDynamicMsg(dynamicId))
     },
-    getTitleAndSidebarList(articleid) {
-      dispatch(actionCreators.getTitleAndSidebarList(articleid))
+    getSidebarContent(dynamicId) {
+      dispatch(actionCreators.getSidebarContent(dynamicId))
     }
-    
+
   }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(Detail)
+export default connect(mapStateToProps, mapDispatchToProps)(Dynamic)
