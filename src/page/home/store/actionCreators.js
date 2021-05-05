@@ -8,6 +8,10 @@ const ArticleListAction = (data, totalPage, curList) => ({
   totalPage: fromJS(totalPage),
   curList: fromJS(curList)
 })
+const UserInfoAction = (userInfo) => ({
+  type: constants.GETUSERINFO,
+  userInfo: fromJS(userInfo)
+})
 
 export const ChangePageAction = (page) => ({
   type: constants.CHANGEPAGE,
@@ -21,11 +25,19 @@ export const NextPageAction = () => ({
 })
 export const getArticleList = () => {
   return (dispatch) => {
-    axios.get('/api/ArticleList.json').then(res => {
-      let data = res.data
-      let curList = data.data.slice(0,7)
-      let totalPage = Math.ceil(data.data.length / 7)
-      dispatch(ArticleListAction(data.data, totalPage, curList))
+    axios.get('/api/home/articleList.json').then(res => {
+      let curList = res.data.slice(0, 7)
+      let totalPage = Math.ceil(res.data.length / 7)
+      dispatch(ArticleListAction(res.data, totalPage, curList))
+    }).catch(err => {
+      console.log(err)
+    })
+  }
+}
+export const getUserInfo = () => {
+  return (dispatch) => {
+    axios.get('/api/home/userInfo.json').then(res => {
+      dispatch(UserInfoAction(res.data))
     }).catch(err => {
       console.log(err)
     })

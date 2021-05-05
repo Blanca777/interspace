@@ -5,7 +5,7 @@ import store from './store'
 import Header from './common/header'
 import Footer from './common/footer'
 import Home from './page/home'
-import Detail from './page/detail'
+import Article from './page/article'
 
 function App() {
   return (
@@ -13,7 +13,7 @@ function App() {
       <BrowserRouter>
         <Header />
         <Route path="/" exact component={Home}></Route>
-        <Route path="/detail/:articleid" exact component={Detail}></Route>
+        <Route path="/article/:articleid" exact component={Article}></Route>
         <Footer />
       </BrowserRouter>
     </Provider>

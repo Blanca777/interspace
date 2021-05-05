@@ -5,7 +5,8 @@ const defaultState = fromJS({
   articleList: [],
   page: 1,
   totalPage: 0,
-  curList: []
+  curList: [],
+  userInfo: {}
 })
 const reducer = (state = defaultState, action) => {
   switch (action.type) {
@@ -14,6 +15,10 @@ const reducer = (state = defaultState, action) => {
         articleList: action.articleList,
         totalPage: action.totalPage,
         curList: action.curList
+      });
+    case constants.GETUSERINFO:
+      return state.merge({
+        userInfo: action.userInfo
       });
     case constants.CHANGEPAGE:
       let curList = fromJS(state.get('articleList').toJS().slice((action.page - 1) * 7, action.page * 7))
@@ -35,7 +40,7 @@ const reducer = (state = defaultState, action) => {
       if (state.get('page') < state.get('totalPage')) {
         let page = state.get('page') + 1
         let curList = fromJS(state.get('articleList').toJS().slice((page - 1) * 7, page * 7))
-        
+
         return state.merge({
           page, curList
         });

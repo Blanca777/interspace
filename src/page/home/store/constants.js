@@ -1,4 +1,5 @@
 export const GETARTICLELIST = 'getArticleList'
+export const GETUSERINFO = 'getUserInfo'
 export const CHANGEPAGE = 'changePage'
 export const PREVPAGE = 'prevPage'
 export const NEXTPAGE = 'nextPage'

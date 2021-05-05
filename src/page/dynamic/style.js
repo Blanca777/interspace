@@ -1,12 +1,12 @@
 import styled from 'styled-components'
-export const DetailWrapper = styled.section`
+export const ArticleWrapper = styled.section`
   width: 100vw;
   padding: 70px 250px 100px 320px;
   box-sizing: border-box;
   display: flex;
   justify-content: center;
 `;
-export const DetailBox = styled.article`
+export const ArticleBox = styled.article`
   max-width: 860px;
   flex: 1;
   .markdown {
@@ -29,9 +29,11 @@ export const DetailBox = styled.article`
     }
     code {
       line-height: 20px;
+      background: #000;
     }
-    ul {
+    ul,ol {
       list-style-type: circle;
+    
     }
     li {
       color: #aaa;
@@ -49,7 +51,7 @@ export const DetailBox = styled.article`
     }
   }
 `;
-export const DetailTitle = styled.div`
+export const ArticleTitle = styled.div`
   width: 100%;
   margin-top: 50px;
 `;

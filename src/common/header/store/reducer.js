@@ -2,15 +2,38 @@ import * as constants from './constants';
 import { fromJS } from 'immutable';
 
 const defaultState = fromJS({
-  temp: false
+  reptheme: {
+    color1: "#121212",
+    color2: "#242424",
+    color3: "#7F7F7F",
+    titleColor1: "#67cc86",
+    titleColor2: "#3eaf7c",
+    tabBgColor1: "#ff4400",
+    background: "#ffffff"
+  },
+  curTheme: {
+    color1: "#fff",
+    color2: "#c9c9c9",
+    color3: "#8B8B8B",
+    titleColor1: "#67cc86",
+    titleColor2: "#3eaf7c",
+    tabBgColor1: "#ff4400",
+    background: "#181818"
+  }
+
 })
 const reducer = (state = defaultState, action) => {
-  if (action.type === constants.TEMP1) {
-    return state.set('temp', true);
+  switch (action.type) {
+    case constants.CHANGETHEME:
+      console.log(action.curTheme)
+
+      return state.merge({
+        curTheme: state.get('reptheme'),
+        reptheme: action.curTheme
+      })
+
+    default:
+      return state
   }
-  if (action.type === constants.TEMP2) {
-    return state.set('temp', false);
-  }
-  return state;
 }
 export default reducer

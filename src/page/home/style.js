@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import homebg from '../../statics/homebg.jpg'
 import blanca from '../../statics/blanca.jpg'
 import store from '../../store'
-let curTheme = store.getState().toJS().global.curTheme
+let curTheme = store.getState().toJS().header.curTheme
 export const HomeWrapper = styled.main`
   width: 100vw;
 `;

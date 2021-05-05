@@ -37,8 +37,9 @@ import {
 class Home extends PureComponent {
 
   componentDidMount() {
-    this.props.getArticleList();
-
+    this.props.getArticleList(this.props.articleList);
+    this.props.getUserInfo(this.props.userInfo);
+    window.scrollTo(0,0)
   }
   getPageList = () => {
     let pagelist = []
@@ -62,11 +63,12 @@ class Home extends PureComponent {
   //   }
   // }
   render() {
+  
     return (
       <HomeWrapper curTheme={this.props.curTheme}>
         <PicWrapper>
           <Pic></Pic>
-          <PicText>在我们失去一切之后<br />我们的冒险才真正开始</PicText>
+          <PicText>在失去一切之后<br />我们的冒险才真正开始</PicText>
         </PicWrapper>
 
         <Content>
@@ -75,9 +77,9 @@ class Home extends PureComponent {
 
               this.props.curList.map((item) => {
                 return (
-                  
-                    <BlogItem key={item.get('articleid')}>
-                      <Link to={`/detail/${item.get('articleid')}`} >
+
+                  <BlogItem key={item.get('articleid')}>
+                    <Link to={`/article/${item.get('articleid')}`} >
                       <Blogtitle>{item.get('title')}</Blogtitle>
                       {
                         item.getIn(["outline", "title"]) !== undefined && (
@@ -91,7 +93,7 @@ class Home extends PureComponent {
                           </Blogabstract>
                         )
                       }
-                      
+
 
                       <Bloghr></Bloghr>
                       <Blogmsg>
@@ -99,8 +101,8 @@ class Home extends PureComponent {
                         <Msgitem><i className="iconfont">&#xe619;</i> {item.get('time')}</Msgitem>
                         <Msgitem><i className="iconfont">&#xe63d;</i> {item.get('tag')}</Msgitem>
                       </Blogmsg>
-                      </Link>
-                    </BlogItem>
+                    </Link>
+                  </BlogItem>
 
                 )
               })
@@ -111,40 +113,51 @@ class Home extends PureComponent {
               <Pagebtn className="pagebtn" onClick={this.props.handleNextPage}>下一页</Pagebtn>
             </Pageto>
           </Article>
+          
+          
           <Userbox>
             <UserInfo>
               <Userimg></Userimg>
-              <Username>blanca</Username>
+              <Username>{this.props.userInfo.get('name')}</Username>
               <Usernum>
                 <Numitem className="borderr">
-                  <h4>77</h4>
+                  <h4>{this.props.userInfo.get('articleNum')}</h4>
                   <h6>文章</h6>
                 </Numitem>
                 <Numitem>
-                  <h4>6</h4>
+                  <h4>{this.props.userInfo.get('tagNum')}</h4>
                   <h6>标签</h6>
                 </Numitem>
               </Usernum>
             </UserInfo>
             <Hastitle><i className="iconfont">&#xe624;</i> 分类</Hastitle>
             <Categorybox>
-              <Categoryitem>教程<span>2</span></Categoryitem>
-              <Categoryitem>开发工具<span>1</span></Categoryitem>
-              <Categoryitem>日常<span>1</span></Categoryitem>
-              <Categoryitem>java<span>2</span></Categoryitem>
-              <Categoryitem>推荐<span>1</span></Categoryitem>
+              {
+                this.props.userInfo.get('category')&&this.props.userInfo.get('category').map(item => {
+                  return <Categoryitem key={item.get("categoryName")}>{item.get("categoryName")}<span>{item.get("articleNum")}</span></Categoryitem>
+                })
+              }
+
             </Categorybox>
             <Hastitle><i className="iconfont">&#xe9f7;</i> 标签</Hastitle>
             <Tagsbox>
-              <Tagsitem>前端</Tagsitem>
-              <Tagsitem>前端</Tagsitem>
+              {
+                this.props.userInfo.get('tag')&&this.props.userInfo.get('tag').map(item => {
+                  return <Tagsitem key={item}>{item}</Tagsitem>
+                })
+              }
             </Tagsbox>
             <Hastitle><i className="iconfont">&#xe625;</i> 友情链接</Hastitle>
             <Flinkbox>
-              <Flinkitem>123</Flinkitem>
-              <Flinkitem>123</Flinkitem>
+              {
+                this.props.userInfo.get('fLink')&&this.props.userInfo.get('fLink').map(item => {
+                  return <Flinkitem key={item}>{item}</Flinkitem>
+                })
+              }
             </Flinkbox>
           </Userbox>
+
+          
         </Content>
 
       </HomeWrapper>
@@ -156,15 +169,25 @@ class Home extends PureComponent {
 const mapStateToProps = (state) => {
   return {
     curList: state.getIn(["home", "curList"]),
+    articleList: state.getIn(["home", "articleList"]),
     page: state.getIn(["home", "page"]),
     totalPage: state.getIn(["home", "totalPage"]),
-    curTheme: state.getIn(["global", "curTheme"])
+    curTheme: state.getIn(["header", "curTheme"]),
+    userInfo: state.getIn(['home', 'userInfo'])
   }
 }
 const mapDispatchToProps = (dispatch) => {
   return {
-    getArticleList() {
-      dispatch(actionCreators.getArticleList())
+    getArticleList(articleList) {
+      if (articleList.size === 0) {
+        dispatch(actionCreators.getArticleList())
+      }
+
+    },
+    getUserInfo(userInfo) {
+      if (userInfo.size === 0) {
+        dispatch(actionCreators.getUserInfo())
+      }
     },
     handleChangePage(page) {
       dispatch(actionCreators.ChangePageAction(page))

@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-// import { actionCreators } from './store'
+import { actionCreators } from './store'
 import { Link } from 'react-router-dom'
 import {
   HeaderWrapper,
@@ -9,12 +9,11 @@ import {
   HeaderSearch,
   NavWarpper,
   NavItem
-
 } from './style'
 import blanca from '../../statics/blanca.jpg'
 const Header = (props) => {
   return (
-    <HeaderWrapper curTheme={props.curTheme}>
+    <HeaderWrapper>
       <Link to='/'>
         <HeaderLeft>
           <img src={blanca} alt="blanca" />
@@ -22,17 +21,17 @@ const Header = (props) => {
         </HeaderLeft>
       </Link>
       <HeaderRight>
-        <i className="iconfont themeicon" onClick={props.handleChangeTheme}>&#xe887;</i>
+
+        <i className="iconfont themeicon" onClick={()=>props.handleChangeTheme(props.curTheme)}>&#xe887;</i>
         <i className="iconfont searchicon">&#xe9fc;</i>
-        <HeaderSearch />
+        <HeaderSearch /> 
         <NavWarpper>
-          <NavItem className="active"><i className="iconfont">&#xe60f;</i>主页</NavItem>
-          <NavItem><i className="iconfont">&#xe619;</i>动态</NavItem>
-          <NavItem><i className="iconfont">&#xe629;</i>推荐</NavItem>
-          <NavItem><i className="iconfont">&#xe9f8;</i>分类</NavItem>
-          <NavItem><i className="iconfont">&#xe63d;</i>标签</NavItem>
-          <NavItem><i className="iconfont">&#xe9f6;</i>系列教程</NavItem>
-          <NavItem><i className="iconfont">&#xe60e;</i>关于</NavItem>
+        <Link to='/'><NavItem className="active"><i className="iconfont">&#xe60f;</i>主页</NavItem></Link>
+        <Link to='/dynamic/dynamic1'><NavItem><i className="iconfont">&#xe619;</i>动态</NavItem></Link>
+        <Link to='/tools/recommended'><NavItem><i className="iconfont">&#xe629;</i>工具</NavItem></Link>
+        <Link to='/article/article1'><NavItem><i className="iconfont">&#xe9f8;</i>文章笔记</NavItem></Link>
+        <Link to='/tag'><NavItem><i className="iconfont">&#xe63d;</i>标签</NavItem></Link>
+        <Link to='/dynamic/about'><NavItem><i className="iconfont">&#xe60e;</i>关于</NavItem></Link>
         </NavWarpper>
       </HeaderRight>
     </HeaderWrapper>
@@ -40,13 +39,13 @@ const Header = (props) => {
 }
 const mapStateToProps = (state) => {
   return {
-    curTheme: state.getIn(["global", "curTheme"]).toJS()
+    curTheme: state.getIn(["header", "curTheme"])
   }
 }
 const mapDispatchToProps = (dispatch) => {
   return {
-    handleChangeTheme() {
-      console.log(22)
+    handleChangeTheme(curTheme) {
+      dispatch(actionCreators.getChangeThemeAction(curTheme))
     }
   }
 }

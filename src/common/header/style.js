@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import store from '../../store'
-let curTheme = store.getState().toJS().global.curTheme
+let curTheme = store.getState().toJS().header.curTheme
 export const HeaderWrapper = styled.header`
   position: fixed;
   top: 0;
@@ -9,7 +9,7 @@ export const HeaderWrapper = styled.header`
   padding: 10px 20px;
   overflow: hidden;
 
-`
+`;
 export const HeaderLeft = styled.div`
   width: 200px;
   height: 50px;
@@ -25,9 +25,9 @@ export const HeaderLeft = styled.div`
     white-space: nowarp;
     margin-left: 20px;
     font-size: 18px;
-    color: ${curTheme.color2};
+    color: ${curTheme.color1};
   }
-`
+`;
 export const HeaderRight = styled.div`
   position: relative;
   float: right;
@@ -52,7 +52,8 @@ export const HeaderRight = styled.div`
     left: 45px;
     font-size: 26px;
   }
-`
+`;
+
 export const HeaderSearch = styled.input`
   box-sizing: border-box;
   width: 200px;
@@ -67,13 +68,13 @@ export const HeaderSearch = styled.input`
   &:focus{
     border: 1px solid ${curTheme.titleColor2};
   }
-`
+`;
 export const NavWarpper = styled.ul`
   display: flex;
   justify-content: space-around;
   align-items: center;
   width: 600px;
-`
+`;
 export const NavItem = styled.li`
   font-size: 15px;
   height: 30px;
@@ -100,4 +101,4 @@ export const NavItem = styled.li`
       color: ${curTheme.titleColor2};
     }
   }
-`
+`;
