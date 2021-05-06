@@ -7,23 +7,23 @@
   "dynamicList": [
     {
       "dynamicTime": "2021-5-2",
-      "dynamicImage": "src",
-      "dynamicText": "asdasd"
+      "dynamicText": "开发博客第2天",
+      "dynamicListId": "dynamicListId1"
     },
     {
       "dynamicTime": "2021-5-1",
-      "dynamicImage": "src",
-      "dynamicText": "asd123"
+      "dynamicText": "开发博客第1天",
+      "dynamicListId": "dynamicListId2"
     },
     {
       "dynamicTime": "2021-4-30",
-      "dynamicImage": "src",
-      "dynamicText": "asdzxc"
+      "dynamicText": "开发博客准备",
+      "dynamicListId": "dynamicListId3"
     },
     {
       "dynamicTime": "2021-4-29",
-      "dynamicImage": "src",
-      "dynamicText": "asdfdg"
+      "dynamicText": "开发博客准备",
+      "dynamicListId": "dynamicListId4"
     }
   ]
 }

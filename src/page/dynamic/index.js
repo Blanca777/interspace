@@ -46,16 +46,23 @@ class Dynamic extends PureComponent {
             </DynamicTitle>
             <DynamicContent>
               <DynamicList>
-                <DynamicItem>
-                  <DynamicPoint />
-                  <DynamicTime>20-20-11</DynamicTime>
-                  <DynamicText>asd</DynamicText>
-                </DynamicItem>
-                <DynamicItem>
-                  <DynamicPoint />
-                  <DynamicTime>20-20-11</DynamicTime>
-                  <DynamicText>asd</DynamicText>
-                </DynamicItem>
+                {
+                  dynamicMsg.get('dynamicList') && dynamicMsg.get('dynamicList').map((item) => {
+                    return (
+                      <DynamicItem key={item.get("dynamicListId") || item.get("articleListId")}>
+                        <DynamicPoint />
+                        <DynamicTime>{item.get("dynamicTime")}</DynamicTime>
+                        {
+                          item.get("articleListId") && <Link to={item.get("articleListId")}><DynamicText>{item.get("dynamicText")}</DynamicText></Link>
+                        }
+                        {
+                          item.get("dynamicListId") && <DynamicText>{item.get("dynamicText")}</DynamicText>
+                        }
+                      </DynamicItem>
+                    )
+                  })
+                }
+
               </DynamicList>
 
             </DynamicContent>
