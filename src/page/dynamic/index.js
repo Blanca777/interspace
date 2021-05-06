@@ -26,8 +26,8 @@ class Dynamic extends PureComponent {
 
   componentDidMount() {
     let { getDynamicMsg, getSidebarContent } = this.props
-    getDynamicMsg(this.props.match.params.dynamicid)
-    getSidebarContent(this.props.match.params.dynamicid)
+    getDynamicMsg(this.props.match.params.dynamicId)
+    getSidebarContent(this.props.match.params.dynamicId)
     window.scrollTo(0, 0)
   }
   render() {

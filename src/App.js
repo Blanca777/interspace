@@ -7,6 +7,7 @@ import Footer from './common/footer'
 import Home from './page/home'
 import Article from './page/article'
 import Dynamic from './page/dynamic'
+import Tools from './page/tools'
 
 function App() {
   return (
@@ -14,8 +15,9 @@ function App() {
       <BrowserRouter>
         <Header />
         <Route path="/" exact component={Home}></Route>
-        <Route path="/article/:articleid" exact component={Article}></Route>
-        <Route path="/dynamic/:dynamicid" exact component={Dynamic}></Route>
+        <Route path="/article/:articleId" exact component={Article}></Route>
+        <Route path="/dynamic/:dynamicId" exact component={Dynamic}></Route>
+        <Route path="/tools/:toolsId" exact component={Tools}></Route>
         <Footer />
       </BrowserRouter>
     </Provider>

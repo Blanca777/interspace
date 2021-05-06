@@ -2,39 +2,33 @@ import * as constants from './constants'
 import axios from 'axios'
 import { fromJS } from 'immutable'
 
-const ArticleContentAction = (data) => ({
-  type: constants.GETARTICLECONTENT,
-  content: fromJS(data)
+
+const toolsMsgAction = (toolsMsg) => ({
+  type: constants.GETTOOLSCONTENT,
+  toolsMsg: fromJS(toolsMsg)
 })
-const titleAndSidebarAction = (articleMsg, sidebarList) => ({
-  type: constants.TITLEANDSIDEBAR,
-  articleMsg: fromJS(articleMsg),
+
+const SidebarAction = (sidebarTitle, sidebarList) => ({
+  type: constants.GETSIDEBARCONTENT,
+  sidebarTitle: fromJS(sidebarTitle),
   sidebarList: fromJS(sidebarList)
 })
 
-
-export const getArticleContent = (articleid) => {
+export const getToolsMsg = (toolsId) => {
   return (dispatch) => {
-    axios.get('/api/ArticleContent/'+articleid).then(res => {
-      dispatch(ArticleContentAction(res.data))
+    axios.get('/api/tools/'+toolsId+'.json').then(res => {
+      dispatch(toolsMsgAction(res.data))
     }).catch(err => {
       console.log(err)
     })
   } 
 }
-export const getTitleAndSidebarList = (articleid) => {
+
+export const getSidebarContent = () => {
   return (dispatch) => {
-    axios.get('/api/articleList.json').then(res => {
-      let data = res.data.data
-      for(let i = 0;i<data.length;i++){
-        if(data[i].articleid === articleid){
-          console.log(data[i].category)
-          let sidebarList = data.filter(item=>item.category===data[i].category)
-          console.log(sidebarList)
-          dispatch(titleAndSidebarAction(data[i], sidebarList))
-          break;
-        }
-      }
+    axios.get('/api/tools/sidebar.json').then(res => {
+      let { sidebarTitle, sidebarList } = res.data
+      dispatch(SidebarAction(sidebarTitle, sidebarList))
     }).catch(err => {
       console.log(err)
     })

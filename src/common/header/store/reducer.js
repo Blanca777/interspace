@@ -19,7 +19,46 @@ const defaultState = fromJS({
     titleColor2: "#3eaf7c",
     tabBgColor1: "#ff4400",
     background: "#181818"
-  }
+  },
+  active:"home",
+  navList:[
+    {
+      navId: '/',
+      navTo: "/",
+      navText: "主页",
+      navIcon: "&#xe60f;"
+    },
+    {
+      navId: "/dynamic/personalDynamic",
+      navTo: "/dynamic/personalDynamic",
+      navText: "动态",
+      navIcon: "&#xe619;"
+    },
+    {
+      navId: "/tools/recommended",
+      navTo: "/tools/recommended",
+      navText: "工具",
+      navIcon: "&#xe629;"
+    },
+    {
+      navId: "/article/article1",
+      navTo: "/article/article1",
+      navText: "文章笔记",
+      navIcon: "&#xe9f8;"
+    },
+    {
+      navId: "/tag",
+      navTo: "/tag",
+      navText: "标签",
+      navIcon: "&#xe63d;"
+    },
+    {
+      navId: "/dynamic/about",
+      navTo: "/dynamic/about",
+      navText: "关于",
+      navIcon: "&#xe60e;"
+    }
+  ]
 
 })
 const reducer = (state = defaultState, action) => {

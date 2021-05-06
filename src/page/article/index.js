@@ -22,9 +22,9 @@ class Article extends PureComponent {
 
   componentDidMount() {
     let { getArticleMsg, getArticleContent, getSidebarContent } = this.props
-    getArticleMsg(this.props.match.params.articleid)
-    getArticleContent(this.props.match.params.articleid)
-    getSidebarContent(this.props.match.params.articleid)
+    getArticleMsg(this.props.match.params.articleId)
+    getArticleContent(this.props.match.params.articleId)
+    getSidebarContent(this.props.match.params.articleId)
     window.scrollTo(0, 0)
   }
   render() {
@@ -87,14 +87,14 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
   return {
-    getArticleMsg(articleid) {
-      dispatch(actionCreators.getArticleMsg(articleid))
+    getArticleMsg(articleId) {
+      dispatch(actionCreators.getArticleMsg(articleId))
     },
-    getArticleContent(articleid) {
-      dispatch(actionCreators.getArticleContent(articleid))
+    getArticleContent(articleId) {
+      dispatch(actionCreators.getArticleContent(articleId))
     },
-    getSidebarContent(articleid) {
-      dispatch(actionCreators.getSidebarContent(articleid))
+    getSidebarContent(articleId) {
+      dispatch(actionCreators.getSidebarContent(articleId))
     }
 
   }

@@ -1,2 +1,2 @@
-export const GETDYNAMICCONTENT = 'getDynamicContent'
-export const GETSIDEBARCONTENT = 'getSidebarContent'
+export const GETDYNAMICCONTENT = 'dynamic/getDynamicContent'
+export const GETSIDEBARCONTENT = 'dynamic/getSidebarContent'

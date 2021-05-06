@@ -1,3 +1,3 @@
-export const GETARTICLEMSG = 'getArticleMsg'
-export const GETARTICLECONTENT = 'getArticleContent'
-export const GETSIDEBARCONTENT = 'getSidebarContent'
+export const GETARTICLEMSG = 'article/getArticleMsg'
+export const GETARTICLECONTENT = 'article/getArticleContent'
+export const GETSIDEBARCONTENT = 'article/getSidebarContent'

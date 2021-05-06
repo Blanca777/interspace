@@ -2,19 +2,19 @@ import * as constants from './constants';
 import { fromJS } from 'immutable';
 
 const defaultState = fromJS({
-  content: 0,
-  articleMsg: {},
+  toolsMsg: {},
+  sidebarTitle: "",
   sidebarList: []
 })
 const reducer = (state = defaultState, action) => {
   switch (action.type) {
-    case constants.GETARTICLECONTENT:
+    case constants.GETTOOLSCONTENT:
       return state.merge({
-        content: action.content
+        toolsMsg: action.toolsMsg
       }) 
-    case constants.TITLEANDSIDEBAR:
+    case constants.GETSIDEBARCONTENT:
       return state.merge({
-        articleMsg: action.articleMsg,
+        sidebarTitle: action.sidebarTitle,
         sidebarList: action.sidebarList
       })
 
