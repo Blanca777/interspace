@@ -4,6 +4,7 @@ import { reducer as homeReducer } from '../page/home/store'
 import { reducer as articleReducer } from '../page/article/store'
 import { reducer as dynamicReducer } from '../page/dynamic/store'
 import { reducer as toolsReducer } from '../page/tools/store'
+import { reducer as tagReducer } from '../page/tag/store'
 
 
 
@@ -12,7 +13,8 @@ const reducer = combineReducers({
   home: homeReducer,
   article: articleReducer,
   dynamic: dynamicReducer,
-  tools: toolsReducer
+  tools: toolsReducer,
+  tag: tagReducer
 });
 
 export default reducer;

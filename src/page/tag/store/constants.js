@@ -1,2 +1,2 @@
-export const GETARTICLECONTENT = 'getArticleContent'
-export const TITLEANDSIDEBAR = 'titleAndSidebar'
+export const GETTAGLIST = 'tag/getTagList';
+export const GETARTICLELIST = 'tag/getArticleList';

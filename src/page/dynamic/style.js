@@ -9,47 +9,7 @@ export const DynamicWrapper = styled.section`
 export const DynamicBox = styled.article`
   max-width: 860px;
   flex: 1;
-  .markdown {
-    letter-spacing: 2px;
-    h2 {
-      font-size: 25px;
-      font-weight: bold;
-      margin-top: 60px;
-    }
-    h3 {
-      font-size: 20px;
-      font-weight: bold;
-      margin-top: 40px;
-      color: #ddd;
-    }
-    p {
-      line-height: 22px;
-      margin: 20px 0;
-      color: #c8c8c8;
-    }
-    code {
-      line-height: 20px;
-      background: #000;
-    }
-    ul,ol {
-      list-style-type: circle;
-    
-    }
-    li {
-      color: #aaa;
-      margin: 10px 0;
-      padding-left: 20px;
-      box-sizing: border-box;
-      &::before{
-        content: '';
-        display: inline-block;
-        width: 10px;
-        height: 10px;
-        background: #aaa;
-        margin-right: 5px;
-      }
-    }
-  }
+  
 `;
 export const DynamicTitle = styled.div`
   width: 100%;

@@ -1,76 +1,64 @@
 import styled from 'styled-components'
-export const DetailWrapper = styled.section`
+import store from '../../store'
+let curTheme = store.getState().toJS().header.curTheme
+export const TagWrapper = styled.section`
   width: 100vw;
-  padding: 70px 250px 100px 320px;
+  padding: 70px 50px 100px;
   box-sizing: border-box;
   display: flex;
   justify-content: center;
 `;
-export const DetailBox = styled.article`
+export const TagBox = styled.article`
   max-width: 860px;
   flex: 1;
-  .markdown {
-    letter-spacing: 2px;
-    h2 {
-      font-size: 25px;
-      font-weight: bold;
-      margin-top: 60px;
-    }
-    h3 {
-      font-size: 20px;
-      font-weight: bold;
-      margin-top: 40px;
-      color: #ddd;
-    }
-    p {
-      line-height: 22px;
-      margin: 20px 0;
-      color: #c8c8c8;
-    }
-    code {
-      line-height: 20px;
-      background: #000;
-    }
-    ul,ol {
-      list-style-type: circle;
-    
-    }
-    li {
-      color: #aaa;
-      margin: 10px 0;
-      padding-left: 20px;
-      box-sizing: border-box;
-      &::before{
-        content: '';
-        display: inline-block;
-        width: 10px;
-        height: 10px;
-        background: #aaa;
-        margin-right: 5px;
-      }
-    }
-  }
 `;
-export const DetailTitle = styled.div`
+export const TagList = styled.div`
   width: 100%;
   margin-top: 50px;
 `;
-export const TitleText = styled.h1`
-  font-size: 34px;
-  color: #c4c4c4;
+export const TagItem = styled.span`
+  display: inline-block;
+  padding: 2px 6px;
+  background: #f40;
+  margin: 10px;
+  border-radius: 4px;
 `;
-export const TitleMsg = styled.ul`
+export const ArticleList = styled.div`
   width: 100%;
-  padding: 15px 0;
-  margin-top: 15px;
-  border-top: 1px solid #323232;
+  margin-top: 20px;
 `;
-export const TitleItem = styled.li`
-  float: left;
-  margin-right: 40px;
-  color: #a4a4a4;
+export const BlogItem = styled.article`
+  position: relative;
+  margin: 0 auto 20px;
+  padding: 16px 20px;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 2px;
+  box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.6);
+  box-sizing: border-box;
+  transition: all .3s;
+  cursor: pointer;
+`;
+export const Blogtitle = styled.div`
+  height: 30px;
+  line-height: 30px;
+  color: ${curTheme.titleColor2};
+  font-weight: 500;
+  font-size: 24px;
+`;
+
+export const Bloghr = styled.hr`
+  border: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.3);
+`;
+export const Blogmsg = styled.div`
+
+`;
+export const Msgitem = styled.div`
+  display: inline-block;
+  margin-right: 20px;
+  color: ${curTheme.color3};
   .iconfont {
-    margin-right: 10px;
-    color: #a4a4a4;
+    color: ${curTheme.color3};
   }
 `;

@@ -8,6 +8,7 @@ import Home from './page/home'
 import Article from './page/article'
 import Dynamic from './page/dynamic'
 import Tools from './page/tools'
+import Tag from './page/tag'
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/article/:articleId" exact component={Article}></Route>
         <Route path="/dynamic/:dynamicId" exact component={Dynamic}></Route>
         <Route path="/tools/:toolsId" exact component={Tools}></Route>
+        <Route path="/tag/:tagId" exact component={Tag}></Route>
         <Footer />
       </BrowserRouter>
     </Provider>
