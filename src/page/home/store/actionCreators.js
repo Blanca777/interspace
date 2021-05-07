@@ -8,11 +8,11 @@ const ArticleListAction = (data, totalPage, curList) => ({
   totalPage: fromJS(totalPage),
   curList: fromJS(curList)
 })
-const UserInfoAction = (userInfo) => ({
-  type: constants.GETUSERINFO,
-  userInfo: fromJS(userInfo)
-})
 
+const RankListAction = (rankList) => ({
+  type: constants.GETRANKLIST,
+  rankList: fromJS(rankList),
+})
 export const ChangePageAction = (page) => ({
   type: constants.CHANGEPAGE,
   page: fromJS(page)
@@ -34,10 +34,10 @@ export const getArticleList = () => {
     })
   }
 }
-export const getUserInfo = () => {
+export const getRankList = () => {
   return (dispatch) => {
-    axios.get('/api/home/userInfo.json').then(res => {
-      dispatch(UserInfoAction(res.data))
+    axios.get('/api/home/rankList.json').then(res => {
+      dispatch(RankListAction(res.data))
     }).catch(err => {
       console.log(err)
     })

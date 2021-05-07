@@ -10,7 +10,7 @@ import {
   NavWarpper,
   NavItem
 } from './style'
-import blanca from '../../statics/blanca.jpg'
+import interspace from '../../statics/interspace.png'
 class Header extends PureComponent {
   componentDidMount() {
   }
@@ -20,8 +20,8 @@ class Header extends PureComponent {
       <HeaderWrapper>
         <Link to='/'>
           <HeaderLeft>
-            <img src={blanca} alt="blanca" />
-            <span>blanca个人中心</span>
+            <img src={interspace} alt="interspace" />
+            <span>空隙</span>
           </HeaderLeft>
         </Link>
         <HeaderRight>
@@ -30,7 +30,6 @@ class Header extends PureComponent {
           <i className="iconfont searchicon">&#xe9fc;</i>
           <HeaderSearch />
           <NavWarpper>
-            <Link to='/'><NavItem className="active"><i className="iconfont">&#xe60f;</i>主页</NavItem></Link>
             <Link to='/dynamic/personalDynamic'><NavItem><i className="iconfont">&#xe619;</i>动态</NavItem></Link>
             <Link to='/tools/vscode'><NavItem><i className="iconfont">&#xe629;</i>工具</NavItem></Link>
             <Link to='/article/article1'><NavItem><i className="iconfont">&#xe9f8;</i>文章笔记</NavItem></Link>

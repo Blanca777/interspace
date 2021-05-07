@@ -13,6 +13,10 @@ const SidebarAction = (sidebarTitle, sidebarList) => ({
   sidebarTitle: fromJS(sidebarTitle),
   sidebarList: fromJS(sidebarList)
 })
+const UserInfoAction = (userInfo) => ({
+  type: constants.GETUSERINFO,
+  userInfo: fromJS(userInfo)
+})
 
 export const getDynamicMsg = (dynamicId) => {
   return (dispatch) => {
@@ -29,6 +33,15 @@ export const getSidebarContent = () => {
     axios.get('/api/dynamic/sidebar.json').then(res => {
       let { sidebarTitle, sidebarList } = res.data
       dispatch(SidebarAction(sidebarTitle, sidebarList))
+    }).catch(err => {
+      console.log(err)
+    })
+  }
+}
+export const getUserInfo = () => {
+  return (dispatch) => {
+    axios.get('/api/dynamic/userInfo.json').then(res => {
+      dispatch(UserInfoAction(res.data))
     }).catch(err => {
       console.log(err)
     })

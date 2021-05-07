@@ -37,7 +37,6 @@ export const Content = styled.section`
 `
 export const Article = styled.article`
   flex: auto;
-  width: 0;
 `;
 export const Pageto = styled.section`
   width: 100%;
@@ -106,118 +105,22 @@ export const Msgitem = styled.div`
     color: ${curTheme.color3};
   }
 `;
-export const Userbox = styled.article`
-  position: sticky;
-  top: 70px;
-  transition: all .3s;
-  margin-left: 15px;
-  flex: 0 0 300px;
-  height: auto;
-  box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.6);
-  border-radius: 2px;
+export const RankList = styled.aside`
+  width: 250px;
+  margin-left: 10px;
+  box-shadow: 0 1px 8px 0 rgb(0 0 0 / 60%);
+`;
+export const RankTitle = styled.h1`
+  width: 100%;
+  padding: 20px 20px 10px;
   box-sizing: border-box;
-  padding: 0 15px;
-`;
-export const UserInfo = styled.article`
-`;
-export const Userimg = styled.img.attrs({
-  src: blanca
-})`
-  width: 100px;
-  height: 100px;
-  padding: 30px 100px 20px;
-  border-radius: 2px;
-`;
-export const Username = styled.h4`
-  text-align: center;
-  margin-bottom: 20px;
-  color: ${curTheme.color1};
-`;
-export const Usernum = styled.div`
-  padding: 0 30px 10px;
-  display: flex;
-  color: ${curTheme.color1};
-`;
-export const Numitem = styled.div`
-  width: 120px;
-  height: 50px;
-  color: ${curTheme.color1};
-  &.borderr{
-    border-right: 1px solid #333;
-  }
-  
-  h4 {
-    width: 120px;
-    text-align: center;
-    height: 25px;
-  }
-  h6 {
-    width: 120px;
-    height: 25px;
-    text-align: center;
-  }
+  font-size: 20px;
+  color: #67cc86;
 `;
 
-export const Hastitle = styled.div`
-  padding: 18px 0;
-  color:  ${curTheme.color2};
-  .iconfont {
-    color: #aaa;
-  }
-`;
-export const Categorybox = styled.ul`
-  padding: 10px 0;
-`;
-export const Categoryitem = styled.li`
-  padding: 6px 12px;
-  margin: 6px 0;
-  box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.6);
-  color:  ${curTheme.titleColor2};
-  overflow: hidden;
-  line-height: 25px;
-  span {
-    float: right;
-    display: inline-block;
-    width: 25px;
-    height: 25px;
-    border-radius: 2px;
-    background: #f40;
-    text-align: center;
-    line-height: 25px;
-    color: ${curTheme.color1};
-  }
-`;
-export const Tagsbox = styled.div`
+export const RankItem = styled.li`
+  width: 100%;
+  padding-left: 30px;
   margin: 20px 0;
-`;
-export const Tagsitem = styled.span`
-  display: inline-block;
-  background: #f40;
-  padding: 6px;
-  margin-right: 8px;
-  border-radius: 4px;
-  font-size: 14px;
-`;
-export const Flinkbox = styled.article`
-  margin: 20px 0;
-`;
-export const Flinkitem = styled.article`
-  display: inline-block;
-  padding: 6px;
-  margin: 4px 4px 10px;
-  line-height: 20px;
-  vertical-align: middle;
-  font-size: 13px;
-  box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.6);
-  border-radius: 4px;
-  font-size: 14px;
-  color: ${curTheme.color2};
-  &::before {
-    content: '';
-    display: inline-block;
-    background-color: rgb(225, 91, 100);
-    width: 6px;
-    height: 6px;
-    margin: 2px;
-  }
+  box-sizing: border-box;
 `;

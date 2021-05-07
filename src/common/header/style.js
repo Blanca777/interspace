@@ -6,9 +6,9 @@ export const HeaderWrapper = styled.header`
   top: 0;
   z-index: 20;
   width: 100vw;
-  padding: 10px 20px;
+  padding: 5px 20px;
   overflow: hidden;
-
+  box-shadow: 0 1px 8px 0 rgb(0 0 0 / 60%);
 `;
 export const HeaderLeft = styled.div`
   width: 200px;
@@ -34,7 +34,7 @@ export const HeaderRight = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  width: 850px;
+  width: 650px;
   height: 50px;
   margin-right: 30px;
   .iconfont {
@@ -73,7 +73,7 @@ export const NavWarpper = styled.ul`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  width: 600px;
+  width: 400px;
 `;
 export const NavItem = styled.li`
   font-size: 15px;
@@ -82,17 +82,12 @@ export const NavItem = styled.li`
   text-align: center;
   box-sizing: border-box;
   cursor: pointer;
-  color: ${curTheme.color2};
-  &.active{
-    color: ${curTheme.titleColor2};
-    border-bottom: 2px solid ${curTheme.titleColor2};
-    .iconfont {
-      color: ${curTheme.titleColor2};
-    }
-  }
+  color: ${curTheme.titleColor2};
+  border-bottom: 2px solid ${curTheme.titleColor2};
+ 
   .iconfont {
     margin-right: 5px;
-    color: #bfbfbf;
+    color: ${curTheme.titleColor2};
   }
   &:hover{
     color: ${curTheme.titleColor2};
