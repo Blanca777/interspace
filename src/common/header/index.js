@@ -19,7 +19,7 @@ class Header extends PureComponent {
   componentDidMount() {
   }
   render() {
-    let { handleChangeTheme, curTheme, userInfo, login } = this.props
+    let { handleChangeTheme, curTheme, userInfo, loginStatus } = this.props
     return (
       <HeaderWrapper>
         <Link to='/'>
@@ -35,9 +35,9 @@ class Header extends PureComponent {
           <HeaderSearch />
           <NavWarpper>
             {
-              login ? (
-              <Link to='/dynamic/personalDynamic'>
-                <NavItem><img src={spaceman} alt="spaceman" /><span>{userInfo.get('name')}</span></NavItem>
+              loginStatus ? (
+              <Link to={`/dynamic/${userInfo.get('userId')}/articleDynamic`}>
+                <NavItem><img src={spaceman} alt="spaceman" /><span>{userInfo.get('userName')}</span></NavItem>
               </Link>) : (
               <Link to='/login'>
                 <NavItem><img src={spaceman} alt="spaceman" /><span>登机</span></NavItem>
@@ -62,8 +62,8 @@ class Header extends PureComponent {
 const mapStateToProps = (state) => {
   return {
     curTheme: state.getIn(["header", "curTheme"]),
-    login: state.getIn(["dynamic", "login"]),
-    userInfo: state.getIn(["dynamic", "userInfo"])
+    loginStatus: state.getIn(["login", "loginStatus"]),
+    userInfo: state.getIn(["login", "userInfo"])
   }
 }
 const mapDispatchToProps = (dispatch) => {

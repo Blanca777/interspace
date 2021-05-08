@@ -1,7 +1,7 @@
 {
-  "userId": "blanca",
-  "userName": "blanca",
-  "userImg": "http://localhost:3000/static/media/blanca.95c48eab.jpg",
+  "authorId": "blanca",
+  "authorName": "blanca",
+  "authorImg": "http://localhost:3000/static/media/blanca.95c48eab.jpg",
   "articleNum": 11,
   "tagNum": 7,
   "category": [

@@ -28,3 +28,8 @@ export const getArticleList = () => {
     })
   }
 }
+
+export const changeCurListAction = (tagId) => ({
+  type: constants.CHANGECURLIST,
+  tagId
+})

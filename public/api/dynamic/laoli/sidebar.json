@@ -1,0 +1,14 @@
+{
+  
+  "sidebarList": [
+    {
+      "dynamicId": "personalDynamic",
+      "dynamicTitle": "个人动态"
+    },
+    {
+      "dynamicId": "articleDynamic",
+      "dynamicTitle": "文章动态"
+    }
+    
+  ]
+}

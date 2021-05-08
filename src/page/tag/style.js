@@ -18,10 +18,11 @@ export const TagList = styled.div`
 `;
 export const TagItem = styled.span`
   display: inline-block;
-  padding: 2px 6px;
+  padding: 4px 6px;
   background: #f40;
   margin: 10px;
   border-radius: 4px;
+  cursor: pointer;
 `;
 export const ArticleList = styled.div`
   width: 100%;

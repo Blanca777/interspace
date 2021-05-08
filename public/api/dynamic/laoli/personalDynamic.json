@@ -1,0 +1,29 @@
+{
+  "dynamicId": "personalDynamic",
+  "dynamicTitle": "个人动态",
+  "author": "blanca",
+  "time": "2021-5-2",
+  "viewNum": 11,
+  "dynamicList": [
+    {
+      "dynamicTime": "2021-5-2",
+      "dynamicText": "开发博客第2天",
+      "dynamicListId": "dynamicListId1"
+    },
+    {
+      "dynamicTime": "2021-5-1",
+      "dynamicText": "开发博客第1天",
+      "dynamicListId": "dynamicListId2"
+    },
+    {
+      "dynamicTime": "2021-4-30",
+      "dynamicText": "开发博客准备",
+      "dynamicListId": "dynamicListId3"
+    },
+    {
+      "dynamicTime": "2021-4-29",
+      "dynamicText": "开发博客准备",
+      "dynamicListId": "dynamicListId4"
+    }
+  ]
+}

@@ -18,9 +18,9 @@ const UserInfoAction = (userInfo) => ({
   userInfo: fromJS(userInfo)
 })
 
-export const getDynamicMsg = (dynamicId) => {
+export const getDynamicMsg = (userId,dynamicId) => {
   return (dispatch) => {
-    axios.get('/api/dynamic/'+dynamicId+'.json').then(res => {
+    axios.get(`/api/dynamic/${userId}/${dynamicId}.json`).then(res => {
       dispatch(dynamicMsgAction(res.data))
     }).catch(err => {
       console.log(err)
@@ -28,9 +28,9 @@ export const getDynamicMsg = (dynamicId) => {
   } 
 }
 
-export const getSidebarContent = () => {
+export const getSidebarContent = (userId) => {
   return (dispatch) => {
-    axios.get('/api/dynamic/sidebar.json').then(res => {
+    axios.get(`/api/dynamic/${userId}/sidebar.json`).then(res => {
       let { sidebarTitle, sidebarList } = res.data
       dispatch(SidebarAction(sidebarTitle, sidebarList))
     }).catch(err => {

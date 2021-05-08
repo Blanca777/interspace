@@ -1,10 +1,9 @@
 import styled from 'styled-components'
-import blanca from '../../statics/blanca.jpg'
 import store from '../../store'
 let curTheme = store.getState().toJS().header.curTheme
 export const DynamicWrapper = styled.section`
   width: 100vw;
-  padding-top: 60px;
+  padding-top: 60px; 
   box-sizing: border-box;
   display: flex;
   justify-content: space-between;
@@ -73,20 +72,6 @@ export const DynamicText = styled.div`
 `;
 
 
-
-
-
-
-export const SidebarWrapper = styled.nav`
-  position: fixed;
-  top: 0;
-  left: 0;
-  
-  box-sizing: border-box;
-  width: 280px;
-  height: 100vh;
-
-`;
 export const SidebarBox = styled.div`
 
   max-width: 280px;
@@ -98,13 +83,27 @@ export const SidebarTitle = styled.h2`
   text-transform: Uppercase;
 `;
 export const SidebarItem = styled.div`
-  padding: 5px 20px;
-  margin: 10px 0;
+  padding: 5px 10px 5px 20px;
+  margin: 10px 0 10px 10px;
   background: rgba(62,175,124,.1);
   border-right: 3px solid #3eaf7c;
   color: #d8d8d8;
-  &:hover {
-    color: #3eaf7c;
+  svg {
+    width: 30px;
+    height: 30px;
+    vertical-align: middle;
+    margin-left: 10px;
+    cursor: pointer;
+    opacity: 0.7;
+    &:hover {
+      opacity: 1;
+    }
+  }
+  a {
+    background: rgba(62,175,124, 0);
+    &:hover {
+      color: #3eaf7c;
+    }
   }
 `;
 
@@ -119,22 +118,22 @@ export const UserInfo = styled.article`
   img {
     width: 100px;
     height: 100px;
-    padding: 30px 75px 20px;
+    padding: 30px 75px 10px;
     border-radius: 2px;
   }
 `;
-export const Userimg = styled.img.attrs({
-  src: blanca
-})`
-  width: 100px;
-  height: 100px;
-  padding: 30px 75px 20px;
-  border-radius: 2px;
-`;
+
+
 export const Username = styled.h4`
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   color: ${curTheme.color1};
+`;
+export const Logout = styled.h4`
+  text-align: center;
+  margin-bottom: 20px;
+  color: red;
+  cursor: pointer;
 `;
 export const Usernum = styled.div`
   display: flex;

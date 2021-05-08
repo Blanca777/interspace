@@ -43,9 +43,9 @@ class Article extends PureComponent {
 
           <Userbox>
             <UserInfo>
-              <Link to={`/dynamic/${userInfo.get('userId')}/articleDynamic`}>
-                <img src={userInfo.get('userImg')} alt="" />
-                <Username>{userInfo.get('userName')}</Username>
+              <Link to={`/dynamic/${userInfo.get('authorId')}/articleDynamic`}>
+                <img src={userInfo.get('authorImg')} alt="" />
+                <Username>{userInfo.get('authorName')}</Username>
               </Link>
 
               <Usernum>

@@ -9,6 +9,8 @@ import Article from './page/article'
 import Dynamic from './page/dynamic'
 import Tools from './page/tools'
 import Tag from './page/tag'
+import Login from './page/login'
+
 
 function App() {
   return (
@@ -20,6 +22,7 @@ function App() {
         <Route path="/dynamic/:userId/:dynamicId" exact component={Dynamic}></Route>
         <Route path="/tools/:toolsId" exact component={Tools}></Route>
         <Route path="/tag/:tagId" exact component={Tag}></Route>
+        <Route path="/login" exact component={Login}></Route>
         <Footer />
       </BrowserRouter>
     </Provider>
