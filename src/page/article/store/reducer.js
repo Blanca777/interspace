@@ -4,8 +4,7 @@ import { fromJS } from 'immutable';
 const defaultState = fromJS({
   articleContent: "",
   articleMsg: {},
-  sidebarTitle: "",
-  sidebarList: []
+  userInfo: {}
 })
 const reducer = (state = defaultState, action) => {
   switch (action.type) {
@@ -17,11 +16,10 @@ const reducer = (state = defaultState, action) => {
       return state.merge({
         articleContent: action.articleContent
       }) 
-    case constants.GETSIDEBARCONTENT:
-      return state.merge({
-        sidebarTitle: action.sidebarTitle,
-        sidebarList: action.sidebarList
-      })
+      case constants.GETUSERINFO:
+        return state.merge({
+          userInfo: action.userInfo
+        });
 
     default:
       return state;

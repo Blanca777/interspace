@@ -6,8 +6,6 @@ import { reducer as dynamicReducer } from '../page/dynamic/store'
 import { reducer as toolsReducer } from '../page/tools/store'
 import { reducer as tagReducer } from '../page/tag/store'
 
-
-
 const reducer = combineReducers({
   header: headerReducer,
   home: homeReducer,

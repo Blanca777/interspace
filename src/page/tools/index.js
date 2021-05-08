@@ -11,7 +11,6 @@ import {
   ToolsContent,
   ToolsAdvantages,
   ToolsApplication,
-  SidebarWrapper,
   SidebarBox,
   SidebarTitle,
   SidebarItem
@@ -30,54 +29,52 @@ class Tools extends PureComponent {
   render() {
     let { toolsMsg, sidebarTitle, sidebarList, getToolsMsg } = this.props
     return (
-      <>
-        <ToolsWrapper>
-          <ToolsBox>
-            <ToolsTitle>
-              <TitleText>{toolsMsg.get('toolsTitle')}</TitleText>
-              <TitleMsg>
-                <TitleItem><i className="iconfont">&#xe60e;</i>{toolsMsg.get('author')}</TitleItem>
-                <TitleItem><i className="iconfont">&#xe619;</i>{toolsMsg.get('time')}</TitleItem>
-                <TitleItem><i className="iconfont">&#xe650;</i>{toolsMsg.get('viewNum')}</TitleItem>
-              </TitleMsg>
-            </ToolsTitle>
-            <ToolsContent>
-              <ToolsAdvantages>
-                <h1>优点</h1>
-                <div>{toolsMsg.get('advantages')}</div>
-              </ToolsAdvantages>
-              <ToolsApplication>
-                <h1>应用</h1>
-                <div>{toolsMsg.get('application')}</div>
-              </ToolsApplication>
-            </ToolsContent>
-          </ToolsBox>
+      <ToolsWrapper>
+        <SidebarBox>
+          <SidebarTitle>{sidebarTitle}</SidebarTitle>
+          {
+            sidebarList.map(item => {
+              return (
+                <Link
+                  to={`/tools/${item.get('toolsId')}`}
+                  onClick={() => {
+                    getToolsMsg(item.get('toolsId'))
+                  }}
+                  key={item.get('toolsId')}
+                >
+                  <SidebarItem>
+                    {item.get('toolsTitle')}
+                  </SidebarItem>
+                </Link>
+              )
+            })
+          }
 
-        </ToolsWrapper>
-        <SidebarWrapper>
-          <SidebarBox>
-            <SidebarTitle>{sidebarTitle}</SidebarTitle>
-            {
-              sidebarList.map(item => {
-                return (
-                  <Link
-                    to={`/tools/${item.get('toolsId')}`}
-                    onClick={() => {
-                      getToolsMsg(item.get('toolsId'))
-                    }}
-                    key={item.get('toolsId')}
-                  >
-                    <SidebarItem>
-                      {item.get('toolsTitle')}
-                    </SidebarItem>
-                  </Link>
-                )
-              })
-            }
+        </SidebarBox>
+        
+        <ToolsBox>
+          <ToolsTitle>
+            <TitleText>{toolsMsg.get('toolsTitle')}</TitleText>
+            <TitleMsg>
+              <TitleItem><i className="iconfont">&#xe60e;</i>{toolsMsg.get('author')}</TitleItem>
+              <TitleItem><i className="iconfont">&#xe619;</i>{toolsMsg.get('time')}</TitleItem>
+              <TitleItem><i className="iconfont">&#xe650;</i>{toolsMsg.get('viewNum')}</TitleItem>
+            </TitleMsg>
+          </ToolsTitle>
+          <ToolsContent>
+            <ToolsAdvantages>
+              <h1>优点</h1>
+              <div>{toolsMsg.get('advantages')}</div>
+            </ToolsAdvantages>
+            <ToolsApplication>
+              <h1>应用</h1>
+              <div>{toolsMsg.get('application')}</div>
+            </ToolsApplication>
+          </ToolsContent>
+        </ToolsBox>
 
-          </SidebarBox>
-        </SidebarWrapper>
-      </>
+        
+      </ToolsWrapper>
     )
   }
 }

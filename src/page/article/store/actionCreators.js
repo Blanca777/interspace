@@ -13,11 +13,11 @@ const articleContentAction = (articleContent) => ({
   articleContent: fromJS(articleContent)
 })
 
-const SidebarAction = (sidebarTitle, sidebarList) => ({
-  type: constants.GETSIDEBARCONTENT,
-  sidebarTitle: fromJS(sidebarTitle),
-  sidebarList: fromJS(sidebarList)
+const UserInfoAction = (userInfo) => ({
+  type: constants.GETUSERINFO, 
+  userInfo: fromJS(userInfo)
 })
+
 
 export const getArticleMsg = (articleid) => {
   return (dispatch) => {
@@ -38,11 +38,10 @@ export const getArticleContent = (articleid) => {
   } 
 }
 
-export const getSidebarContent = (articleid) => {
+export const getUserInfo = () => {
   return (dispatch) => {
-    axios.get('/api/article/sidebar.json').then(res => {
-      let { sidebarTitle, sidebarList } = res.data
-      dispatch(SidebarAction(sidebarTitle, sidebarList))
+    axios.get('/api/article/userInfo.json').then(res => {
+      dispatch(UserInfoAction(res.data))
     }).catch(err => {
       console.log(err)
     })

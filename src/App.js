@@ -17,7 +17,7 @@ function App() {
         <Header />
         <Route path="/" exact component={Home}></Route>
         <Route path="/article/:articleId" exact component={Article}></Route>
-        <Route path="/dynamic/:dynamicId" exact component={Dynamic}></Route>
+        <Route path="/dynamic/:userId/:dynamicId" exact component={Dynamic}></Route>
         <Route path="/tools/:toolsId" exact component={Tools}></Route>
         <Route path="/tag/:tagId" exact component={Tag}></Route>
         <Footer />

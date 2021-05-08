@@ -1,13 +1,14 @@
 import styled from 'styled-components'
 export const ToolsWrapper = styled.section`
   width: 100vw;
-  padding: 70px 250px 100px 320px;
+  padding-top: 60px;
   box-sizing: border-box;
   display: flex;
   justify-content: center;
 `;
 export const ToolsBox = styled.article`
   max-width: 860px;
+  margin-left: 300px;
   flex: 1;
   
 `;
@@ -35,10 +36,7 @@ export const TitleItem = styled.li`
   }
 `;
 export const ToolsContent = styled.article`
-
   margin-top: 30px;
-
-
 `
 export const ToolsAdvantages = styled.article`
   margin-bottom: 50px;
@@ -50,12 +48,8 @@ export const ToolsAdvantages = styled.article`
     padding-bottom: 10px;
     border-bottom: 1px solid #000;
   }
-
-
 `
-
 export const ToolsApplication = styled.article`
-
   margin-bottom: 50px;
   h1 {
     font-size: 22px;
@@ -65,28 +59,15 @@ export const ToolsApplication = styled.article`
     padding-bottom: 10px;
     border-bottom: 1px solid #000;
   }
-
-`
-
-
-
-
-export const SidebarWrapper = styled.nav`
-  position: fixed;
-  top: 0;
-  left: 0;
-  padding-top: 70px;
-  box-sizing: border-box;
-  width: 280px;
-  height: 100vh;
-  background: red;
-
 `;
-export const SidebarBox = styled.div`
-  width: 100%;
-  height: 100%;
-  padding: 40px 20px;
 
+export const SidebarBox = styled.div`
+  position: fixed;
+  left: 0;
+  width: 300px;
+  height: 100%;
+  padding: 40px 10px;
+  box-sizing: border-box;
 `;
 export const SidebarTitle = styled.h2`
   margin-bottom: 20px;

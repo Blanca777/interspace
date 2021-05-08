@@ -116,6 +116,12 @@ export const Userbox = styled.article`
   box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.6);
 `;
 export const UserInfo = styled.article`
+  img {
+    width: 100px;
+    height: 100px;
+    padding: 30px 75px 20px;
+    border-radius: 2px;
+  }
 `;
 export const Userimg = styled.img.attrs({
   src: blanca

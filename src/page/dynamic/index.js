@@ -19,7 +19,6 @@ import {
   SidebarItem,
   Userbox,
   UserInfo,
-  Userimg,
   Username,
   Usernum,
   Numitem,
@@ -37,24 +36,24 @@ import { actionCreators } from './store'
 class Dynamic extends PureComponent {
 
   componentDidMount() {
-    let { getDynamicMsg, getSidebarContent, getUserInfo } = this.props
-    getDynamicMsg(this.props.match.params.dynamicId)
-    getSidebarContent(this.props.match.params.dynamicId)
-    getUserInfo(this.props.userInfo);
+    let { getDynamicMsg, getSidebarContent, getUserInfo, match, userInfo } = this.props
+    getDynamicMsg(match.params.dynamicId)
+    getSidebarContent(match.params.dynamicId)
+    getUserInfo(userInfo,match.params.userId);
     window.scrollTo(0, 0)
   }
   render() {
-    let { dynamicMsg, sidebarTitle, sidebarList, getDynamicMsg, userInfo } = this.props
+    let { dynamicMsg, sidebarList, getDynamicMsg, userInfo } = this.props
     return (
       <>
         <DynamicWrapper>
           <SidebarBox>
-            <SidebarTitle>{sidebarTitle}</SidebarTitle>
+            <SidebarTitle>太空飞船</SidebarTitle>
             {
               sidebarList.map(item => {
                 return (
                   <Link
-                    to={`/dynamic/${item.get('dynamicId')}`}
+                    to={`/dynamic/${userInfo.get('userId')}/${item.get('dynamicId')}`}
                     onClick={() => {
                       getDynamicMsg(item.get('dynamicId'))
                     }}
@@ -105,8 +104,11 @@ class Dynamic extends PureComponent {
 
           <Userbox>
             <UserInfo>
-              <Userimg></Userimg>
-              <Username>{userInfo.get('name')}</Username>
+              <Link to={`/dynamic/${userInfo.get('userId')}/articleDynamic`}>
+                <img src={userInfo.get('userImg')} alt="" />
+                <Username>{userInfo.get('userName')}</Username>
+              </Link>
+
               <Usernum>
                 <Numitem className="borderr">
                   <h4>{userInfo.get('articleNum')}</h4>
@@ -144,6 +146,7 @@ class Dynamic extends PureComponent {
               }
             </Flinkbox>
           </Userbox>
+
         </DynamicWrapper>
 
       </>
@@ -154,7 +157,6 @@ class Dynamic extends PureComponent {
 const mapStateToProps = (state) => {
   return {
     dynamicMsg: state.getIn(['dynamic', 'dynamicMsg']),
-    sidebarTitle: state.getIn(["dynamic", "sidebarTitle"]),
     sidebarList: state.getIn(["dynamic", "sidebarList"]),
     userInfo: state.getIn(['dynamic', 'userInfo'])
   }
@@ -167,9 +169,9 @@ const mapDispatchToProps = (dispatch) => {
     getSidebarContent(dynamicId) {
       dispatch(actionCreators.getSidebarContent(dynamicId))
     },
-    getUserInfo(userInfo) {
+    getUserInfo(userInfo, userId) {
       if (userInfo.size === 0) {
-        dispatch(actionCreators.getUserInfo())
+        dispatch(actionCreators.getUserInfo(userId))
       }
     }
 

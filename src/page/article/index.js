@@ -10,10 +10,18 @@ import {
   TitleText,
   TitleMsg,
   TitleItem,
-  SidebarWrapper,
-  SidebarBox,
-  SidebarTitle,
-  SidebarItem
+  Userbox,
+  UserInfo,
+  Username,
+  Usernum,
+  Numitem,
+  Hastitle,
+  Categorybox,
+  Categoryitem,
+  Tagsbox,
+  Tagsitem,
+  Flinkbox,
+  Flinkitem,
 
 } from './style'
 import { actionCreators } from './store'
@@ -21,17 +29,63 @@ import { actionCreators } from './store'
 class Article extends PureComponent {
 
   componentDidMount() {
-    let { getArticleMsg, getArticleContent, getSidebarContent } = this.props
+    let { getArticleMsg, getArticleContent, getUserInfo } = this.props
     getArticleMsg(this.props.match.params.articleId)
     getArticleContent(this.props.match.params.articleId)
-    getSidebarContent(this.props.match.params.articleId)
+    getUserInfo(this.props.userInfo);
     window.scrollTo(0, 0)
   }
   render() {
-    let { articleMsg, articleContent, sidebarTitle, sidebarList, getArticleContent, getArticleMsg } = this.props
+    let { articleMsg, articleContent, userInfo } = this.props
     return (
       <>
         <ArticleWrapper>
+
+          <Userbox>
+            <UserInfo>
+              <Link to={`/dynamic/${userInfo.get('userId')}/articleDynamic`}>
+                <img src={userInfo.get('userImg')} alt="" />
+                <Username>{userInfo.get('userName')}</Username>
+              </Link>
+
+              <Usernum>
+                <Numitem className="borderr">
+                  <h4>{userInfo.get('articleNum')}</h4>
+                  <h6>文章</h6>
+                </Numitem>
+                <Numitem>
+                  <h4>{userInfo.get('tagNum')}</h4>
+                  <h6>标签</h6>
+                </Numitem>
+              </Usernum>
+            </UserInfo>
+            <Hastitle><i className="iconfont">&#xe624;</i> 分类</Hastitle>
+            <Categorybox>
+              {
+                userInfo.get('category') && userInfo.get('category').map(item => {
+                  return <Categoryitem key={item.get("categoryName")}>{item.get("categoryName")}<span>{item.get("articleNum")}</span></Categoryitem>
+                })
+              }
+
+            </Categorybox>
+            <Hastitle><i className="iconfont">&#xe9f7;</i> 标签</Hastitle>
+            <Tagsbox>
+              {
+                userInfo.get('tag') && userInfo.get('tag').map(item => {
+                  return <Tagsitem key={item}>{item}</Tagsitem>
+                })
+              }
+            </Tagsbox>
+            <Hastitle><i className="iconfont">&#xe625;</i> 友情链接</Hastitle>
+            <Flinkbox>
+              {
+                userInfo.get('fLink') && userInfo.get('fLink').map(item => {
+                  return <Flinkitem key={item}>{item}</Flinkitem>
+                })
+              }
+            </Flinkbox>
+          </Userbox>
+
           <ArticleBox>
             <ArticleTitle>
               <TitleText>{articleMsg.get('articleTitle')}</TitleText>
@@ -48,30 +102,7 @@ class Article extends PureComponent {
           </ArticleBox>
 
         </ArticleWrapper>
-        <SidebarWrapper>
-          <SidebarBox>
-            <SidebarTitle>{sidebarTitle}</SidebarTitle>
-            {
-              sidebarList.map(item => {
-                return (
-                  <Link
-                    to={`/article/${item.get('articleId')}`}
-                    onClick={() => {
-                      getArticleContent(item.get('articleId'))
-                      getArticleMsg(item.get('articleId'))
-                    }}
-                    key={item.get('articleId')}
-                  >
-                    <SidebarItem>
-                      {item.get('articleTitle')}
-                    </SidebarItem>
-                  </Link>
-                )
-              })
-            }
 
-          </SidebarBox>
-        </SidebarWrapper>
       </>
     )
   }
@@ -81,8 +112,7 @@ const mapStateToProps = (state) => {
   return {
     articleContent: state.getIn(['article', 'articleContent']),
     articleMsg: state.getIn(['article', 'articleMsg']),
-    sidebarTitle: state.getIn(["article", "sidebarTitle"]),
-    sidebarList: state.getIn(["article", "sidebarList"])
+    userInfo: state.getIn(['article', 'userInfo'])
   }
 }
 const mapDispatchToProps = (dispatch) => {
@@ -93,8 +123,10 @@ const mapDispatchToProps = (dispatch) => {
     getArticleContent(articleId) {
       dispatch(actionCreators.getArticleContent(articleId))
     },
-    getSidebarContent(articleId) {
-      dispatch(actionCreators.getSidebarContent(articleId))
+    getUserInfo(userInfo) {
+      if (userInfo.size === 0) {
+        dispatch(actionCreators.getUserInfo())
+      }
     }
 
   }

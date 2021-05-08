@@ -24,7 +24,9 @@ export const HeaderLeft = styled.div`
   span{
     white-space: nowarp;
     margin-left: 20px;
-    font-size: 18px;
+    font-size: 22px;
+    font-weight: bold;
+    font-family: monospace;
     color: ${curTheme.color1};
   }
 `;
@@ -83,17 +85,17 @@ export const NavItem = styled.li`
   box-sizing: border-box;
   cursor: pointer;
   color: ${curTheme.titleColor2};
-  border-bottom: 2px solid ${curTheme.titleColor2};
- 
-  .iconfont {
-    margin-right: 5px;
-    color: ${curTheme.titleColor2};
-  }
   &:hover{
-    color: ${curTheme.titleColor2};
-    border-bottom: 2px solid ${curTheme.titleColor2};
-    .iconfont {
-      color: ${curTheme.titleColor2};
+    span {
+      color: #FFFACD;
     }
+    
+  }
+
+  img {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    vertical-align:middle
   }
 `;

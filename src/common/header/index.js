@@ -11,11 +11,15 @@ import {
   NavItem
 } from './style'
 import interspace from '../../statics/interspace.png'
+import spaceman from '../../statics/iconpng/spaceman.png'
+import project from '../../statics/iconpng/project.png'
+import tools from '../../statics/iconpng/tools.png'
+import capsule from '../../statics/iconpng/capsule.png'
 class Header extends PureComponent {
   componentDidMount() {
   }
   render() {
-    let { handleChangeTheme, curTheme } = this.props
+    let { handleChangeTheme, curTheme, userInfo, login } = this.props
     return (
       <HeaderWrapper>
         <Link to='/'>
@@ -30,11 +34,24 @@ class Header extends PureComponent {
           <i className="iconfont searchicon">&#xe9fc;</i>
           <HeaderSearch />
           <NavWarpper>
-            <Link to='/dynamic/personalDynamic'><NavItem><i className="iconfont">&#xe619;</i>动态</NavItem></Link>
-            <Link to='/tools/vscode'><NavItem><i className="iconfont">&#xe629;</i>工具</NavItem></Link>
-            <Link to='/article/article1'><NavItem><i className="iconfont">&#xe9f8;</i>文章笔记</NavItem></Link>
-            <Link to='/tag/tagAll'><NavItem><i className="iconfont">&#xe63d;</i>标签</NavItem></Link>
-            <Link to='/dynamic/about'><NavItem><i className="iconfont">&#xe60e;</i>关于</NavItem></Link>
+            {
+              login ? (
+              <Link to='/dynamic/personalDynamic'>
+                <NavItem><img src={spaceman} alt="spaceman" /><span>{userInfo.get('name')}</span></NavItem>
+              </Link>) : (
+              <Link to='/login'>
+                <NavItem><img src={spaceman} alt="spaceman" /><span>登机</span></NavItem>
+              </Link>)
+            }
+            <Link to='/tag/tagAll'>
+              <NavItem><img src={project} alt="project" /><span>开荒项目</span></NavItem>
+            </Link>
+            <Link to='/tools/vscode'>
+              <NavItem><img src={tools} alt="tools" /><span>开荒设备</span></NavItem>
+            </Link>
+            <Link to='/about'>
+              <NavItem><img src={capsule} alt="capsule" /><span>太空舱</span></NavItem>
+            </Link>
           </NavWarpper>
         </HeaderRight>
       </HeaderWrapper>
@@ -44,7 +61,9 @@ class Header extends PureComponent {
 
 const mapStateToProps = (state) => {
   return {
-    curTheme: state.getIn(["header", "curTheme"])
+    curTheme: state.getIn(["header", "curTheme"]),
+    login: state.getIn(["dynamic", "login"]),
+    userInfo: state.getIn(["dynamic", "userInfo"])
   }
 }
 const mapDispatchToProps = (dispatch) => {

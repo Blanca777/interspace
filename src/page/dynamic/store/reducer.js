@@ -5,13 +5,14 @@ const defaultState = fromJS({
   dynamicMsg: {},
   sidebarTitle: "",
   sidebarList: [],
-  userInfo: {}
+  userInfo: {},
+  login: false
 })
 const reducer = (state = defaultState, action) => {
   switch (action.type) {
     case constants.GETDYNAMICCONTENT:
       return state.merge({
-        dynamicMsg: action.dynamicMsg
+        dynamicMsg: action.dynamicMsg 
       })
     case constants.GETSIDEBARCONTENT:
       return state.merge({

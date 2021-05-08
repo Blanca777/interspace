@@ -38,9 +38,9 @@ export const getSidebarContent = () => {
     })
   }
 }
-export const getUserInfo = () => {
+export const getUserInfo = (userId) => {
   return (dispatch) => {
-    axios.get('/api/dynamic/userInfo.json').then(res => {
+    axios.get(`/api/dynamic/${userId}/userInfo.json`).then(res => {
       dispatch(UserInfoAction(res.data))
     }).catch(err => {
       console.log(err)
