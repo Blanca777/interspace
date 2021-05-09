@@ -7,6 +7,7 @@ export const ArticleWrapper = styled.section`
   box-sizing: border-box;
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
 `;
 export const ArticleBox = styled.article`
   max-width: 860px;
@@ -193,4 +194,144 @@ export const Flinkitem = styled.article`
     height: 6px;
     margin: 2px;
   }
+`;
+
+export const CommentBox = styled.div`
+  width: 70vw;
+  min-width: 500px;
+  padding: 20px 32vw;
+
+`;
+export const CommentTextArea = styled.textarea.attrs({
+  placeholder: "你的想法"
+})`
+  width: 100%;
+  height: 80px;
+
+  outline: none;
+  border: 1px solid #c9c9c9;
+  resize: none;
+
+  font-size: 20px;
+  background: #181818;
+  color: #fff;
+  text-align: center;
+  padding: 10px;
+  border-radius: 3px;
+  box-sizing: border-box;
+  &:focus {
+    &+div {
+      opacity: 1;
+    }
+  }
+`;
+export const CommentSubmit = styled.div`
+  opacity: 0;
+  transition: all .3s;
+  margin-top: 5px;
+  width: 100px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  background: #fff;
+  color: #53e3a6;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 15px;
+  float: right;
+  &:hover {
+    color: #fff;
+    background: #53e3a6;
+  }
+`;
+export const CommentList = styled.div`
+  width: 100%;
+  box-sizing: border-box;
+  padding: 20px 10px;
+  margin-top: 10px;
+`;
+export const CommentItem = styled.div`
+  padding: 10px 0 60px;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  margin: 20px 0;
+  background: transparent;
+  border: 1px solid #c9c9c9;
+  img {
+    width: 40px;
+    height: 40px;
+    vertical-align: middle;
+  }
+`;
+export const CommentAuthorName = styled.span`
+  
+`;
+export const CommentText = styled.span`
+  display: inline-block;
+  width: 60%;
+  padding-left: 20px;
+  vertical-align: top;
+  line-height: 20px;
+  letter-spacing: 2px;
+`;
+export const CommentReplyList = styled.div`
+  padding: 0 50px;
+  margin-top: 10px;
+`;
+export const ReplyItem = styled.div`
+  color: #c9c9c9;
+`;
+export const ReplyAuthorName = styled.span`
+  color: #c9c9c9;
+`;
+export const ReplyText = styled.span`
+  display: inline-block;
+  width: 60%;
+  padding-left: 20px;
+  line-height: 20px;
+  vertical-align: top;
+  letter-spacing: 2px;
+`;
+export const CommentReplyInput = styled.input.attrs({
+  placeholder: "点击，写下你的足迹"
+})`
+  position: absolute;
+  left: 50%;
+  bottom: 10px;
+  transform: translate(-50%);
+
+  width: 280px;
+  padding: 5px;
+  background: transparent;
+  text-align: center;
+
+  outline: none;
+  border: none;
+  border-radius: 20px;
+
+  transition: all .5s;
+  
+  &::placeholder {
+    color: #c8c8c8;
+  }
+  &:focus {
+    background: #fff;
+    &::placeholder {
+      color: #fff;
+    }
+    &+span {
+      opacity: 1;
+    }
+  }
+`;
+export const CommentReplyBtn = styled.span`
+  position: absolute;
+  left: 50%;
+  margin-left: 150px;
+  bottom: 15px;
+  cursor: pointer;
+  overflow: hidden;
+  opacity: 0;
+  transition: all .5s;
 `;
