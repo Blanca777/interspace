@@ -15,7 +15,7 @@ const SidebarAction = (sidebarTitle, sidebarList) => ({
 })
 const UserInfoAction = (userInfo) => ({
   type: constants.GETUSERINFO,
-  userInfo: fromJS(userInfo)
+  userInfo: fromJS(userInfo) 
 })
 
 export const getDynamicMsg = (userId,dynamicId) => {

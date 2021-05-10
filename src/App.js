@@ -4,13 +4,13 @@ import { BrowserRouter, Route } from 'react-router-dom'
 import store from './store'
 import Header from './common/header'
 import Footer from './common/footer'
-import Home from './page/home'
-import Article from './page/article'
-import Dynamic from './page/dynamic'
-import Tools from './page/tools'
-import Tag from './page/tag'
-import Login from './page/login'
-import About from './page/about'
+import Home from './page/home/loadable'
+import Article from './page/article/loadable'
+import Dynamic from './page/dynamic/loadable'
+import Tools from './page/tools/loadable'
+import Tag from './page/tag/loadable'
+import Login from './page/login/loadable'
+import About from './page/about/loadable'
 
 
 function App() {
@@ -25,7 +25,8 @@ function App() {
         <Route path="/tag/:tagId" exact component={Tag}></Route>
         <Route path="/login" exact component={Login}></Route>
         <Route path="/about" exact component={About}></Route>
-        <Footer />
+        <Route path="/" exact component={Footer}></Route>
+        
       </BrowserRouter>
     </Provider>
   );

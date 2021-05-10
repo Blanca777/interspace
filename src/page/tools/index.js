@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import {
   ToolsWrapper,
   ToolsBox,
@@ -97,4 +97,4 @@ const mapDispatchToProps = (dispatch) => {
 
   }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(Tools)
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Tools))

@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import {
   DynamicWrapper,
   DynamicBox,
@@ -58,7 +58,7 @@ class Dynamic extends PureComponent {
                   <Link
                     to={`/dynamic/${userInfo.get('authorId')}/${item.get('dynamicId')}`}
                     onClick={() => {
-                      getDynamicMsg(item.get('dynamicId'))
+                      getDynamicMsg(userInfo.get('authorId'),item.get('dynamicId'))
                     }}
                   >
                     {item.get('dynamicTitle')}
@@ -187,4 +187,4 @@ const mapDispatchToProps = (dispatch) => {
 
   }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(Dynamic)
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Dynamic))

@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
-import { Redirect } from 'react-router-dom'
+import { Redirect, withRouter } from 'react-router-dom'
 import {
   LoginWrapper,
   LoginBox,
@@ -61,4 +61,4 @@ const mapDispatchToProps = (dispatch) => ({
   }
 
 })
-export default connect(mapStateToProps, mapDispatchToProps)(Login)
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Login))

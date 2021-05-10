@@ -269,9 +269,8 @@ export const CommentAuthorName = styled.span`
 `;
 export const CommentText = styled.span`
   display: inline-block;
-  width: 60%;
+  width: 80%;
   padding-left: 20px;
-  vertical-align: top;
   line-height: 20px;
   letter-spacing: 2px;
 `;
@@ -281,16 +280,16 @@ export const CommentReplyList = styled.div`
 `;
 export const ReplyItem = styled.div`
   color: #c9c9c9;
+  margin: 10px 0;
 `;
 export const ReplyAuthorName = styled.span`
   color: #c9c9c9;
 `;
 export const ReplyText = styled.span`
   display: inline-block;
-  width: 60%;
+  width: 70%;
   padding-left: 20px;
   line-height: 20px;
-  vertical-align: top;
   letter-spacing: 2px;
 `;
 export const CommentReplyInput = styled.input.attrs({
