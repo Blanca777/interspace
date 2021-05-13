@@ -8,11 +8,11 @@ const dynamicMsgAction = (dynamicMsg) => ({
   dynamicMsg: fromJS(dynamicMsg)
 })
 
-const SidebarAction = (sidebarTitle, sidebarList) => ({
-  type: constants.GETSIDEBARCONTENT,
-  sidebarTitle: fromJS(sidebarTitle),
-  sidebarList: fromJS(sidebarList)
-})
+// const SidebarAction = (sidebarTitle, sidebarList) => ({
+//   type: constants.GETSIDEBARCONTENT,
+//   sidebarTitle: fromJS(sidebarTitle),
+//   sidebarList: fromJS(sidebarList)
+// })
 const UserInfoAction = (userInfo) => ({
   type: constants.GETUSERINFO,
   userInfo: fromJS(userInfo) 
@@ -28,16 +28,16 @@ export const getDynamicMsg = (userId,dynamicId) => {
   } 
 }
 
-export const getSidebarContent = (userId) => {
-  return (dispatch) => {
-    axios.get(`/api/dynamic/${userId}/sidebar.json`).then(res => {
-      let { sidebarTitle, sidebarList } = res.data
-      dispatch(SidebarAction(sidebarTitle, sidebarList))
-    }).catch(err => {
-      console.log(err)
-    })
-  }
-}
+// export const getSidebarContent = (userId) => {
+//   return (dispatch) => {
+//     axios.get(`/api/dynamic/${userId}/sidebar.json`).then(res => {
+//       let { sidebarTitle, sidebarList } = res.data
+//       dispatch(SidebarAction(sidebarTitle, sidebarList))
+//     }).catch(err => {
+//       console.log(err)
+//     })
+//   }
+// }
 export const getUserInfo = (userId) => {
   return (dispatch) => {
     axios.get(`/api/dynamic/${userId}/userInfo.json`).then(res => {

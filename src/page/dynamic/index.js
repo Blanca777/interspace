@@ -45,10 +45,10 @@ class Dynamic extends PureComponent {
     super(props)
   }
   componentDidMount() {
-    let { getDynamicMsg, getSidebarContent, getUserInfo, match } = this.props
+    let { getDynamicMsg, getUserInfo, match } = this.props
     let { userId, dynamicId } = match.params
     getDynamicMsg(userId, dynamicId)
-    getSidebarContent(userId, dynamicId)
+    // getSidebarContent(userId, dynamicId)
     getUserInfo(userId);
     window.scrollTo(0, 0)
   }
@@ -60,8 +60,16 @@ class Dynamic extends PureComponent {
       body: formData 
     }).then(response => console.log(response))
   };
+  getDynamicTitleText(dynamicId){
+    if(dynamicId==="articleDynamic"){
+      return "文章动态"
+    }else if(dynamicId==="personalDynamic"){
+      return "个人动态"
+    }
+  }
   render() {
-    let { changeDynamicTitle, fileName, dynamicTitle, showAddDynamic, FileValueChange, dynamicMsg, sidebarList, getDynamicMsg, userInfo, loginUserInfo, logout, showAddDynamicBox } = this.props
+    let { match, changeDynamicTitle, fileName, dynamicTitle, showAddDynamic, FileValueChange, dynamicMsg, sidebarList, getDynamicMsg, userInfo, loginUserInfo, logout, showAddDynamicBox } = this.props
+
     return (
       <DynamicWrapper>
         {
@@ -111,10 +119,9 @@ class Dynamic extends PureComponent {
 
         <DynamicBox>
           <DynamicTitle>
-            <TitleText>{dynamicMsg.get('dynamicTitle')}</TitleText>
+            <TitleText>{this.getDynamicTitleText(match.params.dynamicId)}</TitleText>
             <TitleMsg>
-              <TitleItem><i className="iconfont">&#xe60e;</i>{dynamicMsg.get('author')}</TitleItem>
-              <TitleItem><i className="iconfont">&#xe619;</i>{dynamicMsg.get('time')}</TitleItem>
+
               <TitleItem><i className="iconfont">&#xe650;</i>{dynamicMsg.get('viewNum')}</TitleItem>
             </TitleMsg>
           </DynamicTitle>
@@ -211,9 +218,9 @@ const mapDispatchToProps = (dispatch) => {
     getDynamicMsg(userId, dynamicId) {
       dispatch(actionCreators.getDynamicMsg(userId, dynamicId))
     },
-    getSidebarContent(userId) {
-      dispatch(actionCreators.getSidebarContent(userId))
-    },
+    // getSidebarContent(userId) {
+    //   dispatch(actionCreators.getSidebarContent(userId))
+    // },
     getUserInfo(userId) {
       dispatch(actionCreators.getUserInfo(userId))
     },

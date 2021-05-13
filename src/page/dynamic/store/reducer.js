@@ -4,7 +4,17 @@ import { fromJS } from 'immutable';
 const defaultState = fromJS({
   dynamicMsg: {},
   sidebarTitle: "",
-  sidebarList: [],
+  sidebarList: [
+    {
+      "dynamicId": "personalDynamic",
+      "dynamicTitle": "个人动态"
+    },
+    {
+      "dynamicId": "articleDynamic",
+      "dynamicTitle": "文章动态"
+    }
+    
+  ],
   userInfo: {},
   login: false,
   showAddDynamic: true,

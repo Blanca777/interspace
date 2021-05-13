@@ -16,7 +16,7 @@ export const handleLogin = (accout, password) => {
   }
   return (dispatch) => {
     axios.post('https://faf202d3-04aa-4a2b-af03-3ba3bf105ee7.mock.pstmn.io', data).then(res=>{
-      // console.log(res)
+      console.log(res)
       dispatch(loginAction(res.data))
     }).catch(err=>{
       console.log(err)

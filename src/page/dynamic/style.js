@@ -27,8 +27,8 @@ export const TitleMsg = styled.ul`
   border-top: 1px solid #323232;
 `;
 export const TitleItem = styled.li`
-  float: left;
-  margin-right: 40px;
+  float: right;
+  margin-left: 40px;
   color: #a4a4a4;
   .iconfont {
     margin-right: 10px;
