@@ -6,4 +6,6 @@ const LoadableComponent = Loadable({
   loading: Loading
 });
 
-export default () => <LoadableComponent />
+const LoadableC = () => <LoadableComponent />
+
+export default LoadableC

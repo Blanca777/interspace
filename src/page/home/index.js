@@ -24,11 +24,13 @@ import {
   RankTitle,
   RankItem
 } from './style'
+import { fromJS } from 'immutable'
 class Home extends PureComponent {
 
   componentDidMount() {
-    this.props.getArticleList(this.props.articleList);
-    this.props.getRankList(this.props.rankList);
+    let {getArticleList,getRankList,articleList,rankList} = this.props
+    getArticleList(articleList);
+    getRankList(rankList);
     window.scrollTo(0, 0)
   }
   getPageList = () => {
@@ -57,6 +59,7 @@ class Home extends PureComponent {
           <Article>
             {
               this.props.curList.map((item) => {
+                
                 return (
                   <BlogItem key={item.get('articleid')}>
                     <Link to={`/article/${item.get('articleid')}`} >

@@ -6,13 +6,17 @@ const defaultState = fromJS({
   sidebarTitle: "",
   sidebarList: [],
   userInfo: {},
-  login: false
+  login: false,
+  showAddDynamic: true,
+  fileName: "",
+  dynamicTitle: ''
+
 })
 const reducer = (state = defaultState, action) => {
   switch (action.type) {
     case constants.GETDYNAMICCONTENT:
       return state.merge({
-        dynamicMsg: action.dynamicMsg 
+        dynamicMsg: action.dynamicMsg
       })
     case constants.GETSIDEBARCONTENT:
       return state.merge({
@@ -23,6 +27,20 @@ const reducer = (state = defaultState, action) => {
       return state.merge({
         userInfo: action.userInfo
       });
+    case constants.SHOWADDDYNAMIC:
+      return state.merge({
+        showAddDynamic: !state.get('showAddDynamic'),
+        dynamicTitle: '',
+        fileName: ''
+      });
+    case constants.CHANGEDYNAMICTITLE:
+      return state.merge({
+        dynamicTitle: action.dynamicTitle
+      })
+    case constants.CHANGEFILENAME:
+      return state.merge({
+        fileName: action.fileName
+      })
     default:
       return state;
   }

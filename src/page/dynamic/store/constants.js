@@ -1,3 +1,6 @@
 export const GETDYNAMICCONTENT = 'dynamic/getDynamicContent'
 export const GETSIDEBARCONTENT = 'dynamic/getSidebarContent'
 export const GETUSERINFO = 'dynamic/getUserInfo'
+export const SHOWADDDYNAMIC = 'dynamic/showAddDynamic'
+export const CHANGEDYNAMICTITLE = 'dynamic/changeDynamicTitle'
+export const CHANGEFILENAME = 'dynamic/changeFileName'

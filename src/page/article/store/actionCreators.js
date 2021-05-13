@@ -21,9 +21,9 @@ const CommentListAction = (commentList) => ({
   type: constants.GETCOMMENTLIST, 
   commentList: fromJS(commentList)
 })
-const CommentSendAction = () => ({
-  type: constants.COMMENTSEND
-})
+// const CommentSendAction = () => ({
+//   type: constants.COMMENTSEND
+// })
 
 export const getArticleMsg = (articleid) => {
   return (dispatch) => {
@@ -70,11 +70,11 @@ export const commentSend = (commentTextValue, authorId) => {
   const data = {commentTextValue,authorId}
   return (dispatch) => {
     axios.post('/api/article/addCommentList.json',data).then(res => {
-      if(res.data.status = 'success'){
-        dispatch(CommentSendAction(res.data.commentList))
-      }else{
-        alert('出现未知错误，请重新输入！')
-      }
+      // if(res.data.status = 'success'){
+      //   dispatch(CommentSendAction(res.data.commentList))
+      // }else{
+      //   alert('出现未知错误，请重新输入！')
+      // }
       
     }).catch(err => {
       console.log(err)

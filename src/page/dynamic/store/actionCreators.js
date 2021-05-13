@@ -47,3 +47,17 @@ export const getUserInfo = (userId) => {
     })
   }
 }
+export const showAddDynamicBox = () => ({
+  type: constants.SHOWADDDYNAMIC
+})
+export const changeDynamicTitle = (dynamicTitle) => ({
+  type: constants.CHANGEDYNAMICTITLE,
+  dynamicTitle
+})
+export const changeFileName = (file) => {
+  
+  return {
+    type: constants.CHANGEFILENAME,
+    fileName: file.name
+  }
+}

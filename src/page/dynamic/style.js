@@ -88,6 +88,7 @@ export const SidebarItem = styled.div`
   background: rgba(62,175,124,.1);
   border-right: 3px solid #3eaf7c;
   color: #d8d8d8;
+
   svg {
     width: 30px;
     height: 30px;
@@ -220,5 +221,121 @@ export const Flinkitem = styled.article`
     width: 6px;
     height: 6px;
     margin: 2px;
+  }
+`;
+
+export const AddDynamicBox = styled.aside`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 400px;
+  height: 150px;
+  padding: 20px;
+  z-index: 10;
+  background: rgba(0,0,0,.1);
+  box-shadow: 0 0 10px #555;
+`
+export const AddDynamicInput = styled.input.attrs({
+  placeholder: "标题"
+})`
+  box-sizing: border-box;
+  padding: 10px;
+  border-radius: 20px; 
+  outline: none;
+  border: none;
+  text-align: center;
+  background: #c9c9c9;
+  width: 400px;
+  transition: all .3s;
+  font-size: 20px;
+  color: #3eaf7c;
+  &:focus {
+    background: #fff;
+    &::placeholder{ 
+      color: #fff;
+    }
+  }
+`;
+export const AddDynamicFileBox = styled.div`
+  position: absolute;
+  top: 80px;
+  left: 120px;  
+  display: inline-block;
+  background: #fff;
+  width: 200px;
+  height: 40px;
+  border-radius: 5px;
+  
+  span {
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+    text-align: center;
+    line-height: 40px;
+    background: #fff;
+    color: #646464;
+    
+  }
+
+`
+export const AddDynamicFile = styled.input.attrs({
+  type: "file",
+  accept: ".md",
+  name: 'file'
+})`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200px;
+  height: 40px;
+  opacity: 0;
+  cursor: pointer;
+`;
+
+export const AddDynamicCancel = styled.div`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 220px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  background: #fff;
+  color: #f00;
+  cursor: pointer;
+  opacity: .7;
+  &:hover {
+    opacity: 1;
+    color: #fff;
+    background: #f00;
+    font-size: 18px;
+
+
+  }
+`;
+export const AddDynamicSubmit = styled.input.attrs({
+  type: "submit",
+  value: "添加"
+})`
+  outline: none;
+  border: none;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 220px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  background: #fff;
+  color: #3eaf7c;
+  opacity: .7;
+  cursor: pointer;
+  &:hover {
+    opacity: 1;
+    color: #fff;
+    background: #3eaf7c;
+    font-size: 18px;
+
   }
 `;

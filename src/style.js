@@ -38,5 +38,15 @@ html, body{
     border-collapse: collapse;
     border-spacing: 0;
   }
-  
+  ::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: #F5F5F5;
+    background-clip: padding-box;
+    min-height: 28px;
+  }
 `;
