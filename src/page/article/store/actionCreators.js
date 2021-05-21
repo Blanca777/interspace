@@ -5,7 +5,8 @@ import { fromJS } from 'immutable'
 
 const articleMsgAction = (articleMsg) => ({
   type: constants.GETARTICLEMSG,
-  articleMsg: fromJS(articleMsg)
+  articleMsg: fromJS(articleMsg),
+  commentList: fromJS(articleMsg.commentList)
 })
 
 const articleContentAction = (articleContent) => ({
@@ -14,49 +15,40 @@ const articleContentAction = (articleContent) => ({
 })
 
 const UserInfoAction = (userInfo) => ({
-  type: constants.GETUSERINFO, 
+  type: constants.GETUSERINFO,
   userInfo: fromJS(userInfo)
 })
-const CommentListAction = (commentList) => ({
-  type: constants.GETCOMMENTLIST, 
-  commentList: fromJS(commentList)
-})
+// const CommentListAction = (commentList) => ({
+//   type: constants.GETCOMMENTLIST, 
+//   commentList: fromJS(commentList)
+// })
 // const CommentSendAction = () => ({
 //   type: constants.COMMENTSEND
 // })
 
-export const getArticleMsg = (articleid) => {
+export const getArticleMsg = (articleId) => {
   return (dispatch) => {
-    axios.get('/api/article/'+articleid+'.json').then(res => {
+    axios.get(`http://localhost:1777/article/${articleId}`).then(res => {
       dispatch(articleMsgAction(res.data))
-    }).catch(err => {
-      console.log(err)
-    })
-  } 
-}
-export const getArticleContent = (articleid) => {
-  return (dispatch) => {
-    axios.get('/api/article/'+articleid+'.md').then(res => {
-      dispatch(articleContentAction(res.data))
-    }).catch(err => {
-      console.log(err)
-    })
-  } 
-}
-
-export const getUserInfo = () => {
-  return (dispatch) => {
-    axios.get('/api/article/userInfo.json').then(res => {
-      dispatch(UserInfoAction(res.data))
     }).catch(err => {
       console.log(err)
     })
   }
 }
-export const getCommentList = () => {
+export const getArticleContent = (articleId) => {
   return (dispatch) => {
-    axios.get('/api/article/commentList.json').then(res => {
-      dispatch(CommentListAction(res.data))
+    axios.get(`http://localhost:1777/article/md/${articleId}`).then(res => {
+      dispatch(articleContentAction(res.data))
+    }).catch(err => {
+      console.log(err)
+    })
+  }
+}
+
+export const getUserInfo = (authorId) => {
+  return (dispatch) => {
+    axios.get(`http://localhost:1777/article/author/${authorId}`).then(res => {
+      dispatch(UserInfoAction(res.data))
     }).catch(err => {
       console.log(err)
     })
@@ -66,16 +58,16 @@ export const commentTextChange = (commentTextValue) => ({
   type: constants.COMMENTTEXTCHANGE,
   commentTextValue
 })
-export const commentSend = (commentTextValue, authorId) => {
-  const data = {commentTextValue,authorId}
+export const commentSend = (commentTextValue, authorId, authorName, articleId) => {
+  const data = { commentText: commentTextValue, authorId, authorName, articleId }
   return (dispatch) => {
-    axios.post('/api/article/addCommentList.json',data).then(res => {
-      // if(res.data.status = 'success'){
-      //   dispatch(CommentSendAction(res.data.commentList))
-      // }else{
-      //   alert('出现未知错误，请重新输入！')
-      // }
-      
+    axios.post('http://localhost:1777/article/addComment',data).then(res => {
+      if(res.status = 201){
+        dispatch(articleMsgAction(res.data))
+        dispatch(commentTextChange(''))
+      }else{
+        alert('出现未知错误，请重新输入！')
+      }
     }).catch(err => {
       console.log(err)
     })

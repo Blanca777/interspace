@@ -26,8 +26,8 @@ class Article extends PureComponent {
     let { getArticleMsg, getArticleContent, getUserInfo, getCommentList, match, userInfo } = this.props
     getArticleMsg(match.params.articleId)
     getArticleContent(match.params.articleId)
-    getUserInfo(userInfo);
-    getCommentList(match.params.articleId);
+    getUserInfo(match.params.authorId);
+    // getCommentList(match.params.articleId);
     window.scrollTo(0, 0)
   }
   render() {
@@ -87,7 +87,7 @@ class Article extends PureComponent {
           <ArticleTitle>
             <TitleText>{articleMsg.get('articleTitle')}</TitleText>
             <TitleMsg>
-              <TitleItem><i className="iconfont">&#xe60e;</i>{articleMsg.get('author')}</TitleItem>
+              <TitleItem><i className="iconfont">&#xe60e;</i>{articleMsg.get('authorName')}</TitleItem>
               <TitleItem><i className="iconfont">&#xe619;</i>{articleMsg.get('time')}</TitleItem>
               <TitleItem><i className="iconfont">&#xe650;</i>{articleMsg.get('viewNum')}</TitleItem>
             </TitleMsg>
@@ -100,7 +100,7 @@ class Article extends PureComponent {
 
         <CommentBox>
           <CommentTextArea onChange={commentTextChange} value={commentTextValue} ></CommentTextArea>
-          <CommentSubmit onClick={() => commentSend(commentTextValue, loginStatus, loginUserInfo)}>发表</CommentSubmit>
+          <CommentSubmit onClick={() => commentSend(commentTextValue, loginStatus, loginUserInfo, articleMsg)}>发表</CommentSubmit>
           <CommentList>
             {
               commentList.map(item => {
@@ -161,21 +161,21 @@ const mapDispatchToProps = (dispatch) => {
     getArticleContent(articleId) {
       dispatch(actionCreators.getArticleContent(articleId))
     },
-    getUserInfo(userInfo) {
-      if (userInfo.size === 0) {
-        dispatch(actionCreators.getUserInfo())
-      }
+    getUserInfo(authorId) {
+      dispatch(actionCreators.getUserInfo(authorId))
     },
-    getCommentList() {
-      dispatch(actionCreators.getCommentList())
-    },
+    // getCommentList() {
+    //   dispatch(actionCreators.getCommentList())
+    // },
     commentTextChange(e) {
       dispatch(actionCreators.commentTextChange(e.target.value))
     },
-    commentSend(commentTextValue, loginStatus, loginUserInfo) {
+    commentSend(commentTextValue, loginStatus, loginUserInfo, articleMsg) {
       if (loginStatus) {
-        let { authorId } = loginUserInfo
-        dispatch(actionCreators.commentSend(commentTextValue, authorId))
+        let authorId = loginUserInfo.get('authorId')
+        let authorName = loginUserInfo.get('authorName')
+        let articleId = articleMsg.get('articleId')
+        dispatch(actionCreators.commentSend(commentTextValue, authorId, authorName,articleId))
       } else {
         alert('请先登机')
       }

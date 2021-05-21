@@ -6,13 +6,14 @@ const defaultState = fromJS({
   articleMsg: {},
   userInfo: {},
   commentList: [],
-  commentTextValue: "123"
+  commentTextValue: ""
 })
 const reducer = (state = defaultState, action) => {
   switch (action.type) {
     case constants.GETARTICLEMSG:
       return state.merge({
-        articleMsg: action.articleMsg
+        articleMsg: action.articleMsg,
+        commentList: action.commentList
       })
     case constants.GETARTICLECONTENT:
       return state.merge({

@@ -24,7 +24,6 @@ import {
   RankTitle,
   RankItem
 } from './style'
-import { fromJS } from 'immutable'
 class Home extends PureComponent {
 
   componentDidMount() {
@@ -61,8 +60,8 @@ class Home extends PureComponent {
               this.props.curList.map((item) => {
                 
                 return (
-                  <BlogItem key={item.get('articleid')}>
-                    <Link to={`/article/${item.get('articleid')}`} >
+                  <BlogItem key={item.get('articleId')}>
+                    <Link to={`/article/${item.get('authorId')}/${item.get('articleId')}`} >
                       <Blogtitle>{item.get('articleTitle')}</Blogtitle>
                       {
                         item.getIn(["outline", "title"]) !== undefined && (

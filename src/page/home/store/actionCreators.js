@@ -25,7 +25,7 @@ export const NextPageAction = () => ({
 })
 export const getArticleList = () => {
   return (dispatch) => {
-    axios.get('/api/home/articleList.json').then(res => {
+    axios.get('http://localhost:1777/home/articleList').then(res => {
       let curList = res.data.slice(0, 7)
       let totalPage = Math.ceil(res.data.length / 7)
       dispatch(ArticleListAction(res.data, totalPage, curList))
@@ -36,7 +36,7 @@ export const getArticleList = () => {
 }
 export const getRankList = () => {
   return (dispatch) => {
-    axios.get('/api/home/rankList.json').then(res => {
+    axios.get('http://localhost:1777/home/rankList').then(res => {
       dispatch(RankListAction(res.data))
     }).catch(err => {
       console.log(err)
