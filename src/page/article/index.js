@@ -40,7 +40,7 @@ class Article extends PureComponent {
 
         <Userbox>
           <UserInfo>
-            <Link to={`/dynamic/${userInfo.get('authorId')}/articleDynamic`}>
+            <Link to={`/dynamic/${userInfo.get('authorId')}`}>
               <img src={userInfo.get('authorImg')} alt="" />
               <Username>{userInfo.get('authorName')}</Username>
             </Link>
@@ -159,6 +159,7 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(actionCreators.getArticleMsg(articleId))
     },
     getArticleContent(articleId) {
+      
       dispatch(actionCreators.getArticleContent(articleId))
     },
     getUserInfo(authorId) {

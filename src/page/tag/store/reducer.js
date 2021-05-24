@@ -6,17 +6,30 @@ const defaultState = fromJS({
   articleList: [],
   curList: []
 })
-const changeCurList = (tagId, state) => {
-  if (tagId === "") {
+const changeCurList = (state, action) => {
+  if (action.tag === "全部") {
     return state.merge({
       curList: state.get('articleList')
     })
   }
   let curList = state.get('articleList').filter(item => {
-    return item.get('tag').indexOf(tagId) !== -1
+    return item.get('tag').indexOf(action.tag) !== -1
   })
   return state.merge({
     curList
+  })
+}
+const init = (state, action) => {
+  let tagList = new Set(['全部'])
+  action.articleList.forEach(item=>{
+    item.tag.forEach(tag=>{
+      tagList.add(tag)
+    })
+  })
+  return state.merge({
+    tagList: fromJS(Array.from(tagList)),
+    articleList: fromJS(action.articleList),
+    curList: fromJS(action.articleList)
   })
 }
 const reducer = (state = defaultState, action) => {
@@ -26,12 +39,9 @@ const reducer = (state = defaultState, action) => {
         tagList: action.tagList
       })
     case constants.GETARTICLELIST:
-      return state.merge({
-        articleList: action.articleList,
-        curList: action.articleList
-      })
+      return init(state, action)
     case constants.CHANGECURLIST:
-      return changeCurList(action.tagId, state)
+      return changeCurList(state, action)
 
     default:
       return state;

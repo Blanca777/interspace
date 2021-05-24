@@ -2,62 +2,36 @@ import * as constants from './constants'
 import axios from 'axios'
 import { fromJS } from 'immutable'
 
-
-const dynamicMsgAction = (dynamicMsg) => ({
-  type: constants.GETDYNAMICCONTENT,
-  dynamicMsg: fromJS(dynamicMsg)
+const authorInfoAction = (authorInfo) => ({
+  type: constants.GETAUTHORINFO,
+  authorInfo: fromJS(authorInfo)  
 })
+export const changeDynamicList = (dynamicId) => ({
+  type: constants.CHANGEDYNAMICLIST,
+  dynamicId
+}) 
 
-// const SidebarAction = (sidebarTitle, sidebarList) => ({
-//   type: constants.GETSIDEBARCONTENT,
-//   sidebarTitle: fromJS(sidebarTitle),
-//   sidebarList: fromJS(sidebarList)
-// })
-const UserInfoAction = (userInfo) => ({
-  type: constants.GETUSERINFO,
-  userInfo: fromJS(userInfo) 
-})
 
-export const getDynamicMsg = (userId,dynamicId) => {
-  return (dispatch) => {
-    axios.get(`/api/dynamic/${userId}/${dynamicId}.json`).then(res => {
-      dispatch(dynamicMsgAction(res.data))
-    }).catch(err => {
-      console.log(err)
-    })
-  } 
-}
-
-// export const getSidebarContent = (userId) => {
-//   return (dispatch) => {
-//     axios.get(`/api/dynamic/${userId}/sidebar.json`).then(res => {
-//       let { sidebarTitle, sidebarList } = res.data
-//       dispatch(SidebarAction(sidebarTitle, sidebarList))
-//     }).catch(err => {
-//       console.log(err)
-//     })
-//   }
-// }
-export const getUserInfo = (userId) => {
-  return (dispatch) => {
-    axios.get(`/api/dynamic/${userId}/userInfo.json`).then(res => {
-      dispatch(UserInfoAction(res.data))
-    }).catch(err => {
-      console.log(err)
-    })
-  }
-}
 export const showAddDynamicBox = () => ({
   type: constants.SHOWADDDYNAMIC
 })
-export const changeDynamicTitle = (dynamicTitle) => ({
-  type: constants.CHANGEDYNAMICTITLE,
-  dynamicTitle
-})
 export const changeFileName = (file) => {
-  
   return {
     type: constants.CHANGEFILENAME,
     fileName: file.name
   }
 }
+export const getAuthorInfo = (authorId) => {
+  return (dispatch) => {
+    axios.get(`http://localhost:1777/dynamic/${authorId}`).then(res => {
+      dispatch(authorInfoAction(res.data))
+    }).catch(err => {
+      console.log(err)
+    })
+  } 
+}
+export const changeDynamicTitle = (dynamicTitle) => ({
+  type: constants.CHANGEDYNAMICTITLE,
+  dynamicTitle: fromJS(dynamicTitle)
+
+})

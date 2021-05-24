@@ -98,7 +98,7 @@ class Home extends PureComponent {
             {
               this.props.rankList.map(item => {
                 return (
-                  <Link key={item.get('articleId')} to={"/article/" + item.get('articleId')} >
+                  <Link key={item.get('articleId')} to={`/article/${item.get('authorId')}/${item.get('articleId')}`} >
                     <RankItem>{item.get('articleTitle')}</RankItem>
                   </Link> 
                 )

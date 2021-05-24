@@ -18,8 +18,7 @@ import { actionCreators } from './store'
 
 class Detail extends PureComponent {
   componentDidMount() {
-    let { getTagList, getArticleList } = this.props
-    getTagList()
+    let { getArticleList } = this.props
     getArticleList()
   }
 
@@ -31,7 +30,7 @@ class Detail extends PureComponent {
           <TagList>
             {
               tagList.map(item => {
-                return <TagItem key={item.get('tagId')} onClick={()=>changeCurList(item.get('tagId'))}>{item.get('tagName')}</TagItem>
+                return <TagItem key={item} onClick={()=>changeCurList(item)}>{item}</TagItem>
               })
             }
           </TagList>
@@ -39,9 +38,9 @@ class Detail extends PureComponent {
             {
               curList.map((item) => {
                 return (
-                  <BlogItem key={item.get('articleid')}>
-                    <Link to={`/article/${item.get('articleid')}`} >
-                      <Blogtitle>{item.get('title')}</Blogtitle>
+                  <BlogItem key={item.get('articleId')}>
+                    <Link to={`/article/${item.get('authorId')}/${item.get('articleId')}`} >
+                      <Blogtitle>{item.get('articleTitle')}</Blogtitle>
                       <Bloghr></Bloghr>
                       <Blogmsg>
                         <Msgitem><i className="iconfont">&#xe60e;</i> {item.get('author')}</Msgitem>
@@ -70,14 +69,11 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
   return {
-    getTagList() {
-      dispatch(actionCreators.getTagList())
-    },
     getArticleList() {
       dispatch(actionCreators.getArticleList())
     },
-    changeCurList(tagId) {
-      dispatch(actionCreators.changeCurListAction(tagId))
+    changeCurList(tag) {
+      dispatch(actionCreators.changeCurListAction(tag))
     }
 
   }

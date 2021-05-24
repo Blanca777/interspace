@@ -9,15 +9,18 @@ const loginAction = (loginMsg) => ({
 export const handleLogout = () => ({
   type: constants.LOGOUT
 })
-export const handleLogin = (accout, password) => {
+export const handleLogin = (username, password) => {
   const data = {
-    accout,
+    username,
     password
   }
   return (dispatch) => {
-    axios.post('https://faf202d3-04aa-4a2b-af03-3ba3bf105ee7.mock.pstmn.io', data).then(res=>{
-      console.log(res)
-      dispatch(loginAction(res.data))
+    axios.post('http://localhost:1777/login/login', data).then(res=>{
+      if(res.data.loginStatus === "error"){
+        console.log('login err')
+      }else if(res.data.loginStatus === "success"){
+        dispatch(loginAction(res.data))
+      }
     }).catch(err=>{
       console.log(err)
     })

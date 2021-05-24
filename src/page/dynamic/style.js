@@ -88,7 +88,10 @@ export const SidebarItem = styled.div`
   background: rgba(62,175,124,.1);
   border-right: 3px solid #3eaf7c;
   color: #d8d8d8;
-
+  cursor: pointer;
+  span {
+    background: rgba(62,175,124,.01);
+  }
   svg {
     width: 30px;
     height: 30px;

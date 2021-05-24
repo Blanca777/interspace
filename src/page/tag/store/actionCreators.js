@@ -2,26 +2,17 @@ import * as constants from './constants'
 import axios from 'axios'
 import { fromJS } from 'immutable'
 
-const tagListAction = (tagList) => ({
-  type: constants.GETTAGLIST,
-  tagList: fromJS(tagList)
-})
 const ArticleListAction = (articleList) => ({
   type: constants.GETARTICLELIST,
-  articleList: fromJS(articleList)
+  articleList
 })
-export const getTagList = () => {
-  return (dispatch) => {
-    axios.get('/api/tag/tagList.json').then(res=>{
-      dispatch(tagListAction(res.data))
-    }).catch(err=>{
-      console.log(err)
-    })
-  }
-}
+export const changeCurListAction = (tag) => ({
+  type: constants.CHANGECURLIST,
+  tag
+})
 export const getArticleList = () => {
   return (dispatch) => {
-    axios.get('/api/tag/ArticleList.json').then(res=>{
+    axios.get('http://localhost:1777/tag/articleList').then(res=>{
       dispatch(ArticleListAction(res.data))
     }).catch(err=>{
       console.log(err)
@@ -29,7 +20,3 @@ export const getArticleList = () => {
   }
 }
 
-export const changeCurListAction = (tagId) => ({
-  type: constants.CHANGECURLIST,
-  tagId
-})
