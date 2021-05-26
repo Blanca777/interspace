@@ -28,7 +28,7 @@ class Login extends PureComponent {
 
 
   render() {
-    const { loginStatus } = this.props
+    const { loginStatus, handleLogin } = this.props
     if (!loginStatus) {
       return (
         <LoginWrapper>
@@ -37,7 +37,7 @@ class Login extends PureComponent {
             <UsernameInput ref={this.accoutRef} />
             <PasswordInput ref={this.passwordRef} />
             <LoginBtn
-              onClick={() => this.props.handleLogin(this.accoutRef.current.value, this.passwordRef.current.value)}
+              onClick={() => handleLogin(this.accoutRef.current.value, this.passwordRef.current.value)}
             >
               Login
             </LoginBtn>

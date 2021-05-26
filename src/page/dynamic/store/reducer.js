@@ -12,26 +12,16 @@ const defaultState = fromJS({
       "dynamicTitle": "文章动态"
     }
 
-  ], 
+  ],
   dynamicList: [],
   authorInfo: {},
   login: false,
-  showAddDynamic: true,
   fileName: "",
-  dynamicTitle: ''
+  showAddArticle: false,
+  showAddPersonal: false,
 
 })
-const getAuthorInfo = (state, action) => {
-  return state.merge({
-    dynamicList: action.authorInfo.get( 'articleDynamic'),
-    authorInfo: action.authorInfo
-  })
-}
-const changeDynamicList = (state, action) => {
-  return state.merge({
-    dynamicList: state.getIn(["authorInfo", action.dynamicId])
-  })
-}
+
 const reducer = (state = defaultState, action) => {
   switch (action.type) {
     case constants.GETAUTHORINFO:
@@ -39,15 +29,9 @@ const reducer = (state = defaultState, action) => {
     case constants.CHANGEDYNAMICLIST:
       return changeDynamicList(state, action)
     case constants.SHOWADDDYNAMIC:
-      return state.merge({
-        showAddDynamic: !state.get('showAddDynamic'),
-        dynamicTitle: '',
-        fileName: ''
-      });
-    case constants.CHANGEDYNAMICTITLE:
-      return state.merge({
-        dynamicTitle: action.dynamicTitle
-      })
+      return changeAddDynamicBox(state, action)
+    case constants.ADDPERSONALDYNAMIC:
+      return addPersonalDynamic(state, action)
     case constants.CHANGEFILENAME:
       return state.merge({
         fileName: action.fileName
@@ -56,5 +40,36 @@ const reducer = (state = defaultState, action) => {
       return state;
   }
 
+}
+const getAuthorInfo = (state, action) => {
+  return state.merge({
+    dynamicList: action.authorInfo.get('articleDynamic'),
+    authorInfo: action.authorInfo
+  })
+}
+const changeDynamicList = (state, action) => {
+  return state.merge({
+    dynamicList: state.getIn(["authorInfo", action.dynamicId])
+  })
+}
+const changeAddDynamicBox = (state, action) => {
+  if (action.dynamicId === 'personalDynamic') {
+    return state.merge({
+      showAddPersonal: !state.get('showAddPersonal'),
+      showAddArticle: false
+    });
+  } else if (action.dynamicId === 'articleDynamic') {
+    return state.merge({
+      showAddArticle: !state.get('showAddArticle'),
+      showAddPersonal: false
+    });
+  }
+}
+const addPersonalDynamic = (state, action) => {
+  return state.merge({
+    authorInfo: action.authorInfo,
+    dynamicList: action.authorInfo.get('personalDynamic'),
+    showAddPersonal: false
+  })
 }
 export default reducer

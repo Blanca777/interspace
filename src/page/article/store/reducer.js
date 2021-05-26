@@ -36,6 +36,10 @@ const reducer = (state = defaultState, action) => {
         commentTextValue: "",
         commentList: action.newCommentList
       });
+    case constants.UPDATECOMMENTLIST:
+      return state.merge({
+        commentList: action.commentList
+      })
     default:
       return state;
   }

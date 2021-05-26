@@ -13,7 +13,10 @@ const articleContentAction = (articleContent) => ({
   type: constants.GETARTICLECONTENT,
   articleContent: fromJS(articleContent)
 })
-
+const updateCommentListAction = (commentList) => ({
+  type: constants.UPDATECOMMENTLIST,
+  commentList: fromJS(commentList)
+})
 const UserInfoAction = (userInfo) => ({
   type: constants.GETUSERINFO,
   userInfo: fromJS(userInfo)
@@ -22,7 +25,7 @@ const UserInfoAction = (userInfo) => ({
 //   type: constants.GETCOMMENTLIST, 
 //   commentList: fromJS(commentList)
 // })
-// const CommentSendAction = () => ({
+// const CommentSendAction = () => ({ 
 //   type: constants.COMMENTSEND
 // })
 
@@ -65,6 +68,22 @@ export const commentSend = (commentTextValue, authorId, authorName, articleId) =
       if(res.status = 201){
         dispatch(articleMsgAction(res.data))
         dispatch(commentTextChange(''))
+      }else{
+        alert('出现未知错误，请重新输入！')
+      }
+    }).catch(err => {
+      console.log(err)
+    })
+  }
+}
+export const replySend = (replyText, authorId, authorName, articleId, commentId) => {
+  const data = { replyText: replyText.value, authorId, authorName, articleId, commentId }
+  console.log(data)
+  return (dispatch) => {
+    axios.post('http://localhost:1777/article/addReply',data).then(res => {
+      if(res.status = 201){
+        dispatch(updateCommentListAction(res.data.commentList))
+        replyText.value = ''
       }else{
         alert('出现未知错误，请重新输入！')
       }

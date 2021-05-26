@@ -27,7 +27,7 @@ import {
 class Home extends PureComponent {
 
   componentDidMount() {
-    let {getArticleList,getRankList,articleList,rankList} = this.props
+    let { getArticleList, getRankList, articleList, rankList } = this.props
     getArticleList(articleList);
     getRankList(rankList);
     window.scrollTo(0, 0)
@@ -58,7 +58,7 @@ class Home extends PureComponent {
           <Article>
             {
               this.props.curList.map((item) => {
-                
+
                 return (
                   <BlogItem key={item.get('articleId')}>
                     <Link to={`/article/${item.get('authorId')}/${item.get('articleId')}`} >
@@ -100,7 +100,7 @@ class Home extends PureComponent {
                 return (
                   <Link key={item.get('articleId')} to={`/article/${item.get('authorId')}/${item.get('articleId')}`} >
                     <RankItem>{item.get('articleTitle')}</RankItem>
-                  </Link> 
+                  </Link>
                 )
               })
             }
@@ -127,16 +127,10 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     getArticleList(articleList) {
-      if (articleList.size === 0) {
-        dispatch(actionCreators.getArticleList())
-      }
-
+      dispatch(actionCreators.getArticleList())
     },
     getRankList(rankList) {
-      if (rankList.size === 0) {
-        dispatch(actionCreators.getRankList())
-      }
-
+      dispatch(actionCreators.getRankList())
     },
     handleChangePage(page) {
       dispatch(actionCreators.ChangePageAction(page))

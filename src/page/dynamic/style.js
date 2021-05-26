@@ -227,20 +227,39 @@ export const Flinkitem = styled.article`
   }
 `;
 
-export const AddDynamicBox = styled.aside`
+export const AddArticleBox = styled.aside`
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%,-50%);
   width: 400px;
-  height: 150px;
+  height: 200px;
   padding: 20px;
   z-index: 10;
   background: rgba(0,0,0,.1);
   box-shadow: 0 0 10px #555;
+
+`;
+export const AddArticleTagBox = styled.div`
+  width: 400px;
+  position: absolute;
+  bottom: 70px;
+  display: flex;
+  justify-content: center;
+  span {
+    position: absolute;
+    left: 40px;
+    top: 5px;
+  }
+  select {
+    margin: 0 20px;
+    padding: 5px 10px;
+  }
 `
-export const AddDynamicInput = styled.input.attrs({
-  placeholder: "标题"
+export const AddArticleInput = styled.input.attrs({
+  placeholder: "标题",
+  type: "text",
+  name: "title"
 })`
   box-sizing: border-box;
   padding: 10px;
@@ -260,7 +279,7 @@ export const AddDynamicInput = styled.input.attrs({
     }
   }
 `;
-export const AddDynamicFileBox = styled.div`
+export const AddArticleFileBox = styled.div`
   position: absolute;
   top: 80px;
   left: 120px;  
@@ -282,7 +301,7 @@ export const AddDynamicFileBox = styled.div`
   }
 
 `
-export const AddDynamicFile = styled.input.attrs({
+export const AddArticleFile = styled.input.attrs({
   type: "file",
   accept: ".md",
   name: 'file'
@@ -296,7 +315,7 @@ export const AddDynamicFile = styled.input.attrs({
   cursor: pointer;
 `;
 
-export const AddDynamicCancel = styled.div`
+export const AddArticleCancel = styled.div`
   position: absolute;
   bottom: 0;
   left: 0;
@@ -308,16 +327,14 @@ export const AddDynamicCancel = styled.div`
   color: #f00;
   cursor: pointer;
   opacity: .7;
+  font-size: 18px;
   &:hover {
     opacity: 1;
     color: #fff;
     background: #f00;
-    font-size: 18px;
-
-
   }
 `;
-export const AddDynamicSubmit = styled.input.attrs({
+export const AddArticleSubmit = styled.input.attrs({
   type: "submit",
   value: "添加"
 })`
@@ -334,11 +351,96 @@ export const AddDynamicSubmit = styled.input.attrs({
   color: #3eaf7c;
   opacity: .7;
   cursor: pointer;
+  font-size: 18px;
   &:hover {
     opacity: 1;
     color: #fff;
     background: #3eaf7c;
-    font-size: 18px;
+
+  }
+`;
+
+export const AddPersonalBox = styled.aside`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 400px;
+  height: 220px;
+  padding: 20px;
+  z-index: 10;
+  background: rgba(0,0,0,.1);
+  box-shadow: 0 0 10px #555;
+
+`;
+
+export const AddPersonalText = styled.textarea.attrs({
+  placeholder: "内容",
+  type: "text"
+})`
+  box-sizing: border-box;
+  padding: 10px;
+  border-radius: 20px; 
+  outline: none;
+  border: none;
+  text-align: center;
+  background: #c9c9c9;
+  width: 400px;
+  height: 120px;
+  transition: all .3s;
+  font-size: 20px;
+  color: #3eaf7c;
+  margin-top: 10px;
+  resize: none;
+  &:focus {
+    background: #fff;
+    &::placeholder{ 
+      color: #fff;
+    }
+  }
+`;
+export const AddPersonalCancel = styled.div`
+  position: absolute;
+  bottom: 18px;
+  left: 20px;
+  width: 200px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  background: #fff;
+  color: #f00;
+  cursor: pointer;
+  border-top-left-radius: 20px; 
+  border-bottom-left-radius: 20px; 
+  opacity: .7;
+  font-size: 18px;
+  &:hover {
+    opacity: 1;
+    color: #fff;
+    background: #f00;
+  }
+`;
+export const AddPersonalSubmit = styled.div`
+  outline: none;
+  border: none;
+  position: absolute;
+  bottom: 18px;
+  right: 20px;
+  width: 200px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  background: #fff;
+  color: #3eaf7c;
+  opacity: .7;
+  cursor: pointer;
+  border-top-right-radius: 20px; 
+  border-bottom-right-radius: 20px; 
+  font-size: 18px;
+  &:hover {
+    opacity: 1;
+    color: #fff;
+    background: #3eaf7c;
 
   }
 `;

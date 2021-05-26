@@ -21,7 +21,13 @@ import {
 import { actionCreators } from './store'
 import devman from '../../statics/iconpng/devman.png'
 class Article extends PureComponent {
-
+  constructor(props) {
+    super(props)
+    // const CommentReplyInput = React.forwardRef((props, ref) => (
+    //   <CommentReplyInput ref={ref} />
+    // ));
+    // this.replyInputRef = React.createRef();
+  }
   componentDidMount() {
     let { getArticleMsg, getArticleContent, getUserInfo, getCommentList, match, userInfo } = this.props
     getArticleMsg(match.params.articleId)
@@ -33,7 +39,7 @@ class Article extends PureComponent {
   render() {
     let { articleMsg, articleContent, userInfo, commentList,
       commentTextChange, commentTextValue, commentSend,
-      loginStatus, loginUserInfo } = this.props
+      loginStatus, loginUserInfo, replySend } = this.props
     return (
 
       <ArticleWrapper>
@@ -124,7 +130,7 @@ class Article extends PureComponent {
                       }
                     </CommentReplyList>
                     <CommentReplyInput></CommentReplyInput>
-                    <CommentReplyBtn>发送</CommentReplyBtn>
+                    <CommentReplyBtn onClick={(e) => replySend(e, loginStatus, loginUserInfo, articleMsg, item.get('commentId'))}>发送</CommentReplyBtn>
 
 
                   </CommentItem>
@@ -159,15 +165,12 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(actionCreators.getArticleMsg(articleId))
     },
     getArticleContent(articleId) {
-      
+
       dispatch(actionCreators.getArticleContent(articleId))
     },
     getUserInfo(authorId) {
       dispatch(actionCreators.getUserInfo(authorId))
     },
-    // getCommentList() {
-    //   dispatch(actionCreators.getCommentList())
-    // },
     commentTextChange(e) {
       dispatch(actionCreators.commentTextChange(e.target.value))
     },
@@ -176,12 +179,27 @@ const mapDispatchToProps = (dispatch) => {
         let authorId = loginUserInfo.get('authorId')
         let authorName = loginUserInfo.get('authorName')
         let articleId = articleMsg.get('articleId')
-        dispatch(actionCreators.commentSend(commentTextValue, authorId, authorName,articleId))
+        dispatch(actionCreators.commentSend(commentTextValue, authorId, authorName, articleId))
+      } else {
+        alert('请先登机')
+      }
+    },
+    replySend(e, loginStatus, loginUserInfo, articleMsg, commentId) {
+      let replyText = e.target.previousSibling
+      if (loginStatus) {
+        if (replyText.value.length !== 0) {
+          let authorId = loginUserInfo.get('authorId')
+          let authorName = loginUserInfo.get('authorName')
+          let articleId = articleMsg.get('articleId')
+          dispatch(actionCreators.replySend(replyText, authorId, authorName, articleId, commentId))
+        } else {
+          alert('回复内容不能为空')
+        }
+
       } else {
         alert('请先登机')
       }
     }
-
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Article))
