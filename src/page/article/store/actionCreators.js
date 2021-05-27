@@ -65,7 +65,7 @@ export const commentSend = (commentTextValue, authorId, authorName, articleId) =
   const data = { commentText: commentTextValue, authorId, authorName, articleId }
   return (dispatch) => {
     axios.post('http://localhost:1777/article/addComment',data).then(res => {
-      if(res.status = 201){
+      if(res.status === 201){
         dispatch(articleMsgAction(res.data))
         dispatch(commentTextChange(''))
       }else{
@@ -81,7 +81,7 @@ export const replySend = (replyText, authorId, authorName, articleId, commentId)
   console.log(data)
   return (dispatch) => {
     axios.post('http://localhost:1777/article/addReply',data).then(res => {
-      if(res.status = 201){
+      if(res.status === 201){
         dispatch(updateCommentListAction(res.data.commentList))
         replyText.value = ''
       }else{
