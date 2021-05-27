@@ -14,7 +14,9 @@ import { actionCreators } from './store'
 class Login extends PureComponent {
   constructor(props) {
     super(props)
-
+    if (localStorage.getItem('loginAuthorId') !== null) {
+      this.props.longLogin(localStorage.getItem('loginAuthorId'))
+    }
     const UsernameInput = React.forwardRef((props, ref) => (
       <UsernameInput ref={ref} />
     ));
@@ -58,6 +60,9 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   handleLogin(accout, password) {
     dispatch(actionCreators.handleLogin(accout, password))
+  },
+  longLogin(authorId) {
+    dispatch(actionCreators.longLogin(authorId))
   }
 
 })

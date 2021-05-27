@@ -32,6 +32,8 @@ const reducer = (state = defaultState, action) => {
       return changeAddDynamicBox(state, action)
     case constants.ADDPERSONALDYNAMIC:
       return addPersonalDynamic(state, action)
+    case constants.ADDARTICLEDYNAMIC:
+      return addArticleDynamic(state, action)
     case constants.CHANGEFILENAME:
       return state.merge({
         fileName: action.fileName
@@ -70,6 +72,13 @@ const addPersonalDynamic = (state, action) => {
     authorInfo: action.authorInfo,
     dynamicList: action.authorInfo.get('personalDynamic'),
     showAddPersonal: false
+  })
+}
+const addArticleDynamic = (state, action) => {
+  return state.merge({
+    authorInfo: action.authorInfo,
+    dynamicList: action.authorInfo.get('articleDynamic'),
+    showAddArticle: false
   })
 }
 export default reducer

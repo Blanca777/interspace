@@ -10,6 +10,10 @@ const addPersonalDynamicAction = (authorInfo) => ({
   type: constants.ADDPERSONALDYNAMIC,
   authorInfo: fromJS(authorInfo)  
 })
+export const addArticleDynamicAction = (authorInfo) => ({
+  type: constants.ADDARTICLEDYNAMIC,
+  authorInfo: fromJS(authorInfo)  
+})
 export const changeDynamicList = (dynamicId) => ({
   type: constants.CHANGEDYNAMICLIST,
   dynamicId
@@ -47,4 +51,4 @@ export const getAuthorInfo = (authorId) => {
       console.log(err)
     })
   } 
-}
+} 

@@ -25,7 +25,10 @@ import {
   RankItem
 } from './style'
 class Home extends PureComponent {
-
+  constructor(props) {
+    super(props)
+    
+  }
   componentDidMount() {
     let { getArticleList, getRankList, articleList, rankList } = this.props
     getArticleList(articleList);

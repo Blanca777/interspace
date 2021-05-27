@@ -68,7 +68,7 @@ class Dynamic extends PureComponent {
   }
   componentWillUnmount() {
     this.UNLISTEN && this.UNLISTEN()
-  }
+  } 
   addArticleSubmit = (e) => {
     let authorId = this.props.loginUserInfo.get('authorId')
     let authorName = this.props.loginUserInfo.get('authorName')
@@ -80,8 +80,9 @@ class Dynamic extends PureComponent {
       method: 'POST',
       body: formData
     }).then(response => {
-      this.props.showAddDynamicBox('articleDynamic')
-      console.log(response)
+      return response.json()
+    }).then(res=>{
+      this.props.addArticleDynamicAction(res)
     })
   };
   render() {
@@ -281,8 +282,11 @@ const mapDispatchToProps = (dispatch) => {
     },
     FileValueChange(e) {
       dispatch(actionCreators.changeFileName(e.target.files[0]))
+    },
+    addArticleDynamicAction(userInfo) {
+      dispatch(actionCreators.addArticleDynamicAction(userInfo))
     }
-
+    
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Dynamic))

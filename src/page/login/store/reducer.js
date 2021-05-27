@@ -8,13 +8,10 @@ const defaultState = fromJS({
 const reducer = (state = defaultState, action) => {
   switch (action.type) {
     case constants.LOGIN:
-      if (action.loginMsg.loginStatus === 'success') {
-        return state.merge({
-          loginStatus: true,
-          userInfo: fromJS(action.loginMsg.userInfo)
-        })
-      }
-      break;
+      return state.merge({
+        loginStatus: true,
+        userInfo: fromJS(action.userInfo)
+      })
     case constants.LOGOUT:
       return state.merge({
         loginStatus: false,
