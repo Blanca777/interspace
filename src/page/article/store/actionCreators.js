@@ -1,7 +1,7 @@
 import * as constants from './constants'
 import axios from 'axios'
 import { fromJS } from 'immutable'
-
+import { APIUrl } from '../../../config'
 
 const articleMsgAction = (articleMsg) => ({
   type: constants.GETARTICLEMSG,
@@ -31,7 +31,7 @@ const UserInfoAction = (userInfo) => ({
 
 export const getArticleMsg = (articleId) => {
   return (dispatch) => {
-    axios.get(`http://localhost:1777/article/${articleId}`).then(res => {
+    axios.get(`${APIUrl}/article/${articleId}`).then(res => {
       dispatch(articleMsgAction(res.data))
     }).catch(err => {
       console.log(err)
@@ -40,7 +40,7 @@ export const getArticleMsg = (articleId) => {
 }
 export const getArticleContent = (articleId) => {
   return (dispatch) => {
-    axios.get(`http://localhost:1777/article/md/${articleId}`).then(res => {
+    axios.get(`${APIUrl}/article/md/${articleId}`).then(res => {
       dispatch(articleContentAction(res.data))
     }).catch(err => {
       console.log(err)
@@ -50,7 +50,7 @@ export const getArticleContent = (articleId) => {
 
 export const getUserInfo = (authorId) => {
   return (dispatch) => {
-    axios.get(`http://localhost:1777/article/author/${authorId}`).then(res => {
+    axios.get(`${APIUrl}/article/author/${authorId}`).then(res => {
       dispatch(UserInfoAction(res.data))
     }).catch(err => {
       console.log(err)
@@ -64,11 +64,11 @@ export const commentTextChange = (commentTextValue) => ({
 export const commentSend = (commentTextValue, authorId, authorName, articleId) => {
   const data = { commentText: commentTextValue, authorId, authorName, articleId }
   return (dispatch) => {
-    axios.post('http://localhost:1777/article/addComment',data).then(res => {
-      if(res.status === 201){
+    axios.post(`${APIUrl}/article/addComment`, data).then(res => {
+      if (res.status === 201) {
         dispatch(articleMsgAction(res.data))
         dispatch(commentTextChange(''))
-      }else{
+      } else {
         alert('出现未知错误，请重新输入！')
       }
     }).catch(err => {
@@ -80,11 +80,11 @@ export const replySend = (replyText, authorId, authorName, articleId, commentId)
   const data = { replyText: replyText.value, authorId, authorName, articleId, commentId }
   console.log(data)
   return (dispatch) => {
-    axios.post('http://localhost:1777/article/addReply',data).then(res => {
-      if(res.status === 201){
+    axios.post(`${APIUrl}/article/addReply`, data).then(res => {
+      if (res.status === 201) {
         dispatch(updateCommentListAction(res.data.commentList))
         replyText.value = ''
-      }else{
+      } else {
         alert('出现未知错误，请重新输入！')
       }
     }).catch(err => {

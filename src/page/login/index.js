@@ -3,11 +3,18 @@ import { connect } from 'react-redux'
 import { Redirect, withRouter } from 'react-router-dom'
 import {
   LoginWrapper,
+  ChangePanel,
   LoginBox,
   LoginTitle,
   UsernameInput,
   PasswordInput,
-  LoginBtn
+  LoginBtn,
+  SignupBox,
+  SignupBoxTitle,
+  SUsernameInput,
+  SPasswordInput,
+  SAPasswordInput,
+  SignupBtn
 } from './style'
 import { actionCreators } from './store'
 
@@ -23,27 +30,55 @@ class Login extends PureComponent {
     const PasswordInput = React.forwardRef((props, ref) => (
       <PasswordInput ref={ref} />
     ));
-
-    this.accoutRef = React.createRef();
+    const SUsernameInput = React.forwardRef((props, ref) => (
+      <SUsernameInput ref={ref} />
+    ));
+    const SPasswordInput = React.forwardRef((props, ref) => (
+      <SPasswordInput ref={ref} />
+    ));
+    const SAPasswordInput = React.forwardRef((props, ref) => (
+      <SAPasswordInput ref={ref} />
+    ));
+    this.usernameRef = React.createRef();
     this.passwordRef = React.createRef();
+    this.susernameRef = React.createRef();
+    this.spasswordRef = React.createRef();
+    this.sapasswordRef = React.createRef();
   }
 
 
   render() {
-    const { loginStatus, handleLogin } = this.props
+    const { loginStatus, showLoginBox, handleLogin, handleSignup, changeBox } = this.props
     if (!loginStatus) {
       return (
         <LoginWrapper>
-          <LoginBox>
-            <LoginTitle>Welcome</LoginTitle>
-            <UsernameInput ref={this.accoutRef} />
-            <PasswordInput ref={this.passwordRef} />
-            <LoginBtn
-              onClick={() => handleLogin(this.accoutRef.current.value, this.passwordRef.current.value)}
-            >
-              Login
+          <ChangePanel onClick={changeBox}>{showLoginBox ? "To注册" : "To登录"}</ChangePanel>
+          {
+            showLoginBox ? <LoginBox>
+              <LoginTitle>Welcome</LoginTitle>
+              <UsernameInput ref={this.usernameRef} />
+              <PasswordInput ref={this.passwordRef} />
+              <LoginBtn
+                onClick={() => handleLogin(this.usernameRef.current.value, this.passwordRef.current.value)}
+              >
+                Login
             </LoginBtn>
-          </LoginBox>
+            </LoginBox> : <SignupBox>
+              <SignupBoxTitle>Sign Up</SignupBoxTitle>
+              <SUsernameInput ref={this.susernameRef} />
+              <SPasswordInput ref={this.spasswordRef} />
+              <SAPasswordInput ref={this.sapasswordRef} />
+              <SignupBtn
+                onClick={
+                  () => handleSignup(this.susernameRef, this.spasswordRef, this.sapasswordRef)
+                }
+              >
+                Sign Up
+              </SignupBtn>
+            </SignupBox>
+          }
+
+
         </LoginWrapper>
       )
     } else {
@@ -55,7 +90,8 @@ class Login extends PureComponent {
 }
 
 const mapStateToProps = (state) => ({
-  loginStatus: state.getIn(['login', 'loginStatus'])
+  loginStatus: state.getIn(['login', 'loginStatus']),
+  showLoginBox: state.getIn(['login', 'showLoginBox'])
 })
 const mapDispatchToProps = (dispatch) => ({
   handleLogin(accout, password) {
@@ -63,6 +99,36 @@ const mapDispatchToProps = (dispatch) => ({
   },
   longLogin(authorId) {
     dispatch(actionCreators.longLogin(authorId))
+  },
+  changeBox() {
+    dispatch(actionCreators.changeBoxAction())
+  },
+  handleSignup(usernameRef, passwordRef, apasswordRef) {
+    let username = usernameRef.current.value
+    let password = passwordRef.current.value
+    let apassword = apasswordRef.current.value
+    if (password !== '' && apassword !== '' && username !== '') {
+      if (password === apassword) {
+        dispatch(actionCreators.handleSignup(username, password))
+        usernameRef.current.value = '';
+        usernameRef.current.disabled = true;
+        passwordRef.current.disabled = true;
+        apasswordRef.current.disabled = true;
+        setTimeout(() => {
+          usernameRef.current.disabled = false;
+          passwordRef.current.disabled = false;
+          apasswordRef.current.disabled = false;
+        }, 2000)
+      } else {
+        alert('请确认密码一致')
+      }
+      passwordRef.current.value = '';
+      apasswordRef.current.value = '';
+    } else {
+      alert('请输入两次密码')
+    }
+
+
   }
 
 })

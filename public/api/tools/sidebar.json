@@ -1,0 +1,9 @@
+{
+  "sidebarTitle": "开荒设备",
+  "sidebarList": [
+    {
+      "toolsId": "vscode",
+      "toolsTitle": "vscode-轻量级跨平台编辑器"
+    }
+  ]
+}

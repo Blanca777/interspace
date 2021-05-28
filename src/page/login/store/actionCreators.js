@@ -1,10 +1,14 @@
 import * as constants from './constants'
 import axios from 'axios'
+import { APIUrl } from '../../../config'
 
 
 const loginAction = (userInfo) => ({
   type: constants.LOGIN,
   userInfo
+})
+export const changeBoxAction = () => ({
+  type: constants.CHANGEBOX
 })
 export const handleLogout = () => {
   localStorage.removeItem('loginAuthorId')
@@ -13,13 +17,14 @@ export const handleLogout = () => {
   }
 
 }
+
 export const handleLogin = (username, password) => {
   const data = {
     username,
     password
   }
   return (dispatch) => {
-    axios.post('http://localhost:1777/login/login', data).then(res => {
+    axios.post(`${APIUrl}/login/login`, data).then(res => {
       if (res.data.loginStatus === "error") {
         console.log('login err')
       } else if (res.data.loginStatus === "success") {
@@ -33,11 +38,20 @@ export const handleLogin = (username, password) => {
 }
 export const longLogin = (authorId) => {
   return (dispatch) => {
-    axios.post('http://localhost:1777/login/longLogin', { authorId }).then(res => {
+    axios.post(`${APIUrl}/login/longLogin`, { authorId }).then(res => {
       dispatch(loginAction(res.data))
     }).catch(err => {
       console.log(err)
     })
   }
 }
-
+export const handleSignup = (username, password) => {
+  return (dispatch) => {
+    axios.post(`${APIUrl}/login/signup`, { username, password }).then(res => {
+      alert(res.data)
+    }).catch(err => {
+      console.log(err)
+      alert('出错，请重新操作！')
+    })
+  }
+}

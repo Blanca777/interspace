@@ -76,7 +76,7 @@ class Dynamic extends PureComponent {
     let formData = new FormData(e.target);
     formData.append("authorId", authorId);
     formData.append("authorName", authorName);
-    fetch('http://localhost:1777/dynamic/addArticleDynamic', {
+    fetch('http://blanca777.cn:1777/dynamic/addArticleDynamic', {
       method: 'POST',
       body: formData
     }).then(response => {

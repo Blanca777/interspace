@@ -1,0 +1,1 @@
+export const APIUrl = 'http://blanca777.cn:1777'

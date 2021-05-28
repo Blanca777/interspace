@@ -1,7 +1,7 @@
 import * as constants from './constants'
 import axios from 'axios'
 import { fromJS } from 'immutable'
-
+// import { APIUrl } from '../../../config'
 
 const toolsMsgAction = (toolsMsg) => ({
   type: constants.GETTOOLSCONTENT,
