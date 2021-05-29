@@ -1,11 +1,15 @@
 import * as constants from './constants'
 import axios from 'axios'
 import { APIUrl } from '../../../config'
-
+import { actionCreators as loadingActionCreators } from '../../../common/loading/store'
 
 const loginAction = (userInfo) => ({
   type: constants.LOGIN,
   userInfo
+})
+const showLoadingBoxAction = (status) => ({
+  type: constants.SHOWLOADINGBOX,
+  status
 })
 export const changeBoxAction = () => ({
   type: constants.CHANGEBOX
@@ -24,15 +28,28 @@ export const handleLogin = (username, password) => {
     password
   }
   return (dispatch) => {
+    dispatch(loadingActionCreators.changeLoadingTextAction('正在登录'))
+    dispatch(showLoadingBoxAction(true))
     axios.post(`${APIUrl}/login/login`, data).then(res => {
+      console.log(res)
       if (res.data.loginStatus === "error") {
-        console.log('login err')
+        dispatch(loadingActionCreators.changeLoadingTextAction('登录失败'))
+        setTimeout(() => {
+          dispatch(showLoadingBoxAction(false))
+        }, 1000)
       } else if (res.data.loginStatus === "success") {
-        dispatch(loginAction(res.data.userInfo))
-        localStorage.setItem("loginAuthorId", res.data.userInfo.authorId);
+        dispatch(loadingActionCreators.changeLoadingTextAction('登录成功'))
+        setTimeout(() => {
+          dispatch(loginAction(res.data.userInfo))
+          localStorage.setItem("loginAuthorId", res.data.userInfo.authorId);
+          dispatch(showLoadingBoxAction(false))
+        }, 1000)
       }
     }).catch(err => {
-      console.log(err)
+      dispatch(loadingActionCreators.changeLoadingTextAction('登录失败'))
+      setTimeout(() => {
+        dispatch(showLoadingBoxAction(false))
+      }, 1000)
     })
   }
 }
@@ -48,6 +65,7 @@ export const longLogin = (authorId) => {
 export const handleSignup = (username, password) => {
   return (dispatch) => {
     axios.post(`${APIUrl}/login/signup`, { username, password }).then(res => {
+      console.log(res)
       alert(res.data)
     }).catch(err => {
       console.log(err)

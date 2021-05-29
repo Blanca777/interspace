@@ -16,6 +16,7 @@ import {
   SAPasswordInput,
   SignupBtn
 } from './style'
+import Loading from '../../common/loading'
 import { actionCreators } from './store'
 
 class Login extends PureComponent {
@@ -46,12 +47,12 @@ class Login extends PureComponent {
     this.sapasswordRef = React.createRef();
   }
 
-
   render() {
-    const { loginStatus, showLoginBox, handleLogin, handleSignup, changeBox } = this.props
+    const { loginStatus, showLoginBox, showLoadingBox, handleLogin, handleSignup, changeBox } = this.props
     if (!loginStatus) {
       return (
         <LoginWrapper>
+          {showLoadingBox?<Loading />:<></>}
           <ChangePanel onClick={changeBox}>{showLoginBox ? "To注册" : "To登录"}</ChangePanel>
           {
             showLoginBox ? <LoginBox>
@@ -91,11 +92,18 @@ class Login extends PureComponent {
 
 const mapStateToProps = (state) => ({
   loginStatus: state.getIn(['login', 'loginStatus']),
-  showLoginBox: state.getIn(['login', 'showLoginBox'])
+  showLoginBox: state.getIn(['login', 'showLoginBox']),
+  showLoadingBox: state.getIn(['login', 'showLoadingBox'])
 })
 const mapDispatchToProps = (dispatch) => ({
   handleLogin(accout, password) {
-    dispatch(actionCreators.handleLogin(accout, password))
+    if(accout.length !== 0 && password.length !== 0){
+      dispatch(actionCreators.handleLogin(accout, password))
+      
+    }else{
+      alert('请输入正确用户名密码')
+    }
+    
   },
   longLogin(authorId) {
     dispatch(actionCreators.longLogin(authorId))
@@ -118,7 +126,7 @@ const mapDispatchToProps = (dispatch) => ({
           usernameRef.current.disabled = false;
           passwordRef.current.disabled = false;
           apasswordRef.current.disabled = false;
-        }, 2000)
+        }, 5000)
       } else {
         alert('请确认密码一致')
       }

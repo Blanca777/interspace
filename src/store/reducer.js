@@ -6,6 +6,7 @@ import { reducer as dynamicReducer } from '../page/dynamic/store'
 import { reducer as toolsReducer } from '../page/tools/store'
 import { reducer as tagReducer } from '../page/tag/store'
 import { reducer as loginReducer } from '../page/login/store'
+import { reducer as loadingReducer } from '../common/loading/store'
 
 const reducer = combineReducers({
   header: headerReducer,
@@ -14,7 +15,8 @@ const reducer = combineReducers({
   dynamic: dynamicReducer,
   tools: toolsReducer,
   tag: tagReducer,
-  login: loginReducer
+  login: loginReducer,
+  loading: loadingReducer
 });
 
 export default reducer;

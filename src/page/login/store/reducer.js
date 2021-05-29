@@ -4,7 +4,8 @@ import { fromJS } from 'immutable';
 const defaultState = fromJS({
   loginStatus: false,
   userInfo: {},
-  showLoginBox: true
+  showLoginBox: true,
+  showLoadingBox: false
 })
 const reducer = (state = defaultState, action) => {
   switch (action.type) {
@@ -21,6 +22,10 @@ const reducer = (state = defaultState, action) => {
     case constants.CHANGEBOX:
       return state.merge({
         showLoginBox: !state.get('showLoginBox')
+      })
+    case constants.SHOWLOADINGBOX:
+      return state.merge({
+        showLoadingBox: action.status
       })
     default:
       return state;

@@ -8,6 +8,7 @@ export const LoginWrapper = styled.section`
 export const ChangePanel = styled.aside`
   position: absolute;
   top: 130px;
+  z-index: 0;
   width: 200px;
   padding: 20px 0;
   text-align: center;
