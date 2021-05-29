@@ -1,48 +1,20 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { Link, withRouter } from 'react-router-dom'
+import { APIUrl } from '../../config' 
 import {
-  DynamicWrapper,
-  DynamicBox,
-  DynamicTitle,
-  TitleText,
-  TitleMsg,
-  TitleItem,
-  DynamicContent,
-  DynamicList,
-  DynamicItem,
-  DynamicTime,
-  DynamicPoint,
-  DynamicText,
-  SidebarBox,
-  SidebarTitle,
-  SidebarItem,
-  Userbox,
-  UserInfo,
-  Username,
-  Logout,
-  Usernum,
-  Numitem,
-  Hastitle,
-  Categorybox,
-  Categoryitem,
-  Tagsbox,
-  Tagsitem,
-  Flinkbox,
-  Flinkitem,
-  AddArticleBox,
-  AddArticleInput,
-  AddArticleCancel,
-  AddArticleFile,
-  AddArticleFileBox,
-  AddArticleSubmit,
-  AddArticleTagBox,
-  AddPersonalBox,
-  AddPersonalText,
-  AddPersonalCancel,
-  AddPersonalSubmit,
+  DynamicWrapper, DynamicBox, DynamicTitle,
+  TitleText, TitleMsg, TitleItem,
+  DynamicContent, DynamicList, DynamicItem, DynamicTime, DynamicPoint, DynamicText,
+  SidebarBox, SidebarTitle, SidebarItem,
+  Userbox, UserInfo, Username, Logout, Usernum,
+  Numitem, Hastitle, Categorybox, Categoryitem,
+  Tagsbox, Tagsitem, Flinkbox, Flinkitem,
+  AddArticleBox, AddArticleInput, AddArticleCancel, AddArticleFile, AddArticleFileBox, AddArticleSubmit,
+  AddArticleTagBox, AddPersonalBox, AddPersonalText, AddPersonalCancel, AddPersonalSubmit,
 
 } from './style'
+import Loading from '../../common/loading'
 import { actionCreators } from './store'
 import { actionCreators as loginActionCreators } from '../login/store'
 class Dynamic extends PureComponent {
@@ -57,9 +29,9 @@ class Dynamic extends PureComponent {
   componentDidMount() {
     let { getAuthorInfo, match } = this.props
     this.UNLISTEN = this.props.history.listen(route => {
-      if(route.pathname===`/dynamic/${this.props.loginUserInfo.get('authorId')}`){
+      if (route.pathname === `/dynamic/${this.props.loginUserInfo.get('authorId')}`) {
         getAuthorInfo(this.props.loginUserInfo.get('authorId'));
-      }else if(route.pathname.indexOf('/dynamic/')===0){
+      } else if (route.pathname.indexOf('/dynamic/') === 0) {
         getAuthorInfo(route.pathname.slice(8));
       }
     });
@@ -68,7 +40,8 @@ class Dynamic extends PureComponent {
   }
   componentWillUnmount() {
     this.UNLISTEN && this.UNLISTEN()
-  } 
+    this.props.changeLoadingBoxStatus(true)
+  }
   addArticleSubmit = (e) => {
     let authorId = this.props.loginUserInfo.get('authorId')
     let authorName = this.props.loginUserInfo.get('authorName')
@@ -76,20 +49,21 @@ class Dynamic extends PureComponent {
     let formData = new FormData(e.target);
     formData.append("authorId", authorId);
     formData.append("authorName", authorName);
-    fetch('http://blanca777.cn:1777/dynamic/addArticleDynamic', {
+    fetch(`${APIUrl}/dynamic/addArticleDynamic`, {
       method: 'POST',
       body: formData
     }).then(response => {
       return response.json()
-    }).then(res=>{
+    }).then(res => {
       this.props.addArticleDynamicAction(res)
     })
   };
   render() {
-    let { AddPersonalDynamic, match, dynamicList, changeDynamicList, fileName, showAddArticle, showAddPersonal, FileValueChange, sidebarList, authorInfo, loginUserInfo, logout, showAddDynamicBox } = this.props
+    let { showLoadingBox, AddPersonalDynamic, match, dynamicList, changeDynamicList, fileName, showAddArticle, showAddPersonal, FileValueChange, sidebarList, authorInfo, loginUserInfo, logout, showAddDynamicBox } = this.props
 
     return (
       <DynamicWrapper>
+        {showLoadingBox?<Loading />:<></>}
         {
           showAddArticle && (
             <AddArticleBox>
@@ -214,8 +188,8 @@ class Dynamic extends PureComponent {
                 <h6>文章</h6>
               </Numitem>
               <Numitem>
-                <h4>{authorInfo.get('tagNum')}</h4>
-                <h6>标签</h6>
+                <h4>{authorInfo.get('personalNum')}</h4>
+                <h6>动态</h6>
               </Numitem>
             </Usernum>
           </UserInfo>
@@ -253,6 +227,7 @@ class Dynamic extends PureComponent {
 
 const mapStateToProps = (state) => {
   return {
+    showLoadingBox: state.getIn(["dynamic", "showLoadingBox"]),
     sidebarList: state.getIn(["dynamic", "sidebarList"]),
     dynamicList: state.getIn(['dynamic', 'dynamicList']),
     authorInfo: state.getIn(['dynamic', 'authorInfo']),
@@ -285,8 +260,11 @@ const mapDispatchToProps = (dispatch) => {
     },
     addArticleDynamicAction(userInfo) {
       dispatch(actionCreators.addArticleDynamicAction(userInfo))
+    },
+    changeLoadingBoxStatus(status){
+      dispatch(actionCreators.showLoadingBoxAction(status))
     }
-    
+
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Dynamic))

@@ -99,11 +99,9 @@ const mapDispatchToProps = (dispatch) => ({
   handleLogin(accout, password) {
     if(accout.length !== 0 && password.length !== 0){
       dispatch(actionCreators.handleLogin(accout, password))
-      
     }else{
       alert('请输入正确用户名密码')
     }
-    
   },
   longLogin(authorId) {
     dispatch(actionCreators.longLogin(authorId))
@@ -126,14 +124,14 @@ const mapDispatchToProps = (dispatch) => ({
           usernameRef.current.disabled = false;
           passwordRef.current.disabled = false;
           apasswordRef.current.disabled = false;
-        }, 5000)
+        }, 2000)
       } else {
         alert('请确认密码一致')
       }
       passwordRef.current.value = '';
       apasswordRef.current.value = '';
     } else {
-      alert('请输入两次密码')
+      alert('请输入正确用户名密码')
     }
 
 

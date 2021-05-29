@@ -77,7 +77,7 @@ class Home extends PureComponent {
                       <Bloghr></Bloghr>
                       <Blogmsg>
                         <Msgitem><i className="iconfont">&#xe60e;</i> {item.get('authorName')}</Msgitem>
-                        <Msgitem><i className="iconfont">&#xe619;</i> {item.get('time')}</Msgitem>
+                        <Msgitem><i className="iconfont">&#xe619;</i> {item.get('publishTime')}</Msgitem>
                         <Msgitem><i className="iconfont">&#xe63d;</i> {item.get('tag')}</Msgitem>
                       </Blogmsg>
                     </Link>

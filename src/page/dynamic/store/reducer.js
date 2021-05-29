@@ -19,7 +19,7 @@ const defaultState = fromJS({
   fileName: "",
   showAddArticle: false,
   showAddPersonal: false,
-
+  showLoadingBox: true
 })
 
 const reducer = (state = defaultState, action) => {
@@ -37,6 +37,10 @@ const reducer = (state = defaultState, action) => {
     case constants.CHANGEFILENAME:
       return state.merge({
         fileName: action.fileName
+      })
+    case constants.SHOWLOADINGBOX:
+      return state.merge({
+        showLoadingBox: action.status
       })
     default:
       return state;

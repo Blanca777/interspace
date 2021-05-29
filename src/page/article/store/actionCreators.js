@@ -2,6 +2,7 @@ import * as constants from './constants'
 import axios from 'axios'
 import { fromJS } from 'immutable'
 import { APIUrl } from '../../../config'
+import { actionCreators as loadingActionCreators } from '../../../common/loading/store'
 
 const articleMsgAction = (articleMsg) => ({
   type: constants.GETARTICLEMSG,
@@ -21,14 +22,10 @@ const UserInfoAction = (userInfo) => ({
   type: constants.GETUSERINFO,
   userInfo: fromJS(userInfo)
 })
-// const CommentListAction = (commentList) => ({
-//   type: constants.GETCOMMENTLIST, 
-//   commentList: fromJS(commentList)
-// })
-// const CommentSendAction = () => ({ 
-//   type: constants.COMMENTSEND
-// })
-
+export const showLoadingBoxAction = (status) => ({
+  type: constants.SHOWLOADINGBOX,
+  status
+})
 export const getArticleMsg = (articleId) => {
   return (dispatch) => {
     axios.get(`${APIUrl}/article/${articleId}`).then(res => {
@@ -40,8 +37,12 @@ export const getArticleMsg = (articleId) => {
 }
 export const getArticleContent = (articleId) => {
   return (dispatch) => {
+    dispatch(loadingActionCreators.changeLoadingTextAction('正在拼命加载'))
     axios.get(`${APIUrl}/article/md/${articleId}`).then(res => {
       dispatch(articleContentAction(res.data))
+      setTimeout(()=>{
+        dispatch(showLoadingBoxAction(false))
+      },500)
     }).catch(err => {
       console.log(err)
     })

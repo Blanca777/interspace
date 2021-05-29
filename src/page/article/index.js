@@ -6,18 +6,17 @@ import gfm from 'remark-gfm'
 import {
   ArticleWrapper, ArticleBox, ArticleTitle,
   TitleText, TitleMsg, TitleItem,
-
   Userbox, UserInfo, Username,
   Usernum, Numitem, Hastitle,
   Categorybox, Categoryitem, Tagsbox,
   Tagsitem, Flinkbox, Flinkitem,
-
   CommentBox, CommentTextArea, CommentSubmit,
   CommentList, CommentItem, CommentAuthorName,
   CommentText, CommentReplyBtn, CommentReplyList,
   ReplyItem, ReplyAuthorName, ReplyText, CommentReplyInput
 
 } from './style'
+import Loading from '../../common/loading'
 import { actionCreators } from './store'
 import devman from '../../statics/iconpng/devman.png'
 class Article extends PureComponent {
@@ -33,17 +32,19 @@ class Article extends PureComponent {
     getArticleMsg(match.params.articleId)
     getArticleContent(match.params.articleId)
     getUserInfo(match.params.authorId);
-    // getCommentList(match.params.articleId);
     window.scrollTo(0, 0)
+  }
+  componentWillUnmount() {
+    this.props.changeLoadingBoxStatus(true)
   }
   render() {
     let { articleMsg, articleContent, userInfo, commentList,
       commentTextChange, commentTextValue, commentSend,
-      loginStatus, loginUserInfo, replySend } = this.props
+      loginStatus, loginUserInfo, replySend, showLoadingBox } = this.props
     return (
 
       <ArticleWrapper>
-
+        {showLoadingBox ? <Loading /> : <></>}
         <Userbox>
           <UserInfo>
             <Link to={`/dynamic/${userInfo.get('authorId')}`}>
@@ -57,8 +58,8 @@ class Article extends PureComponent {
                 <h6>文章</h6>
               </Numitem>
               <Numitem>
-                <h4>{userInfo.get('tagNum')}</h4>
-                <h6>标签</h6>
+                <h4>{userInfo.get('personalNum')}</h4>
+                <h6>动态</h6>
               </Numitem>
             </Usernum>
           </UserInfo>
@@ -150,6 +151,7 @@ class Article extends PureComponent {
 
 const mapStateToProps = (state) => {
   return {
+    showLoadingBox: state.getIn(['article', 'showLoadingBox']),
     articleContent: state.getIn(['article', 'articleContent']),
     articleMsg: state.getIn(['article', 'articleMsg']),
     commentList: state.getIn(['article', 'commentList']),
@@ -199,6 +201,9 @@ const mapDispatchToProps = (dispatch) => {
       } else {
         alert('请先登机')
       }
+    },
+    changeLoadingBoxStatus(status){
+      dispatch(actionCreators.showLoadingBoxAction(status))
     }
   }
 }

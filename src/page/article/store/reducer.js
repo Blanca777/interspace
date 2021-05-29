@@ -6,7 +6,8 @@ const defaultState = fromJS({
   articleMsg: {},
   userInfo: {},
   commentList: [],
-  commentTextValue: ""
+  commentTextValue: "",
+  showLoadingBox: true
 })
 const reducer = (state = defaultState, action) => {
   switch (action.type) {
@@ -39,6 +40,10 @@ const reducer = (state = defaultState, action) => {
     case constants.UPDATECOMMENTLIST:
       return state.merge({
         commentList: action.commentList
+      })
+    case constants.SHOWLOADINGBOX:
+      return state.merge({
+        showLoadingBox: action.status
       })
     default:
       return state;
