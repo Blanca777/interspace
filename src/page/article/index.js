@@ -95,7 +95,7 @@ class Article extends PureComponent {
             <TitleText>{articleMsg.get('articleTitle')}</TitleText>
             <TitleMsg>
               <TitleItem><i className="iconfont">&#xe60e;</i>{articleMsg.get('authorName')}</TitleItem>
-              <TitleItem><i className="iconfont">&#xe619;</i>{articleMsg.get('time')}</TitleItem>
+              <TitleItem><i className="iconfont">&#xe619;</i>{articleMsg.get('publishTime')}</TitleItem>
               <TitleItem><i className="iconfont">&#xe650;</i>{articleMsg.get('viewNum')}</TitleItem>
             </TitleMsg>
           </ArticleTitle>

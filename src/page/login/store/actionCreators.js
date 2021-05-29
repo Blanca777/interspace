@@ -2,6 +2,7 @@ import * as constants from './constants'
 import axios from 'axios'
 import { APIUrl } from '../../../config'
 import { actionCreators as loadingActionCreators } from '../../../common/loading/store'
+// import { actionCreators as dynamicActionCreators } from '../../dynamic/stroe'
 
 const loginAction = (userInfo) => ({
   type: constants.LOGIN,

@@ -18,7 +18,7 @@ const updateCommentListAction = (commentList) => ({
   type: constants.UPDATECOMMENTLIST,
   commentList: fromJS(commentList)
 })
-const UserInfoAction = (userInfo) => ({
+const uerInfoAction = (userInfo) => ({
   type: constants.GETUSERINFO,
   userInfo: fromJS(userInfo)
 })
@@ -29,7 +29,11 @@ export const showLoadingBoxAction = (status) => ({
 export const getArticleMsg = (articleId) => {
   return (dispatch) => {
     axios.get(`${APIUrl}/article/${articleId}`).then(res => {
-      dispatch(articleMsgAction(res.data))
+      if (res.status === 200) {
+        dispatch(articleMsgAction(res.data))
+      } else {
+        alert(res.data)
+      }
     }).catch(err => {
       console.log(err)
     })
@@ -39,10 +43,15 @@ export const getArticleContent = (articleId) => {
   return (dispatch) => {
     dispatch(loadingActionCreators.changeLoadingTextAction('正在拼命加载'))
     axios.get(`${APIUrl}/article/md/${articleId}`).then(res => {
-      dispatch(articleContentAction(res.data))
-      setTimeout(()=>{
-        dispatch(showLoadingBoxAction(false))
-      },500)
+      if (res.status === 200) {
+        dispatch(articleContentAction(res.data))
+        setTimeout(() => {
+          dispatch(showLoadingBoxAction(false))
+        }, 500)
+      } else {
+        alert(res.data)
+      }
+
     }).catch(err => {
       console.log(err)
     })
@@ -52,7 +61,12 @@ export const getArticleContent = (articleId) => {
 export const getUserInfo = (authorId) => {
   return (dispatch) => {
     axios.get(`${APIUrl}/article/author/${authorId}`).then(res => {
-      dispatch(UserInfoAction(res.data))
+      if (res.status === 200) {
+        dispatch(uerInfoAction(res.data))
+      } else {
+        alert(res.data)
+      }
+
     }).catch(err => {
       console.log(err)
     })
@@ -79,7 +93,6 @@ export const commentSend = (commentTextValue, authorId, authorName, articleId) =
 }
 export const replySend = (replyText, authorId, authorName, articleId, commentId) => {
   const data = { replyText: replyText.value, authorId, authorName, articleId, commentId }
-  console.log(data)
   return (dispatch) => {
     axios.post(`${APIUrl}/article/addReply`, data).then(res => {
       if (res.status === 201) {

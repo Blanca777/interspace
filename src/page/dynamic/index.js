@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { Link, withRouter } from 'react-router-dom'
-import { APIUrl } from '../../config' 
+import { APIUrl } from '../../config'
 import {
   DynamicWrapper, DynamicBox, DynamicTitle,
   TitleText, TitleMsg, TitleItem,
@@ -63,7 +63,7 @@ class Dynamic extends PureComponent {
 
     return (
       <DynamicWrapper>
-        {showLoadingBox?<Loading />:<></>}
+        {showLoadingBox ? <Loading /> : <></>}
         {
           showAddArticle && (
             <AddArticleBox>
@@ -247,7 +247,11 @@ const mapDispatchToProps = (dispatch) => {
     },
 
     logout() {
+      dispatch(actionCreators.showLoadingBoxAction(true))
       dispatch(loginActionCreators.handleLogout())
+      setTimeout(() => {
+        dispatch(actionCreators.showLoadingBoxAction(false))
+      }, 500)
     },
     showAddDynamicBox(dynamicId) {
       dispatch(actionCreators.showAddDynamicBox(dynamicId))
@@ -261,7 +265,7 @@ const mapDispatchToProps = (dispatch) => {
     addArticleDynamicAction(userInfo) {
       dispatch(actionCreators.addArticleDynamicAction(userInfo))
     },
-    changeLoadingBoxStatus(status){
+    changeLoadingBoxStatus(status) {
       dispatch(actionCreators.showLoadingBoxAction(status))
     }
 
