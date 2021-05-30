@@ -122,4 +122,8 @@ export const RankItem = styled.li`
   padding-left: 30px;
   margin: 20px 0;
   box-sizing: border-box;
+  span {
+    float: right;
+    color: #989898;
+  }
 `;

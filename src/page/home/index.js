@@ -5,24 +5,11 @@ import { Link, withRouter } from 'react-router-dom'
 
 import {
   HomeWrapper,
-  PicWrapper,
-  Pic,
-  PicText,
-  Content,
-  Article,
-  BlogItem,
-  Blogtitle,
-  Blogabstract,
-  Bloghr,
-  Blogmsg,
-  Msgitem,
-  Pageto,
-  Pagebtn,
-  AbstractTitle,
-  Abstractparagraph,
-  RankList,
-  RankTitle,
-  RankItem
+  PicWrapper, Pic, PicText,
+  Content, Article,
+  BlogItem, Blogtitle, Blogabstract, Bloghr, Blogmsg,
+  Msgitem, Pageto, Pagebtn, AbstractTitle, Abstractparagraph,
+  RankList, RankTitle, RankItem
 } from './style'
 class Home extends PureComponent {
   componentDidMount() {
@@ -98,7 +85,7 @@ class Home extends PureComponent {
               this.props.rankList.map(item => {
                 return (
                   <Link key={item.get('articleId')} to={`/article/${item.get('authorId')}/${item.get('articleId')}`} >
-                    <RankItem>{item.get('articleTitle')}</RankItem>
+                    <RankItem>{item.get('articleTitle')}<span>{item.get('viewNum')} <i className="iconfont">&#xe650;</i></span></RankItem>
                   </Link>
                 )
               })

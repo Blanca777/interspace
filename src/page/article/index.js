@@ -20,13 +20,7 @@ import Loading from '../../common/loading'
 import { actionCreators } from './store'
 import devman from '../../statics/iconpng/devman.png'
 class Article extends PureComponent {
-  // constructor(props) {
-  //   super(props)
-  //   const CommentReplyInput = React.forwardRef((props, ref) => (
-  //     <CommentReplyInput ref={ref} />
-  //   ));
-  //   this.replyInputRef = React.createRef();
-  // }
+
   componentDidMount() {
     let { getArticleMsg, getArticleContent, getUserInfo, match } = this.props
     getArticleMsg(match.params.articleId)
