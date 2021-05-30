@@ -2,19 +2,9 @@ import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { Redirect, withRouter } from 'react-router-dom'
 import {
-  LoginWrapper,
-  ChangePanel,
-  LoginBox,
-  LoginTitle,
-  UsernameInput,
-  PasswordInput,
-  LoginBtn,
-  SignupBox,
-  SignupBoxTitle,
-  SUsernameInput,
-  SPasswordInput,
-  SAPasswordInput,
-  SignupBtn
+  LoginWrapper, ChangePanel,
+  LoginBox, LoginTitle, UsernameInput, PasswordInput, LoginBtn,
+  SignupBox, SignupBoxTitle, SUsernameInput, SPasswordInput, SAPasswordInput, SignupBtn
 } from './style'
 import Loading from '../../common/loading'
 import { actionCreators } from './store'
@@ -52,7 +42,7 @@ class Login extends PureComponent {
     if (!loginStatus) {
       return (
         <LoginWrapper>
-          {showLoadingBox?<Loading />:<></>}
+          {showLoadingBox ? <Loading /> : <></>}
           <ChangePanel onClick={changeBox}>{showLoginBox ? "To注册" : "To登录"}</ChangePanel>
           {
             showLoginBox ? <LoginBox>
@@ -97,10 +87,10 @@ const mapStateToProps = (state) => ({
 })
 const mapDispatchToProps = (dispatch) => ({
   handleLogin(accout, password) {
-    if(accout.length !== 0 && password.length !== 0){
+    if (accout.length > 4 && accout.length < 12 && password.length > 6 && password.length < 16) {
       dispatch(actionCreators.handleLogin(accout, password))
-    }else{
-      alert('请输入正确用户名密码')
+    } else {
+      alert('请输入正确用户名（4-12）密码（6-16）长度')
     }
   },
   longLogin(authorId) {
@@ -113,7 +103,7 @@ const mapDispatchToProps = (dispatch) => ({
     let username = usernameRef.current.value
     let password = passwordRef.current.value
     let apassword = apasswordRef.current.value
-    if (password !== '' && apassword !== '' && username !== '') {
+    if (username.length >= 4 && username.length <= 12 && password.length >= 6 && password.length <= 16) {
       if (password === apassword) {
         dispatch(actionCreators.handleSignup(username, password))
         usernameRef.current.value = '';
@@ -131,10 +121,8 @@ const mapDispatchToProps = (dispatch) => ({
       passwordRef.current.value = '';
       apasswordRef.current.value = '';
     } else {
-      alert('请输入正确用户名密码')
+      alert('请输入正确用户名（4-12）密码（6-16）长度')
     }
-
-
   }
 
 })

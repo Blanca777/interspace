@@ -52,8 +52,10 @@ export const LoadingBox = styled.div`
   }
 `;
 export const LoadingText = styled.div`
-  margin-top: 50px;
+  position: absolute;
+  width: 100%;
   text-align: center;
   font-weight: bold;
+  line-height: 30px;
   font-size: 20px;
 `;

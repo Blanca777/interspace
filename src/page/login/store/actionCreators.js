@@ -33,7 +33,7 @@ export const handleLogin = (username, password) => {
     dispatch(showLoadingBoxAction(true))
     axios.post(`${APIUrl}/login/login`, data).then(res => {
       if (res.data.loginStatus === "error") {
-        dispatch(loadingActionCreators.changeLoadingTextAction('登录失败'))
+        dispatch(loadingActionCreators.changeLoadingTextAction(res.data.reason))
         setTimeout(() => {
           dispatch(showLoadingBoxAction(false))
         }, 1500)
