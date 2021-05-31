@@ -43,20 +43,27 @@ class Dynamic extends PureComponent {
     this.props.changeLoadingBoxStatus(true)
   }
   addArticleSubmit = (e) => {
-    let authorId = this.props.loginUserInfo.get('authorId')
-    let authorName = this.props.loginUserInfo.get('authorName')
     e.preventDefault();
     let formData = new FormData(e.target);
-    formData.append("authorId", authorId);
-    formData.append("authorName", authorName);
-    fetch(`${APIUrl}/dynamic/addArticleDynamic`, {
-      method: 'POST',
-      body: formData
-    }).then(response => {
-      return response.json()
-    }).then(res => {
-      this.props.addArticleDynamicAction(res)
-    })
+    if(formData.get("title") !== ''&&formData.get("file").size !== 0){
+      let authorId = this.props.loginUserInfo.get('authorId')
+      let authorName = this.props.loginUserInfo.get('authorName')
+      e.preventDefault();
+      let formData = new FormData(e.target);
+      formData.append("authorId", authorId);
+      formData.append("authorName", authorName);
+      fetch(`${APIUrl}/dynamic/addArticleDynamic`, {
+        method: 'POST',
+        body: formData
+      }).then(response => {
+        return response.json()
+      }).then(res => {
+        this.props.addArticleDynamicAction(res)
+      }).catch(error => console.error(error))
+    }else{
+      alert("请填写标题，选择正确的文件")
+    }
+    
   };
   render() {
     let { showLoadingBox, AddPersonalDynamic, match, dynamicList, changeDynamicList, fileName, showAddArticle, showAddPersonal, FileValueChange, sidebarList, authorInfo, loginUserInfo, logout, showAddDynamicBox } = this.props
@@ -72,22 +79,43 @@ class Dynamic extends PureComponent {
                 <AddArticleTagBox>
                   <span>标签：</span>
                   <select name="tag1">
+                    <option>语言</option>
+                    <option>C</option>
+                    <option>C++</option>
+                    <option>Java</option>
+                    <option>Python</option>
+                    <option>JavaScript</option>
+                    <option>NodeJS</option>
                     <option>HTML</option>
                     <option>CSS</option>
-                    <option>JS</option>
+                    <option>Go</option>
+                    <option>Swift</option>
+                    <option>PHP</option>
+                    <option>R</option>
+                    <option>JQuery</option>
                     <option>React</option>
-                    <option>网络</option>
-                    <option>浏览器</option>
-                    <option>动态</option>
+                    <option>VUE</option>
+                    <option>Angular</option>
+                    <option>Express</option>
+                    <option>Spring Boot</option>
+                    <option>Laravel</option>
+                    <option>CakePHP</option>
+                    <option>Django</option>
+                    <option>Ruby on Rails</option>
+                    <option>Flask</option>
+                    <option>Phoenix</option>
+                    <option>Webpack</option>
+                    <option>Gulp</option>
+                    <option>Git</option>
+
                   </select>
                   <select name="tag2">
-                    <option>CSS</option>
-                    <option>HTML</option>
-                    <option>JS</option>
-                    <option>React</option>
-                    <option>网络</option>
+                    <option>类别</option>
+                    <option>计算机网络</option>
                     <option>浏览器</option>
-                    <option>动态</option>
+                    <option>行业发展</option>
+                    <option>个人思考</option>
+                    <option>有趣的事</option>
                   </select>
                 </AddArticleTagBox>
                 <AddArticleFileBox>

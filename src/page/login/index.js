@@ -87,7 +87,7 @@ const mapStateToProps = (state) => ({
 })
 const mapDispatchToProps = (dispatch) => ({
   handleLogin(accout, password) {
-    if (accout.length > 4 && accout.length < 12 && password.length > 6 && password.length < 16) {
+    if (accout.length >= 4 && accout.length <= 12 && password.length >= 6 && password.length <= 16) {
       dispatch(actionCreators.handleLogin(accout, password))
     } else {
       alert('请输入正确用户名（4-12）密码（6-16）长度')

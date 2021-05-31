@@ -248,12 +248,12 @@ export const AddArticleTagBox = styled.div`
   justify-content: center;
   span {
     position: absolute;
-    left: 40px;
+    left: 20px;
     top: 5px;
   }
   select {
-    margin: 0 20px;
-    padding: 5px 10px;
+    margin: 0 10px;
+    padding: 5px 5px;
   }
 `
 export const AddArticleInput = styled.input.attrs({
