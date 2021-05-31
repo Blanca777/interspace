@@ -11,12 +11,16 @@ import {
   Msgitem, Pageto, Pagebtn, AbstractTitle, Abstractparagraph,
   RankList, RankTitle, RankItem
 } from './style'
+import Loading from '../../common/loading'
 class Home extends PureComponent {
   componentDidMount() {
     let { getArticleList, getRankList, articleList, rankList } = this.props
     getArticleList(articleList);
     getRankList(rankList);
     window.scrollTo(0, 0)
+  }
+  componentWillUnmount() {
+    this.props.changeLoadingBoxStatus(true)
   }
   getPageList = () => {
     let pagelist = []
@@ -32,9 +36,10 @@ class Home extends PureComponent {
     return pagelist
   }
   render() {
-
+    let { showLoadingBox,curList,curTheme,handlePrevPage,handleNextPage,rankList } = this.props
     return (
-      <HomeWrapper curTheme={this.props.curTheme}>
+      <HomeWrapper curTheme={curTheme}>
+        {showLoadingBox ? <Loading /> : <></>}
         <PicWrapper>
           <Pic></Pic>
           <PicText>在失去一切之后<br />我们的冒险才真正开始</PicText>
@@ -43,7 +48,7 @@ class Home extends PureComponent {
         <Content>
           <Article>
             {
-              this.props.curList.map((item) => {
+              curList.map((item) => {
 
                 return (
                   <BlogItem key={item.get('articleId')}>
@@ -74,15 +79,15 @@ class Home extends PureComponent {
               })
             }
             <Pageto>
-              <Pagebtn className="pagebtn" onClick={this.props.handlePrevPage}>上一页</Pagebtn>
+              <Pagebtn className="pagebtn" onClick={handlePrevPage}>上一页</Pagebtn>
               {this.getPageList()}
-              <Pagebtn className="pagebtn" onClick={this.props.handleNextPage}>下一页</Pagebtn>
+              <Pagebtn className="pagebtn" onClick={handleNextPage}>下一页</Pagebtn>
             </Pageto>
           </Article>
           <RankList>
             <RankTitle>排行榜</RankTitle>
             {
-              this.props.rankList.map(item => {
+              rankList.map(item => {
                 return (
                   <Link key={item.get('articleId')} to={`/article/${item.get('authorId')}/${item.get('articleId')}`} >
                     <RankItem>{item.get('articleTitle')}<span>{item.get('viewNum')} <i className="iconfont">&#xe650;</i></span></RankItem>
@@ -106,6 +111,7 @@ const mapStateToProps = (state) => {
     articleList: state.getIn(["home", "articleList"]),
     page: state.getIn(["home", "page"]),
     totalPage: state.getIn(["home", "totalPage"]),
+    showLoadingBox: state.getIn(["home", "showLoadingBox"]),
     curTheme: state.getIn(["header", "curTheme"]),
     rankList: state.getIn(["home", "rankList"])
   }
@@ -127,6 +133,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     handleNextPage() {
       dispatch(actionCreators.NextPageAction())
+    },
+    changeLoadingBoxStatus(status) {
+      dispatch(actionCreators.showLoadingBoxAction(status))
     }
   }
 }

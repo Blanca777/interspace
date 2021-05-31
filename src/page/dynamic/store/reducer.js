@@ -48,10 +48,18 @@ const reducer = (state = defaultState, action) => {
 
 }
 const getAuthorInfo = (state, action) => {
-  return state.merge({
-    dynamicList: action.authorInfo.get('articleDynamic'),
-    authorInfo: action.authorInfo
-  })
+  if (action.dynamicList === 'articleDynamic') {
+    return state.merge({
+      dynamicList: action.authorInfo.get('articleDynamic'),
+      authorInfo: action.authorInfo
+    })
+  } else {
+    return state.merge({
+      dynamicList: action.authorInfo.get('personalDynamic'),
+      authorInfo: action.authorInfo
+    })
+  }
+
 }
 const changeDynamicList = (state, action) => {
   return state.merge({

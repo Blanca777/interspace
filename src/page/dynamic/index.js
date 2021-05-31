@@ -35,7 +35,7 @@ class Dynamic extends PureComponent {
         getAuthorInfo(route.pathname.slice(8));
       }
     });
-    getAuthorInfo(match.params.authorId);
+    getAuthorInfo(match.params.authorId, match.params.dynamicList);
     window.scrollTo(0, 0)
   }
   componentWillUnmount() {
@@ -45,7 +45,7 @@ class Dynamic extends PureComponent {
   addArticleSubmit = (e) => {
     e.preventDefault();
     let formData = new FormData(e.target);
-    if(formData.get("title") !== ''&&formData.get("file").size !== 0){
+    if (formData.get("title") !== '' && formData.get("file").size !== 0) {
       let authorId = this.props.loginUserInfo.get('authorId')
       let authorName = this.props.loginUserInfo.get('authorName')
       e.preventDefault();
@@ -60,10 +60,10 @@ class Dynamic extends PureComponent {
       }).then(res => {
         this.props.addArticleDynamicAction(res)
       }).catch(error => console.error(error))
-    }else{
+    } else {
       alert("请填写标题，选择正确的文件")
     }
-    
+
   };
   render() {
     let { showLoadingBox, AddPersonalDynamic, match, dynamicList, changeDynamicList, fileName, showAddArticle, showAddPersonal, FileValueChange, sidebarList, authorInfo, loginUserInfo, logout, showAddDynamicBox } = this.props
@@ -211,11 +211,17 @@ class Dynamic extends PureComponent {
             }
 
             <Usernum>
-              <Numitem className="borderr">
+              <Numitem className="borderr" 
+              onClick={() => {
+                changeDynamicList("articleDynamic")
+              }}>
                 <h4>{authorInfo.get('articleNum')}</h4>
                 <h6>文章</h6>
               </Numitem>
-              <Numitem>
+              <Numitem 
+              onClick={() => {
+                changeDynamicList("personalDynamic")
+              }}>
                 <h4>{authorInfo.get('personalNum')}</h4>
                 <h6>动态</h6>
               </Numitem>
@@ -267,8 +273,8 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
   return {
-    getAuthorInfo(authorId) {
-      dispatch(actionCreators.getAuthorInfo(authorId))
+    getAuthorInfo(authorId, dynamicList) {
+      dispatch(actionCreators.getAuthorInfo(authorId, dynamicList))
     },
     changeDynamicList(dynamicId) {
       dispatch(actionCreators.changeDynamicList(dynamicId))

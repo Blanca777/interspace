@@ -41,19 +41,23 @@ class Article extends PureComponent {
         {showLoadingBox ? <Loading /> : <></>}
         <Userbox>
           <UserInfo>
-            <Link to={`/dynamic/${userInfo.get('authorId')}`}>
+            <Link to={`/dynamic/${userInfo.get('authorId')}/articleDynamic`}>
               <img src={userInfo.get('authorImg')} alt="" />
               <Username>{userInfo.get('authorName')}</Username>
             </Link>
 
             <Usernum>
               <Numitem className="borderr">
-                <h4>{userInfo.get('articleNum')}</h4>
-                <h6>文章</h6>
+                <Link to={`/dynamic/${userInfo.get('authorId')}/articleDynamic`}>
+                  <h4>{userInfo.get('articleNum')}</h4>
+                  <h6>文章</h6>
+                </Link>
               </Numitem>
               <Numitem>
-                <h4>{userInfo.get('personalNum')}</h4>
-                <h6>动态</h6>
+                <Link to={`/dynamic/${userInfo.get('authorId')}/personalDynamic`}>
+                  <h4>{userInfo.get('personalNum')}</h4>
+                  <h6>动态</h6>
+                </Link>
               </Numitem>
             </Usernum>
           </UserInfo>
@@ -196,7 +200,7 @@ const mapDispatchToProps = (dispatch) => {
         alert('请先登机')
       }
     },
-    changeLoadingBoxStatus(status){
+    changeLoadingBoxStatus(status) {
       dispatch(actionCreators.showLoadingBoxAction(status))
     }
   }

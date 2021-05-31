@@ -6,7 +6,8 @@ const defaultState = fromJS({
   page: 1,
   totalPage: 0,
   curList: [],
-  rankList: []
+  rankList: [],
+  showLoadingBox: true
 })
 const reducer = (state = defaultState, action) => {
   switch (action.type) {
@@ -15,7 +16,7 @@ const reducer = (state = defaultState, action) => {
         articleList: action.articleList,
         totalPage: action.totalPage,
         curList: action.curList
-      }); 
+      });
     case constants.GETRANKLIST:
       return state.merge({
         rankList: action.rankList
@@ -47,6 +48,10 @@ const reducer = (state = defaultState, action) => {
       } else {
         return state
       }
+    case constants.SHOWLOADINGBOX:
+      return state.merge({
+        showLoadingBox: action.status
+      })
     default:
       return state;
   }

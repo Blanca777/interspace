@@ -3,9 +3,10 @@ import axios from 'axios'
 import { fromJS } from 'immutable'
 import { APIUrl } from '../../../config'
 import { actionCreators as loadingActionCreators } from '../../../common/loading/store'
-const authorInfoAction = (authorInfo) => ({
+const authorInfoAction = (authorInfo, dynamicList) => ({
   type: constants.GETAUTHORINFO,
-  authorInfo: fromJS(authorInfo)
+  authorInfo: fromJS(authorInfo),
+  dynamicList
 })
 
 const addPersonalDynamicAction = (authorInfo) => ({
@@ -47,12 +48,12 @@ export const changeFileName = (file) => {
     fileName: file.name
   }
 }
-export const getAuthorInfo = (authorId) => {
+export const getAuthorInfo = (authorId, dynamicList) => {
   return (dispatch) => {
     dispatch(loadingActionCreators.changeLoadingTextAction('正在拼命加载'))
     axios.get(`${APIUrl}/dynamic/${authorId}`).then(res => {
       if (res.status === 200) {
-        dispatch(authorInfoAction(res.data))
+        dispatch(authorInfoAction(res.data, dynamicList))
         setTimeout(() => {
           dispatch(showLoadingBoxAction(false))
         }, 500)

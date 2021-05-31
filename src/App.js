@@ -20,7 +20,7 @@ function App() {
         <Header />
         <Route path="/" exact component={Home}></Route>
         <Route path="/article/:authorId/:articleId" exact component={Article}></Route>
-        <Route path="/dynamic/:authorId" exact component={Dynamic}></Route>
+        <Route path="/dynamic/:authorId/:dynamicList" exact component={Dynamic}></Route>
         <Route path="/tools/:toolsId" exact component={Tools}></Route>
         <Route path="/tag/:tagId" exact component={Tag}></Route>
         <Route path="/login" exact component={Login}></Route>

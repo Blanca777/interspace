@@ -146,6 +146,7 @@ export const Usernum = styled.div`
 export const Numitem = styled.div`
   width: 125px;
   height: 50px;
+  cursor: pointer;
   color: ${curTheme.color1};
   &.borderr{
     border-right: 1px solid #333;

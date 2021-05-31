@@ -36,7 +36,7 @@ class Header extends PureComponent {
           <NavWarpper>
             {
               loginStatus ? (
-              <Link to={`/dynamic/${userInfo.get('authorId')}`}>
+              <Link to={`/dynamic/${userInfo.get('authorId')}/personalDynamic`}>
                 <NavItem><img src={spaceman} alt="spaceman" /><span>{userInfo.get('authorName')}</span></NavItem>
               </Link>) : (
               <Link to='/login'>
