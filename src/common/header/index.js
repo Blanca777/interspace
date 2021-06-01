@@ -44,10 +44,10 @@ class Header extends PureComponent {
               </Link>)
             }
             <Link to='/tag/tagAll'>
-              <NavItem><img src={project} alt="project" /><span>开荒项目</span></NavItem>
+              <NavItem><img src={project} alt="project" /><span>开荒笔记</span></NavItem>
             </Link>
-            <Link to='/tools/vscode'>
-              <NavItem><img src={tools} alt="tools" /><span>开荒设备</span></NavItem>
+            <Link to='/channel'>
+              <NavItem><img src={tools} alt="开荒频道" /><span>开荒频道</span></NavItem>
             </Link>
             <Link to='/about'>
               <NavItem><img src={capsule} alt="capsule" /><span>太空舱</span></NavItem>

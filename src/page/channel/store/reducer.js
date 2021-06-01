@@ -2,22 +2,14 @@ import * as constants from './constants';
 import { fromJS } from 'immutable';
 
 const defaultState = fromJS({
-  toolsMsg: {},
-  sidebarTitle: "",
-  sidebarList: []
+  personalDynamic: []
 })
 const reducer = (state = defaultState, action) => {
   switch (action.type) {
-    case constants.GETTOOLSCONTENT:
+    case constants.GETCHANNELLIST:
       return state.merge({
-        toolsMsg: action.toolsMsg
-      }) 
-    case constants.GETSIDEBARCONTENT:
-      return state.merge({
-        sidebarTitle: action.sidebarTitle,
-        sidebarList: action.sidebarList
+        personalDynamic: action.personalDynamic
       })
-
     default:
       return state;
   }

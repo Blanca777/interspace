@@ -44,7 +44,7 @@ class Dynamic extends PureComponent {
     this.props.changeLoadingBoxStatus(true)
   }
   addArticleSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault(); 
     let formData = new FormData(e.target);
     if (formData.get("title") !== '' && formData.get("file").size !== 0) {
       let { changeLoadingText, changeLoadingBoxStatus, loginUserInfo, addArticleDynamic } = this.props
