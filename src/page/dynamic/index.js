@@ -17,6 +17,7 @@ import {
 import Loading from '../../common/loading'
 import { actionCreators } from './store'
 import { actionCreators as loginActionCreators } from '../login/store'
+import { actionCreators as loadingActionCreators } from '../../common/loading/store'
 class Dynamic extends PureComponent {
   constructor(props) {
     super(props)
@@ -44,10 +45,13 @@ class Dynamic extends PureComponent {
   }
   addArticleSubmit = (e) => {
     e.preventDefault();
+    let { changeLoadingText, changeLoadingBoxStatus, loginUserInfo, addArticleDynamicAction } = this.props
+    changeLoadingText('正在拼命上传！')
+    changeLoadingBoxStatus(true)
     let formData = new FormData(e.target);
     if (formData.get("title") !== '' && formData.get("file").size !== 0) {
-      let authorId = this.props.loginUserInfo.get('authorId')
-      let authorName = this.props.loginUserInfo.get('authorName')
+      let authorId = loginUserInfo.get('authorId')
+      let authorName = loginUserInfo.get('authorName')
       e.preventDefault();
       let formData = new FormData(e.target);
       formData.append("authorId", authorId);
@@ -58,8 +62,19 @@ class Dynamic extends PureComponent {
       }).then(response => {
         return response.json()
       }).then(res => {
-        this.props.addArticleDynamicAction(res)
-      }).catch(error => console.error(error))
+        addArticleDynamicAction(res)
+        changeLoadingText('上传成功！')
+        setTimeout(()=>{
+          changeLoadingBoxStatus(false)
+        },500)
+      }).catch(error => {
+        console.error(error)
+        changeLoadingText('上传失败！')
+        setTimeout(()=>{
+          changeLoadingBoxStatus(false)
+        },1000)
+        
+      })
     } else {
       alert("请填写标题，选择正确的文件")
     }
@@ -79,7 +94,21 @@ class Dynamic extends PureComponent {
                 <AddArticleTagBox>
                   <span>标签：</span>
                   <select name="tag1">
-                    <option>语言</option>
+                    <option>领域类型</option>
+                    <option>个人笔记</option>
+                    <option>个人感悟</option>
+                    <option>计算机网络</option>
+                    <option>浏览器</option>
+                    <option>前端开发</option>
+                    <option>后端开发</option>
+                    <option>大数据</option>
+                    <option>行业发展</option>
+                    <option>有趣的事</option>
+                    <option>推荐工具</option>
+                  </select>
+                  <select name="tag2">
+                    <option>编程语言</option>
+                    <option disabled>（可不选）</option>
                     <option>C</option>
                     <option>C++</option>
                     <option>Java</option>
@@ -109,14 +138,7 @@ class Dynamic extends PureComponent {
                     <option>Git</option>
 
                   </select>
-                  <select name="tag2">
-                    <option>类别</option>
-                    <option>计算机网络</option>
-                    <option>浏览器</option>
-                    <option>行业发展</option>
-                    <option>个人思考</option>
-                    <option>有趣的事</option>
-                  </select>
+
                 </AddArticleTagBox>
                 <AddArticleFileBox>
                   <span>{(fileName === '') ? "选择md文件" : fileName}</span>
@@ -211,17 +233,17 @@ class Dynamic extends PureComponent {
             }
 
             <Usernum>
-              <Numitem className="borderr" 
-              onClick={() => {
-                changeDynamicList("articleDynamic")
-              }}>
+              <Numitem className="borderr"
+                onClick={() => {
+                  changeDynamicList("articleDynamic")
+                }}>
                 <h4>{authorInfo.get('articleNum')}</h4>
                 <h6>文章</h6>
               </Numitem>
-              <Numitem 
-              onClick={() => {
-                changeDynamicList("personalDynamic")
-              }}>
+              <Numitem
+                onClick={() => {
+                  changeDynamicList("personalDynamic")
+                }}>
                 <h4>{authorInfo.get('personalNum')}</h4>
                 <h6>动态</h6>
               </Numitem>
@@ -301,6 +323,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     changeLoadingBoxStatus(status) {
       dispatch(actionCreators.showLoadingBoxAction(status))
+    },
+    changeLoadingText(loadingText) {
+      dispatch(loadingActionCreators.changeLoadingTextAction(loadingText))
     }
 
   }

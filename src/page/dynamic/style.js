@@ -254,7 +254,7 @@ export const AddArticleTagBox = styled.div`
   }
   select {
     margin: 0 10px;
-    padding: 5px 5px;
+    padding: 5px 0px 5px 5px;
   }
 `
 export const AddArticleInput = styled.input.attrs({
