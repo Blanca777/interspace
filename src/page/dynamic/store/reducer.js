@@ -90,7 +90,8 @@ const addArticleDynamic = (state, action) => {
   return state.merge({
     authorInfo: action.authorInfo,
     dynamicList: action.authorInfo.get('articleDynamic'),
-    showAddArticle: false
+    showAddArticle: false,
+    fileName: ""
   })
 }
 export default reducer

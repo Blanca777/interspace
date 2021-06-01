@@ -45,11 +45,11 @@ class Dynamic extends PureComponent {
   }
   addArticleSubmit = (e) => {
     e.preventDefault();
-    let { changeLoadingText, changeLoadingBoxStatus, loginUserInfo, addArticleDynamicAction } = this.props
-    changeLoadingText('正在拼命上传！')
-    changeLoadingBoxStatus(true)
     let formData = new FormData(e.target);
     if (formData.get("title") !== '' && formData.get("file").size !== 0) {
+      let { changeLoadingText, changeLoadingBoxStatus, loginUserInfo, addArticleDynamic } = this.props
+      changeLoadingText('正在拼命上传！')
+      changeLoadingBoxStatus(true)
       let authorId = loginUserInfo.get('authorId')
       let authorName = loginUserInfo.get('authorName')
       e.preventDefault();
@@ -62,18 +62,18 @@ class Dynamic extends PureComponent {
       }).then(response => {
         return response.json()
       }).then(res => {
-        addArticleDynamicAction(res)
+        addArticleDynamic(res)
         changeLoadingText('上传成功！')
-        setTimeout(()=>{
+        setTimeout(() => {
           changeLoadingBoxStatus(false)
-        },500)
+        }, 500)
       }).catch(error => {
         console.error(error)
         changeLoadingText('上传失败！')
-        setTimeout(()=>{
+        setTimeout(() => {
           changeLoadingBoxStatus(false)
-        },1000)
-        
+        }, 1000)
+
       })
     } else {
       alert("请填写标题，选择正确的文件")
@@ -81,7 +81,7 @@ class Dynamic extends PureComponent {
 
   };
   render() {
-    let { showLoadingBox, AddPersonalDynamic, match, dynamicList, changeDynamicList, fileName, showAddArticle, showAddPersonal, FileValueChange, sidebarList, authorInfo, loginUserInfo, logout, showAddDynamicBox } = this.props
+    let { showLoadingBox, AddPersonalDynamic, match, dynamicList, changeDynamicList, fileName, showAddArticle, showAddPersonal, changeFileName, sidebarList, authorInfo, loginUserInfo, logout, showAddDynamicBox } = this.props
 
     return (
       <DynamicWrapper>
@@ -142,7 +142,7 @@ class Dynamic extends PureComponent {
                 </AddArticleTagBox>
                 <AddArticleFileBox>
                   <span>{(fileName === '') ? "选择md文件" : fileName}</span>
-                  <AddArticleFile onChange={FileValueChange}></AddArticleFile>
+                  <AddArticleFile onChange={changeFileName}></AddArticleFile>
                 </AddArticleFileBox>
                 <AddArticleCancel onClick={() => showAddDynamicBox('articleDynamic')}>关闭</AddArticleCancel>
                 <AddArticleSubmit></AddArticleSubmit>
@@ -315,10 +315,10 @@ const mapDispatchToProps = (dispatch) => {
     AddPersonalDynamic(text, authorId) {
       dispatch(actionCreators.AddPersonalDynamic(text, authorId))
     },
-    FileValueChange(e) {
-      dispatch(actionCreators.changeFileName(e.target.files[0]))
+    changeFileName(e) {
+      dispatch(actionCreators.changeFileName(e.target.files[0].name))
     },
-    addArticleDynamicAction(userInfo) {
+    addArticleDynamic(userInfo) {
       dispatch(actionCreators.addArticleDynamicAction(userInfo))
     },
     changeLoadingBoxStatus(status) {

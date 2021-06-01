@@ -42,10 +42,10 @@ export const AddPersonalDynamic = (dynamicText, authorId) => {
     })
   }
 }
-export const changeFileName = (file) => {
+export const changeFileName = (fileName) => {
   return {
     type: constants.CHANGEFILENAME,
-    fileName: file.name
+    fileName
   }
 }
 export const getAuthorInfo = (authorId, dynamicList) => {
