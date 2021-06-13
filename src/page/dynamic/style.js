@@ -66,11 +66,21 @@ export const DynamicTime = styled.div`
 
 export const DynamicText = styled.div`
   width: 100%;
-  padding: 20px 10px;
-  
+  padding: 20px 50px 20px 10px;
+  box-sizing: border-box;
+  word-wrap: break-word;
+  letter-spacing: 0.2em;
+  line-height: 18px;
   box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.6);
 `;
 
+export const DynamicDelete = styled.span`
+  position: absolute;
+  top: 40px;
+  right: 10px;
+  color: #f7b4ab;
+  cursor: pointer;
+`;
 
 export const SidebarBox = styled.div`
 

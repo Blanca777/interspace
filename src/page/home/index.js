@@ -49,7 +49,6 @@ class Home extends PureComponent {
           <Article>
             {
               curList.map((item) => {
-
                 return (
                   <BlogItem key={item.get('articleId')}>
                     <Link to={`/article/${item.get('authorId')}/${item.get('articleId')}`} >
@@ -69,7 +68,7 @@ class Home extends PureComponent {
                       <Bloghr></Bloghr>
                       <Blogmsg>
                         <Msgitem><i className="iconfont">&#xe60e;</i> {item.get('authorName')}</Msgitem>
-                        <Msgitem><i className="iconfont">&#xe619;</i> {item.get('publishTime')}</Msgitem>
+                        <Msgitem><i className="iconfont">&#xe619;</i> {new Date(item.get('publishTime')).toLocaleString()}</Msgitem>
                         <Msgitem><i className="iconfont">&#xe63d;</i> {item.get('tag')}</Msgitem>
                       </Blogmsg>
                     </Link>

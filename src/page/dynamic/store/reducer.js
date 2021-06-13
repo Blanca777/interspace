@@ -42,6 +42,11 @@ const reducer = (state = defaultState, action) => {
       return state.merge({
         showLoadingBox: action.status
       })
+    case constants.DELETEDYNAMICITEM:
+      return state.merge({
+        authorInfo: action.authorInfo,
+        dynamicList: action.authorInfo.get("articleDynamic")
+      })
     default:
       return state;
   }

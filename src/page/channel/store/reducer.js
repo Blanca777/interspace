@@ -2,13 +2,13 @@ import * as constants from './constants';
 import { fromJS } from 'immutable';
 
 const defaultState = fromJS({
-  personalDynamic: []
+  speechList: []
 })
 const reducer = (state = defaultState, action) => {
   switch (action.type) {
-    case constants.GETCHANNELLIST:
+    case constants.GETSPEECHLIST:
       return state.merge({
-        personalDynamic: action.personalDynamic
+        speechList: action.speechList
       })
     default:
       return state;

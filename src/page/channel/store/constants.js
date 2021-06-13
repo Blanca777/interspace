@@ -1,2 +1,2 @@
 
-export const GETCHANNELLIST = 'channel/getChannelList'
+export const GETSPEECHLIST = 'channel/getSpeechList'

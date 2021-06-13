@@ -5,7 +5,7 @@ import { APIUrl } from '../../config'
 import {
   DynamicWrapper, DynamicBox, DynamicTitle,
   TitleText, TitleMsg, TitleItem,
-  DynamicContent, DynamicList, DynamicItem, DynamicTime, DynamicPoint, DynamicText,
+  DynamicContent, DynamicList, DynamicItem, DynamicTime, DynamicPoint, DynamicText, DynamicDelete,
   SidebarBox, SidebarTitle, SidebarItem,
   Userbox, UserInfo, Username, Logout, Usernum,
   Numitem, Hastitle, Categorybox, Categoryitem,
@@ -44,7 +44,7 @@ class Dynamic extends PureComponent {
     this.props.changeLoadingBoxStatus(true)
   }
   addArticleSubmit = (e) => {
-    e.preventDefault(); 
+    e.preventDefault();
     let formData = new FormData(e.target);
     if (formData.get("title") !== '' && formData.get("file").size !== 0) {
       let { changeLoadingText, changeLoadingBoxStatus, loginUserInfo, addArticleDynamic } = this.props
@@ -81,7 +81,10 @@ class Dynamic extends PureComponent {
 
   };
   render() {
-    let { showLoadingBox, AddPersonalDynamic, match, dynamicList, changeDynamicList, fileName, showAddArticle, showAddPersonal, changeFileName, sidebarList, authorInfo, loginUserInfo, logout, showAddDynamicBox } = this.props
+    let { deleteDynamicItem, showLoadingBox, AddPersonalDynamic, 
+      match, dynamicList, changeDynamicList, fileName, showAddArticle, 
+      showAddPersonal, changeFileName, sidebarList, authorInfo, loginUserInfo, 
+      logout, showAddDynamicBox } = this.props;
 
     return (
       <DynamicWrapper>
@@ -205,12 +208,20 @@ class Dynamic extends PureComponent {
                   return (
                     <DynamicItem key={item.get("articleId") || item.get("personalId")}>
                       <DynamicPoint />
-                      <DynamicTime>{item.get("dynamicTime")}</DynamicTime>
+                      <DynamicTime>{new Date(item.get("dynamicTime")).toLocaleString()}</DynamicTime>
                       {
-                        item.get("articleId") && <Link to={`/article/${match.params.authorId}/${item.get("articleId")}`}><DynamicText>{item.get("dynamicText")}</DynamicText></Link>
+                        item.get("articleId") &&
+                        <Link to={`/article/${match.params.authorId}/${item.get("articleId")}`}>
+                          <DynamicText>{item.get("dynamicText")}</DynamicText>
+                        </Link>
                       }
                       {
                         item.get("personalId") && <DynamicText>{item.get("dynamicText")}</DynamicText>
+                      }
+                      {
+                        authorInfo.get('authorId') === loginUserInfo.get('authorId') && (
+                          <DynamicDelete onClick={() => deleteDynamicItem(authorInfo.get('authorId'), (item.get("articleId") || item.get("personalId")))}>删除</DynamicDelete>
+                        )
                       }
                     </DynamicItem>
                   )
@@ -326,6 +337,10 @@ const mapDispatchToProps = (dispatch) => {
     },
     changeLoadingText(loadingText) {
       dispatch(loadingActionCreators.changeLoadingTextAction(loadingText))
+    },
+    deleteDynamicItem(authorId, dynamicId) {
+      // console.log(authorId, dynamicId)
+      dispatch(actionCreators.deleteDynamicItem(authorId, dynamicId))
     }
 
   }

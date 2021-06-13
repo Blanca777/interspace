@@ -3,15 +3,15 @@ import axios from 'axios'
 import { fromJS } from 'immutable'
 import { APIUrl } from '../../../config'
 
-const getChannelListAction = (channelList) => ({
-  type: constants.GETCHANNELLIST,
-  channelList: fromJS(channelList)
+const getSpeechListAction = (speechList) => ({
+  type: constants.GETSPEECHLIST,
+  speechList: fromJS(speechList)
 })
 
-export const getChannelList = () => {
+export const getSpeechList = () => {
   return (dispatch) => {
-    axios.get(`${APIUrl}/channel/getChannelList`).then(res => {
-      dispatch(getChannelListAction(res.data))
+    axios.get(`${APIUrl}/channel/speechList`).then(res => {
+      dispatch(getSpeechListAction(res.data))
     }).catch(err => {
       console.log(err)
     })

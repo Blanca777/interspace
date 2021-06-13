@@ -36,7 +36,7 @@ export const HeaderRight = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  width: 650px;
+  min-width: 650px;
   height: 50px;
   margin-right: 30px;
   .iconfont {
@@ -75,7 +75,7 @@ export const NavWarpper = styled.ul`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  width: 400px;
+  min-width: 400px;
 `;
 export const NavItem = styled.li`
   font-size: 15px;
