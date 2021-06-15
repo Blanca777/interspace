@@ -30,7 +30,7 @@ class Dynamic extends PureComponent {
   componentDidMount() {
     let { getAuthorInfo, match } = this.props
     this.UNLISTEN = this.props.history.listen(route => {
-      if (route.pathname === `/dynamic/${this.props.loginUserInfo.get('authorId')}`) {
+      if (route.pathname === `/dynamic/${this.props.loginUserInfo.get('authorId')}/personalDynamic`) {
         getAuthorInfo(this.props.loginUserInfo.get('authorId'));
       } else if (route.pathname.indexOf('/dynamic/') === 0) {
         getAuthorInfo(route.pathname.slice(8));
@@ -81,9 +81,9 @@ class Dynamic extends PureComponent {
 
   };
   render() {
-    let { deleteDynamicItem, showLoadingBox, AddPersonalDynamic, 
-      match, dynamicList, changeDynamicList, fileName, showAddArticle, 
-      showAddPersonal, changeFileName, sidebarList, authorInfo, loginUserInfo, 
+    let { deleteDynamicItem, showLoadingBox, AddPersonalDynamic,
+      match, dynamicList, changeDynamicList, fileName, showAddArticle,
+      showAddPersonal, changeFileName, sidebarList, authorInfo, loginUserInfo,
       logout, showAddDynamicBox } = this.props;
 
     return (
@@ -198,7 +198,11 @@ class Dynamic extends PureComponent {
           <DynamicTitle>
             <TitleText>{authorInfo.get('authorName')}</TitleText>
             <TitleMsg>
-              <TitleItem><i className="iconfont">&#xe650;</i>{authorInfo.get('visiteNum')}</TitleItem>
+              <TitleItem>
+                <svg className="icon" aria-hidden="true">
+                  <use xlinkHref="#icon-yanjing"></use>
+                </svg> {authorInfo.get('visiteNum')}
+              </TitleItem>
             </TitleMsg>
           </DynamicTitle>
           <DynamicContent>
@@ -220,7 +224,11 @@ class Dynamic extends PureComponent {
                       }
                       {
                         authorInfo.get('authorId') === loginUserInfo.get('authorId') && (
-                          <DynamicDelete onClick={() => deleteDynamicItem(authorInfo.get('authorId'), (item.get("articleId") || item.get("personalId")))}>删除</DynamicDelete>
+                          <DynamicDelete onClick={() => deleteDynamicItem(authorInfo.get('authorId'), (item.get("articleId") || item.get("personalId")))}>
+                            <svg className="icon" aria-hidden="true">
+                              <use xlinkHref="#icon-shanchu"></use>
+                            </svg> 删除
+                          </DynamicDelete>
                         )
                       }
                     </DynamicItem>
@@ -239,7 +247,11 @@ class Dynamic extends PureComponent {
             <Username>{authorInfo.get('authorName')}</Username>
             {
               authorInfo.get('authorId') === loginUserInfo.get('authorId') && (
-                <Logout onClick={logout}>退出登录</Logout>
+                <Logout onClick={logout}>
+                  <svg className="icon" aria-hidden="true">
+                    <use xlinkHref="#icon-tuichu"></use>
+                  </svg> 退出登录
+                </Logout>
               )
             }
 
@@ -260,7 +272,11 @@ class Dynamic extends PureComponent {
               </Numitem>
             </Usernum>
           </UserInfo>
-          <Hastitle><i className="iconfont">&#xe624;</i> 分类</Hastitle>
+          <Hastitle>
+            <svg className="icon" aria-hidden="true">
+              <use xlinkHref="#icon-quanbu"></use>
+            </svg> 分类
+          </Hastitle>
           <Categorybox>
             {
               authorInfo.get('category') && authorInfo.get('category').map(item => {
@@ -269,7 +285,11 @@ class Dynamic extends PureComponent {
             }
 
           </Categorybox>
-          <Hastitle><i className="iconfont">&#xe9f7;</i> 标签</Hastitle>
+          <Hastitle>
+            <svg className="icon" aria-hidden="true">
+              <use xlinkHref="#icon-biaoqian"></use>
+            </svg> 标签
+          </Hastitle>
           <Tagsbox>
             {
               authorInfo.get('tag') && authorInfo.get('tag').map(item => {
@@ -277,7 +297,11 @@ class Dynamic extends PureComponent {
               })
             }
           </Tagsbox>
-          <Hastitle><i className="iconfont">&#xe625;</i> 友情链接</Hastitle>
+          <Hastitle>
+            <svg className="icon" aria-hidden="true">
+              <use xlinkHref="#icon-faxian"></use>
+            </svg> 友情链接
+          </Hastitle>
           <Flinkbox>
             {
               authorInfo.get('fLink') && authorInfo.get('fLink').map(item => {

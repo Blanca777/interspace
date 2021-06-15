@@ -36,7 +36,7 @@ class Home extends PureComponent {
     return pagelist
   }
   render() {
-    let { showLoadingBox,curList,curTheme,handlePrevPage,handleNextPage,rankList } = this.props
+    let { showLoadingBox, curList, curTheme, handlePrevPage, handleNextPage, rankList } = this.props
     return (
       <HomeWrapper curTheme={curTheme}>
         {showLoadingBox ? <Loading /> : <></>}
@@ -67,9 +67,20 @@ class Home extends PureComponent {
                       }
                       <Bloghr></Bloghr>
                       <Blogmsg>
-                        <Msgitem><i className="iconfont">&#xe60e;</i> {item.get('authorName')}</Msgitem>
-                        <Msgitem><i className="iconfont">&#xe619;</i> {new Date(item.get('publishTime')).toLocaleString()}</Msgitem>
-                        <Msgitem><i className="iconfont">&#xe63d;</i> {item.get('tag')}</Msgitem>
+                        <Msgitem>
+                          <svg className="icon" aria-hidden="true">
+                            <use xlinkHref="#icon-gerenzhongxin"></use>
+                          </svg> {item.get('authorName')}
+                        </Msgitem>
+                        <Msgitem>
+                          <svg className="icon" aria-hidden="true">
+                            <use xlinkHref="#icon-shijian"></use>
+                          </svg> {new Date(item.get('publishTime')).toLocaleString()}</Msgitem>
+                        <Msgitem>
+                          <svg className="icon" aria-hidden="true">
+                            <use xlinkHref="#icon-biaoqian"></use>
+                          </svg> {item.get('tag')}
+                        </Msgitem>
                       </Blogmsg>
                     </Link>
                   </BlogItem>
@@ -89,7 +100,13 @@ class Home extends PureComponent {
               rankList.map(item => {
                 return (
                   <Link key={item.get('articleId')} to={`/article/${item.get('authorId')}/${item.get('articleId')}`} >
-                    <RankItem>{item.get('articleTitle')}<span>{item.get('viewNum')} <i className="iconfont">&#xe650;</i></span></RankItem>
+                    <RankItem>{item.get('articleTitle')}
+                      <span>{item.get('viewNum')}
+                        <svg className="icon" aria-hidden="true">
+                          <use xlinkHref="#icon-yanjing"></use>
+                        </svg> {item.get('authorName')}
+                      </span>
+                    </RankItem>
                   </Link>
                 )
               })

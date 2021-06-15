@@ -14,7 +14,7 @@ const reducer = (state = defaultState, action) => {
         loginStatus: true,
         userInfo: fromJS(action.userInfo)
       })
-    case constants.LOGOUT:
+    case constants.LOGOUT: 
       return state.merge({
         loginStatus: false,
         userInfo: fromJS({})

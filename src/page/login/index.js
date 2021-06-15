@@ -99,27 +99,18 @@ const mapDispatchToProps = (dispatch) => ({
   changeBox() {
     dispatch(actionCreators.changeBoxAction())
   },
-  handleSignup(usernameRef, passwordRef, apasswordRef) {
-    let username = usernameRef.current.value
-    let password = passwordRef.current.value
-    let apassword = apasswordRef.current.value
+  handleSignup(susernameRef, spasswordRef, sapasswordRef) {
+    let username = susernameRef.current.value
+    let password = spasswordRef.current.value
+    let apassword = sapasswordRef.current.value
     if (username.length >= 4 && username.length <= 12 && password.length >= 6 && password.length <= 16) {
+      spasswordRef.current.value = '';
+      sapasswordRef.current.value = '';
       if (password === apassword) {
         dispatch(actionCreators.handleSignup(username, password))
-        usernameRef.current.value = '';
-        usernameRef.current.disabled = true;
-        passwordRef.current.disabled = true;
-        apasswordRef.current.disabled = true;
-        setTimeout(() => {
-          usernameRef.current.disabled = false;
-          passwordRef.current.disabled = false;
-          apasswordRef.current.disabled = false;
-        }, 2000)
       } else {
         alert('请确认密码一致')
       }
-      passwordRef.current.value = '';
-      apasswordRef.current.value = '';
     } else {
       alert('请输入正确用户名（4-12）密码（6-16）长度')
     }

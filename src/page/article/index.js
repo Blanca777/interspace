@@ -61,7 +61,11 @@ class Article extends PureComponent {
               </Numitem>
             </Usernum>
           </UserInfo>
-          <Hastitle><i className="iconfont">&#xe624;</i> 分类</Hastitle>
+          <Hastitle>
+            <svg className="icon" aria-hidden="true">
+              <use xlinkHref="#icon-quanbu"></use>
+            </svg> 分类
+          </Hastitle>
           <Categorybox>
             {
               userInfo.get('category') && userInfo.get('category').map(item => {
@@ -70,7 +74,11 @@ class Article extends PureComponent {
             }
 
           </Categorybox>
-          <Hastitle><i className="iconfont">&#xe9f7;</i> 标签</Hastitle>
+          <Hastitle>
+            <svg className="icon" aria-hidden="true">
+              <use xlinkHref="#icon-biaoqian"></use>
+            </svg> 标签
+          </Hastitle>
           <Tagsbox>
             {
               userInfo.get('tag') && userInfo.get('tag').map(item => {
@@ -78,7 +86,11 @@ class Article extends PureComponent {
               })
             }
           </Tagsbox>
-          <Hastitle><i className="iconfont">&#xe625;</i> 友情链接</Hastitle>
+          <Hastitle>
+            <svg className="icon" aria-hidden="true">
+              <use xlinkHref="#icon-faxian"></use>
+            </svg> 友情链接
+          </Hastitle>
           <Flinkbox>
             {
               userInfo.get('fLink') && userInfo.get('fLink').map(item => {
@@ -92,9 +104,21 @@ class Article extends PureComponent {
           <ArticleTitle>
             <TitleText>{articleMsg.get('articleTitle')}</TitleText>
             <TitleMsg>
-              <TitleItem><i className="iconfont">&#xe60e;</i>{articleMsg.get('authorName')}</TitleItem>
-              <TitleItem><i className="iconfont">&#xe619;</i>{articleMsg.get('publishTime')}</TitleItem>
-              <TitleItem><i className="iconfont">&#xe650;</i>{articleMsg.get('viewNum')}</TitleItem>
+              <TitleItem>
+                <svg className="icon" aria-hidden="true">
+                  <use xlinkHref="#icon-gerenzhongxin"></use>
+                </svg> {articleMsg.get('authorName')}
+              </TitleItem>
+              <TitleItem>
+                <svg className="icon" aria-hidden="true">
+                  <use xlinkHref="#icon-shijian"></use>
+                </svg> {new Date(articleMsg.get('publishTime')).toLocaleString()}
+                </TitleItem>
+              <TitleItem>
+                <svg className="icon" aria-hidden="true">
+                  <use xlinkHref="#icon-yanjing"></use>
+                </svg> {articleMsg.get('viewNum')}
+                </TitleItem>
             </TitleMsg>
           </ArticleTitle>
           <ReactMarkdown

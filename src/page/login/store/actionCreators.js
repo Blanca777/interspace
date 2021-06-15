@@ -20,7 +20,7 @@ export const handleLogout = () => {
   return {
     type: constants.LOGOUT
   }
-
+ 
 }
 
 export const handleLogin = (username, password) => {
@@ -68,12 +68,11 @@ export const handleSignup = (username, password) => {
     dispatch(showLoadingBoxAction(true))
     axios.post(`${APIUrl}/login/signup`, { username, password }).then(res => {
       dispatch(loadingActionCreators.changeLoadingTextAction(res.data))
-      setTimeout(() => {
-        dispatch(showLoadingBoxAction(false))
-      }, 1500)
     }).catch(err => {
       dispatch(loadingActionCreators.changeLoadingTextAction("出错，请重新操作！"))
+    }).finally(()=>{
       setTimeout(() => {
+        dispatch(changeBoxAction())
         dispatch(showLoadingBoxAction(false))
       }, 1500)
     })

@@ -13,9 +13,10 @@ const addPersonalDynamicAction = (authorInfo) => ({
   type: constants.ADDPERSONALDYNAMIC,
   authorInfo: fromJS(authorInfo)
 })
-const deleteDynamicItemAction = (authorInfo) => ({
+const deleteDynamicItemAction = (authorInfo, dynamicId) => ({
   type: constants.DELETEDYNAMICITEM,
-  authorInfo: fromJS(authorInfo)
+  authorInfo: fromJS(authorInfo),
+  dynamicId
 })
 export const showLoadingBoxAction = (status) => ({
   type: constants.SHOWLOADINGBOX,
@@ -73,11 +74,10 @@ export const getAuthorInfo = (authorId, dynamicList) => {
 export const deleteDynamicItem = (authorId, dynamicId) => {
   return (dispatch) => {
     dispatch(showLoadingBoxAction(true));
-    
     dispatch(loadingActionCreators.changeLoadingTextAction("删除中"));
     axios.post(`${APIUrl}/dynamic/deleteDynamicItem`,{authorId, dynamicId}).then(res=>{
       if(res.status ===200) {
-        dispatch(deleteDynamicItemAction(res.data));
+        dispatch(deleteDynamicItemAction(res.data, dynamicId));
       }
     }).catch(err => {
       console.log(err);

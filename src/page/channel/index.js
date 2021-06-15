@@ -18,14 +18,20 @@ class Channel extends PureComponent {
     window.scrollTo(0, 0)
   }
   openComment(e) {
-    e.target.parentNode.nextElementSibling.style.display = "block"
+    // console.log(e.currentTarget)
+    if (e.currentTarget.parentNode.nextElementSibling.style.display === 'block') {
+      e.currentTarget.parentNode.nextElementSibling.style.display = "none"
+    } else {
+      e.currentTarget.parentNode.nextElementSibling.style.display = "block"
+    }
+
   }
   closeComment(e) {
+
     e.target.parentNode.style.display = "none"
   }
   render() {
     let { speechList } = this.props
-    console.log(speechList)
     return (
       <ChannelWrapper>
         <SpeechBox>
@@ -38,7 +44,14 @@ class Channel extends PureComponent {
                     <SpeechAuthorName>{item.get("authorName")}</SpeechAuthorName>
                   </Link>
                   <SpeechContent>{item.get("speechContent")}</SpeechContent>
-                  <SpeechOperate><span className="iconfont" onClick={this.openComment}>&#xe9fa;</span> {item.get("likeNum")}<span className="iconfont">&#xe9ff;</span></SpeechOperate>
+                  <SpeechOperate>
+                    <svg className="icon" aria-hidden="true" onClick={(e) => this.openComment(e)} >
+                      <use xlinkHref="#icon-xiaoxi"></use>
+                    </svg>
+                    <svg className="icon" aria-hidden="true" onClick={(e) => this.openComment(e)} >
+                      <use xlinkHref="#icon-xihuan"></use>
+                    </svg> {item.get("likeNum")}
+                  </SpeechOperate>
                   <SpeechComment>
                     <CommentInput></CommentInput>
                     <CommentBtn>发送</CommentBtn>
@@ -51,32 +64,15 @@ class Channel extends PureComponent {
                         </CommentItem>
                       )
                     })}
-                    <CommentClose onClick={this.closeComment}>关闭评论区</CommentClose>
+                    <CommentClose onClick={this.closeComment}>
+                      关闭评论区
+                    </CommentClose>
                   </SpeechComment>
                 </SpeechItem>
               )
 
             })
           }
-          {/* <SpeechItem>
-            <SpeechAuthorImg src="http://blanca777.cn:1777/author/blanca/blanca.jpg"></SpeechAuthorImg>
-            <SpeechAuthorName>blanca</SpeechAuthorName>
-            <SpeechContent>发送发送发发送送发送发发送送发送发送发送发发送送发送发送发送送发送发发送送发送发送发送发发送送发送发送发送发发送送发送发送送发送发发送送发送发送发送发发送送发送发送发送发发送送发送发送发送发发送送发送发送发送发发送送发送发发送发送发送发发送送发送发送发送发发送送发送发发送发发送送发送发送发送发发送送发送发发送送发送发发送</SpeechContent>
-            <SpeechOperate><span className="iconfont" onClick={this.openComment}>&#xe9fa;</span> 123<span className="iconfont">&#xe9ff;</span></SpeechOperate>
-            <SpeechComment>
-              <CommentInput></CommentInput>
-              <CommentBtn>发送</CommentBtn>
-              <CommentItem>
-                <CommentAuthorName>blanca:</CommentAuthorName>
-                <CommentText>123</CommentText>
-              </CommentItem>
-              <CommentItem>
-                <CommentAuthorName>blanca:</CommentAuthorName>
-                <CommentText>123</CommentText>
-              </CommentItem>
-              <CommentClose onClick={this.closeComment}>关闭评论区</CommentClose>
-            </SpeechComment>
-          </SpeechItem> */}
 
         </SpeechBox>
 

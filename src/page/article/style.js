@@ -269,10 +269,11 @@ export const CommentAuthorName = styled.span`
 `;
 export const CommentText = styled.span`
   display: inline-block;
-  width: 80%;
+  max-width: 70%;
   padding-left: 20px;
   line-height: 20px;
   letter-spacing: 2px;
+  word-wrap: break-word;
 `;
 export const CommentReplyList = styled.div`
   padding: 0 50px;

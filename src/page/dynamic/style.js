@@ -78,7 +78,7 @@ export const DynamicDelete = styled.span`
   position: absolute;
   top: 40px;
   right: 10px;
-  color: #f7b4ab;
+  color: #ff7777;
   cursor: pointer;
 `;
 

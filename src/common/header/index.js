@@ -29,19 +29,23 @@ class Header extends PureComponent {
           </HeaderLeft>
         </Link>
         <HeaderRight>
-
-          <i className="iconfont themeicon" onClick={() => handleChangeTheme(curTheme)}>&#xe887;</i>
-          <i className="iconfont searchicon">&#xe9fc;</i>
+          
+          <svg className="icon themeicon" aria-hidden="true" onClick={() => handleChangeTheme(curTheme)}>
+            <use xlinkHref="#icon-shezhi"></use>
+          </svg>
+          <svg className="icon searchicon" aria-hidden="true">
+            <use xlinkHref="#icon-sousuo"></use>
+          </svg>
           <HeaderSearch />
           <NavWarpper>
             {
               loginStatus ? (
-              <Link to={`/dynamic/${userInfo.get('authorId')}/personalDynamic`}>
-                <NavItem><img src={spaceman} alt="spaceman" /><span>{userInfo.get('authorName')}</span></NavItem>
-              </Link>) : (
-              <Link to='/login'>
-                <NavItem><img src={spaceman} alt="spaceman" /><span>登机</span></NavItem>
-              </Link>)
+                <Link to={`/dynamic/${userInfo.get('authorId')}/personalDynamic`}>
+                  <NavItem><img src={spaceman} alt="spaceman" /><span>{userInfo.get('authorName')}</span></NavItem>
+                </Link>) : (
+                <Link to='/login'>
+                  <NavItem><img src={spaceman} alt="spaceman" /><span>登机</span></NavItem>
+                </Link>)
             }
             <Link to='/tag/tagAll'>
               <NavItem><img src={project} alt="project" /><span>开荒笔记</span></NavItem>

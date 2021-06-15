@@ -50,8 +50,9 @@ export const SpeechOperate = styled.div`
   position: absolute;
   top: 70px;
   right: 10px;
-  span {
+  svg {
     cursor: pointer;
+    margin-left: 10px;
   }
 `;
 export const SpeechComment = styled.div`

@@ -43,15 +43,27 @@ const reducer = (state = defaultState, action) => {
         showLoadingBox: action.status
       })
     case constants.DELETEDYNAMICITEM:
-      return state.merge({
-        authorInfo: action.authorInfo,
-        dynamicList: action.authorInfo.get("articleDynamic")
-      })
+      return deleteDynamicItem(state, action);
     default:
       return state;
   }
 
 }
+const deleteDynamicItem = (state, action) => {
+  if(action.dynamicId.slice(0,2)==="ad"){
+    return state.merge({
+      authorInfo: action.authorInfo,
+      dynamicList: action.authorInfo.get("articleDynamic")
+    })
+  }else{
+    return state.merge({
+      authorInfo: action.authorInfo,
+      dynamicList: action.authorInfo.get("personalDynamic")
+    })
+  }
+  
+}
+
 const getAuthorInfo = (state, action) => {
   if (action.dynamicList === 'articleDynamic') {
     return state.merge({
