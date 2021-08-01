@@ -7,16 +7,24 @@ function Footer() {
   return (
     <FooterWrapper>
       <FooterItem>
-        <i className="iconfont">&#xe698;</i>react
+        <svg className="icon" aria-hidden="true">
+          <use xlinkHref="#icon-kuangjiaframe23"></use>
+        </svg>react
       </FooterItem>
       <FooterItem>
-        <i className="iconfont">&#xe9fd;</i>粤ICP备2021042464号-1
+        <svg className="icon" aria-hidden="true">
+          <use xlinkHref="#icon-icon-class-c"></use>
+        </svg>粤ICP备2021042464号-1
       </FooterItem>
       <FooterItem>
-        <i className="iconfont">&#xe9fe;</i>blanca
+        <svg className="icon" aria-hidden="true">
+          <use xlinkHref="#icon-gerenzhongxin"></use>
+        </svg>blanca
       </FooterItem>
       <FooterItem>
-        <i className="iconfont">&#xe650;</i>777
+        <svg className="icon" aria-hidden="true">
+          <use xlinkHref="#icon-yanjing"></use>
+        </svg>777
       </FooterItem>
     </FooterWrapper>
   )
@@ -31,8 +39,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    
+
   }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(Footer)
+export default connect(mapStateToProps, mapDispatchToProps)(Footer)
